@@ -5,27 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>你我之间约等于紫次方</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #eef2f6; padding: 20px; color: #333; margin: 0; min-height: 100vh; }
+  /* 👇 修改：全局 padding 从 20px 缩小到 12px，减少拥挤感 */
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #eef2f6; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
-  .header { text-align: center; padding: 30px 0; }
+  .header { text-align: center; padding: 20px 0; }
   .header h1 { margin: 0; color: #1e293b; letter-spacing: 2px; font-size: 26px; }
   .header p { color: #64748b; font-size: 14px; margin-top: 8px; }
 
-  .menu-grid { display: grid; gap: 20px; max-width: 800px; margin: 0 auto; }
-  .menu-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.3s ease; border-left: 6px solid #a78bfa; }
+  /* 👇 修改：卡片间距缩小 */
+  .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
+  /* 👇 修改：卡片内部 padding 缩小 */
+  .menu-card { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.3s ease; border-left: 6px solid #a78bfa; }
   .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-  .menu-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; color: #4c1d95; }
+  .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #4c1d95; }
   .menu-desc { font-size: 14px; color: #64748b; line-height: 1.5; }
 
-  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-  .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 20px; transition: background 0.2s; }
+  /* 👇 修改：详情页 padding 缩小 */
+  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #fff; padding: 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: background 0.2s; }
   .back-btn:hover { background: #8b5cf6; }
   .back-btn.green { background: #34d399; }
   .back-btn.green:hover { background: #10b981; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; color: #1e293b; }
 
-  .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
   .sub-menu-item { padding: 8px 16px; background: #f1f5f9; border-radius: 20px; font-size: 14px; cursor: pointer; color: #475569; transition: 0.2s; }
   .sub-menu-item:hover, .sub-menu-item.active { background: #a78bfa; color: #fff; }
 
@@ -38,12 +42,12 @@
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
   #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
 
-  .text-box { background: #f8fafc; padding: 20px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #334155; margin-bottom: 15px; border-left: 4px solid #34d399; }
+  .text-box { background: #f8fafc; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #334155; margin-bottom: 15px; border-left: 4px solid #34d399; }
   .text-box h3 { margin-top: 0; color: #047857; font-size: 16px; }
+  .text-box p { margin-top: 6px; margin-bottom: 6px; }
 
-  /* 👇 新增：文字列表专用样式 */
   .text-list-item { 
-    background: #f8fafc; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; 
+    background: #f8fafc; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; 
     cursor: pointer; transition: 0.2s; border: 1px solid #e2e8f0;
     display: flex; justify-content: space-between; align-items: center;
   }
@@ -56,32 +60,30 @@
 <body>
 
 <!-- ================= 首页 ================= -->
-<div id<div id="home-page">
+<div id="home-page">
   <div class="header">
     <h1>🐭设定存档🐦‍⬛</h1>
     <p>▼点击下方查看详细内容▼</p>
   </div>
+  
   <div class="menu-grid">
-    
-    <!-- 👇 第一个卡片：参考图册 -->
-    <div class="menu-card" onclick="showPage('gallery-page')" style="padding: 0; overflow: hidden;">
-      <!-- 图片放在最上面，撑满宽度，高度固定，自动裁切 -->
-      <img src="images/IMG_2760.JPG" style="width: 100%; height: 120px; object-fit: cover;">
-      <div style="padding: 20px;">
+    <!-- 👇 第一个卡片：左图右字，更加紧凑 -->
+    <div class="menu-card" onclick="showPage('gallery-page')" style="display: flex; align-items: center; gap: 16px; padding: 12px;">
+      <img src="images/IMG_2760.JPG" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+      <div>
         <div class="menu-title">▼参考图册</div>
         <div class="menu-desc">供以参考的png与服设</div>
       </div>
     </div>
 
-    <!-- 👇 第二个卡片：文字设定内容 -->
-    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399; padding: 0; overflow: hidden;">
-      <img src="images/IMG_2760.JPG" style="width: 100%; height: 120px; object-fit: cover;">
-      <div style="padding: 20px;">
+    <!-- 👇 第二个卡片：左图右字，更加紧凑 -->
+    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399; display: flex; align-items: center; gap: 16px; padding: 12px;">
+      <img src="images/IMG_2760.JPG" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+      <div>
         <div class="menu-title">▼文字设定内容</div>
         <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -125,7 +127,7 @@
   <div class="back-btn green" onclick="showPage('home-page')">← 返回主页</div>
   <div class="detail-title">角色文字设定</div>
   
-  <p style="font-size: 14px; color: #64748b; margin-bottom: 20px;">点击下方小标题查看详细内容：</p>
+  <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
 
   <div class="text-list-item" onclick="showPage('text-detail-1')">
     <div>
@@ -161,16 +163,16 @@
   </div>
 </div>
 
-<!-- 👇 文字详情页 2：背景故事 -->
+<!-- 👇 文字详情页 2：四月一日一期 -->
 <div id="text-detail-2" class="detail-page">
   <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">四月一日一期</div>
   <div class="text-box">
   四月一日一期（鼠）24岁 174cm 日本人<br><br>
-欺诈师、诈骗犯，伪装得很好很常识人的反社会类型人。需要通过对另一个（在意的）人的痛苦、羞辱、恐惧、受控制或受折磨中映射出自己的存在来证明自己，反之被这样做也可以，爱也算。在对人不感兴趣后会抛弃得很彻底，甚至被缠上的话会无情地解决掉对方。<br><br>
-（在与相方相遇前，多数为施虐方）<br><br>
-微表情算丰富的一类很多变，内心常常飘忽不定，吐槽役，角色底色是自大的傲慢的虽然表现的不明显但会将目标拉进自己的理想国玩过家家一般闹剧的人，微妙的无视忽视对方的需求只做自己想做的事。<br><br>
-在进入亲密关系建立感情连接时（特指所有），相当地乐意为相方付出与付出自己并以此获得自己想要的，被相方当成狗、玩具、私有物都无所谓，期间相当的忠心、私心、贴心，具有一定个人戏剧性色彩。恐惧无法被填补的空缺存在，出现这样的情况就会变得判若两人，沉默、死寂、难以忍受现状，不惜一切代价寻找突破口，毋庸置疑，哪怕是生命。<br><br>
+  欺诈师、诈骗犯，伪装得很好很常识人的反社会类型人。需要通过对另一个（在意的）人的痛苦、羞辱、恐惧、受控制或受折磨中映射出自己的存在来证明自己，反之被这样做也可以，爱也算。在对人不感兴趣后会抛弃得很彻底，甚至被缠上的话会无情地解决掉对方。<br><br>
+  （在与相方相遇前，多数为施虐方）<br><br>
+  微表情算丰富的一类很多变，内心常常飘忽不定，吐槽役，角色底色是自大的傲慢的虽然表现的不明显但会将目标拉进自己的理想国玩过家家一般闹剧的人，微妙的无视忽视对方的需求只做自己想做的事。<br><br>
+  在进入亲密关系建立感情连接时（特指所有），相当地乐意为相方付出与付出自己并以此获得自己想要的，被相方当成狗、玩具、私有物都无所谓，期间相当的忠心、私心、贴心，具有一定个人戏剧性色彩。恐惧无法被填补的空缺存在，出现这样的情况就会变得判若两人，沉默、死寂、难以忍受现状，不惜一切代价寻找突破口，毋庸置疑，哪怕是生命。<br><br>
   </div>
 </div>
 
