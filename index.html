@@ -145,22 +145,22 @@
     <div class="text-list-arrow">›</div>
   </div>
 
-  <div class="text-list-item" onclick="showPage('text-detail-3')">
+    <div class="text-list-item" onclick="showPage('text-detail-3')">
     <div>
       <div class="text-list-title">相处模式</div>
       <div class="text-list-desc">看不看其实无所谓</div>
     </div>
     <div class="text-list-arrow">›</div>
   </div>
-</div>
 
-<div class="text-list-item" onclick="showPage('text-detail-4')">
+  <div class="text-list-item" onclick="showPage('text-detail-4')">
     <div>
       <div class="text-list-title">主线故事</div>
-      <div class="text-list-desc">还会会到那里吗？你我的身边。</div>
+      <div class="text-list-desc">还会回到那里吗？你我的身边。</div>
     </div>
     <div class="text-list-arrow">›</div>
   </div>
+</div> 
   
 <!-- 👇 文字详情页 1：基础信息 -->
 <div id="text-detail-1" class="detail-page">
@@ -187,10 +187,10 @@
   </div>
 </div>
 
-<!-- 👇 文字详情页 3：IF线设定 -->
+<!-- 👇 文字详情页 3：相处模式 -->
 <div id="text-detail-3" class="detail-page">
   <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
-  <div class="detail-title">IF线设定</div>
+  <div class="detail-title">相处模式</div>
   <div class="text-box">
     <h3>如果当初……</h3>
     <p>这里可以写很多很多字，长文会自动换行。你可以用 &lt;br&gt; 来换行，或者用 &lt;p&gt; 来分段。</p>
@@ -211,7 +211,7 @@
   <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
 </div>
 <script>
-  const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3'];
+const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
 
   // 初始化，记录首页状态
   window.onload = function() {
