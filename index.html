@@ -110,15 +110,15 @@
   <div id="gallery1" class="sub-gallery">
     <p style="font-size: 14px; color: #666;">这里写立绘参考的说明文字。</p>
     <div class="img-grid">
-      <div class="img-box" onclick="openLightbox('images/20261119_3.PNG')">
+      <div class="img-box" onclick="openLightbox('images/20261119_3.PNG', this)">
         <span class="img-num">1</span>
         <img src="images/20261119_3.PNG" alt="图1" onerror="this.alt='图片加载失败'">
       </div>
-      <div class="img-box" onclick="openLightbox('images/IMG_2792.PNG')">
+      <div class="img-box" onclick="openLightbox('images/IMG_2792.PNG', this)">
         <span class="img-num">2</span>
         <img src="images/IMG_2792.PNG" alt="图2" onerror="this.alt='图片加载失败'">
       </div>
-      <div class="img-box" onclick="openLightbox('images/IMG_2797.PNG')">
+      <div class="img-box" onclick="openLightbox('images/IMG_2797.PNG', this)">
   <span class="img-num">3</span>
   <img src="images/IMG_2797.PNG" alt="图3" onerror="this.alt='图片加载失败'">
 </div>
@@ -128,7 +128,7 @@
   <div id="gallery2" class="sub-gallery" style="display: none;">
     <p style="font-size: 14px; color: #666;">这里写服设参考的说明文字。</p>
     <div class="img-grid">
-      <div class="img-box" onclick="openLightbox('images/IMG_2760.JPG')">
+      <div class="img-box" onclick="openLightbox('images/IMG_2760.JPG', this)">
         <span class="img-num">1</span>
         <img src="images/IMG_2760.JPG" alt="图1" onerror="this.alt='图片加载失败'">
       </div>
@@ -236,12 +236,24 @@
   </div>
 </div>
 
-<!-- 灯箱 -->
+<!-- 全新的灯箱（支持滑动和计数） -->
 <div id="lightbox" onclick="closeLightbox(event)">
+  <div id="lightbox-counter" style="position: absolute; top: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10000;">1 / 1</div>
+  
+  <!-- 左箭头 -->
+  <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(-1);" style="position: absolute; left: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">‹</div>
+  
   <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
+  
+  <!-- 右箭头 -->
+  <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(1);" style="position: absolute; right: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">›</div>
 </div>
 <script>
-const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
+  const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
+
+  // 相册数据（自动抓取页面上的图片）
+  let currentAlbum = []; 
+  let currentIndex = 0;
 
   // 初始化，记录首页状态
   window.onload = function() {
@@ -256,8 +268,6 @@ const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'te
     });
     document.getElementById(pageId).style.display = 'block';
     window.scrollTo(0, 0);
-    
-    // 记录浏览历史，让手机返回键生效
     history.pushState({ pageId: pageId }, '', '#' + pageId);
   }
 
@@ -280,7 +290,6 @@ const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'te
     }
   };
 
-  // 切换子图册
   function showSubGallery(galleryId, element) {
     const page = element.closest('.detail-page');
     page.querySelectorAll('.sub-gallery').forEach(el => el.style.display = 'none');
@@ -289,23 +298,65 @@ const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'te
     element.classList.add('active');
   }
 
-  // 图片灯箱
-  function openLightbox(src) {
-    const img = document.getElementById('lightbox-img');
-    img.src = src;
-    img.onerror = () => { img.alt = '图片加载失败，请检查路径'; };
+  // 👇 全新的灯箱逻辑
+  function openLightbox(src, element) {
+    // 找到当前图片所在的大盒子（相册）
+    const galleryContainer = element.closest('.img-grid');
+    // 获取这个相册里所有的图片
+    const allImages = Array.from(galleryContainer.querySelectorAll('.img-box img'));
+    // 提取所有图片的路径
+    currentAlbum = allImages.map(img => img.getAttribute('src'));
+    // 找到当前点击的是第几张
+    currentIndex = currentAlbum.indexOf(src);
+
+    updateLightbox();
     document.getElementById('lightbox').style.display = 'flex';
   }
 
-  function closeLightbox(e) {
-    if (e.target.id === 'lightbox') {
-      document.getElementById('lightbox').style.display = 'none';
-    }
+  // 更新灯箱内的图片和计数
+  function updateLightbox() {
+    if(currentAlbum.length === 0) return;
+    document.getElementById('lightbox-img').src = currentAlbum[currentIndex];
+    // 更新顶部的 3 / 12 计数
+    document.getElementById('lightbox-counter').innerText = (currentIndex + 1) + ' / ' + currentAlbum.length;
   }
 
+  function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = 0;
+    if (currentIndex >= currentAlbum.length) currentIndex = currentAlbum.length - 1;
+    updateLightbox();
+  }
+
+  // 👇 添加键盘左右键支持（电脑端用）
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') document.getElementById('lightbox').style.display = 'none';
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox.style.display === 'flex') {
+      if (e.key === 'Escape') lightbox.style.display = 'none';
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'ArrowRight') changeImage(1);
+    }
   });
+
+  // 👇 手机端滑动检测
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const lb = document.getElementById('lightbox');
+  
+  lb.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, false);
+
+  lb.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, false);
+
+  function handleSwipe() {
+    // 滑动距离超过 50 像素才算数
+    if (touchEndX < touchStartX - 50) changeImage(1); // 向左滑，看下一张
+    if (touchEndX > touchStartX + 50) changeImage(-1); // 向右滑，看上一张
+  }
 </script>
 </body>
 </html>
