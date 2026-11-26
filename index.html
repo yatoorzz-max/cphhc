@@ -5,55 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>你我之间约等于紫次方</title>
 <style>
-  /* 全局基础设置 */
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #eef2f6; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
+  /* 全局：纯白背景，极简黑白 */
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
   .header { text-align: center; padding: 20px 0; }
-  .header h1 { margin: 0; color: #1e293b; letter-spacing: 2px; font-size: 26px; }
+  .header h1 { margin: 0; color: #111111; letter-spacing: 2px; font-size: 26px; }
 
   .home-avatar { text-align: center; margin-bottom: 20px; }
-  .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #a78bfa; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  /* 头像边框变浅灰，去掉了滤镜 */
+  .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #e5e5e5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
-  /* 首页卡片 */
+  /* 首页卡片：微灰底色，深灰左边框 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
-  .menu-card { background: #fff; border-radius: 16px; padding: 16px; cursor: pointer; transition: 0.2s; border-left: 6px solid #a78bfa; display: flex; align-items: center; gap: 16px; }
+  .menu-card { background: #f9f9f9; border-radius: 16px; padding: 16px; cursor: pointer; transition: 0.2s; border-left: 6px solid #d4d4d4; display: flex; align-items: center; gap: 16px; }
   .menu-card img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-  .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #4c1d95; }
-  .menu-desc { font-size: 14px; color: #64748b; line-height: 1.5; }
+  .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #111111; }
+  .menu-desc { font-size: 14px; color: #737373; line-height: 1.5; }
 
   /* 详情页大盒子 */
-  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #fff; padding: 16px; border-radius: 16px; }
-  .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
-  .back-btn.green { background: #34d399; }
-  .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; color: #1e293b; }
+  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
+  
+  /* 返回按钮：黑底白字 */
+  .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
+  .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
 
   /* 👇 相册列表样式（横向卡片） */
   .album-list { display: flex; flex-direction: column; gap: 12px; }
-  .album-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; }
-  .album-item:hover { border-color: #a78bfa; }
-  .album-cover { width: 120px; height: 120px; flex-shrink: 0; background: #f1f5f9; }
+  .album-item { background: #f9f9f9; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; }
+  .album-item:hover { border-color: #cccccc; background: #f5f5f5; }
+  .album-cover { width: 120px; height: 120px; flex-shrink: 0; background: #eeeeee; }
   .album-cover img { width: 100%; height: 100%; object-fit: cover; }
   .album-info { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
-  .album-info-title { font-size: 18px; font-weight: bold; color: #1e293b; margin-bottom: 4px; }
-  .album-info-desc { font-size: 13px; color: #94a3b8; }
+  .album-info-title { font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px; }
+  .album-info-desc { font-size: 13px; color: #888888; }
 
-  /* 👇 相册内部（点进去之后的网格，和之前一样） */
+  /* 👇 相册内部的网格 */
   .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 15px; }
-  .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f1f5f9; }
+  .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f5f5f5; }
   .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-  .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+  .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
-  /* 文字框 */
-  .text-box { background: #f8fafc; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #334155; margin-bottom: 15px; border-left: 4px solid #34d399; }
+  /* 文字框：微灰底 */
+  .text-box { background: #f9f9f9; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border-left: 4px solid #d4d4d4; }
 
-  /* 文字列表按钮 */
-  .text-list-item { background: #f8fafc; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-  .text-list-title { font-size: 16px; font-weight: bold; color: #1e293b; }
-  .text-list-desc { font-size: 13px; color: #94a3b8; margin-top: 4px; }
-  .text-list-arrow { color: #34d399; font-size: 20px; font-weight: bold; }
+  /* 文字列表按钮：微灰底，浅灰边 */
+  .text-list-item { background: #f9f9f9; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: center; }
+  .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
+  .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
+  .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
-  /* 灯箱背景 */
+  /* 灯箱背景（保留黑色半透明以免刺眼） */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
   #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
 </style>
@@ -70,8 +72,8 @@
   </div>
 
   <div style="text-align: center; margin-bottom: 20px;">
-    <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 4px;">▇ 出身▇</span>
-    <span style="font-size: 13px; color: #94a3b8; line-height: 1.5;">
+    <span style="font-size: 13px; color: #999999; display: block; margin-bottom: 4px;">▇ 出身▇</span>
+    <span style="font-size: 13px; color: #999999; line-height: 1.5;">
       TRPG模组《雨降らしの蝶》normal·全魔改版<br>
       ↑为以上模组中的HO3×HO4组成的PC产品<br>
       所携带的内容与PNG全由俩位PC的PL的演绎、捏造、口嗨<br>
@@ -88,7 +90,8 @@
       </div>
     </div>
 
-    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399;">
+    <!-- 第二个卡片的左侧边框颜色换成了浅灰 -->
+    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #a3a3a3;">
       <img src="images/IMG_2760.JPG">
       <div>
         <div class="menu-title">▼文字设定内容</div>
@@ -103,9 +106,7 @@
   <div class="back-btn" onclick="showPage('home-page')">← 返回上一页</div>
   <div class="detail-title">参考图册</div>
   
-  <!-- 相册列表 -->
   <div class="album-list">
-    <!-- 👇 复制这个打开新相册（点击跳转到 gallery-1） -->
     <div class="album-item" onclick="showPage('gallery-1')">
       <div class="album-cover"><img src="images/20261119_3.PNG"></div>
       <div class="album-info">
@@ -114,7 +115,6 @@
       </div>
     </div>
 
-    <!-- 👇 第二个相册（点击跳转到 gallery-2） -->
     <div class="album-item" onclick="showPage('gallery-2')">
       <div class="album-cover"><img src="images/IMG_2760.JPG"></div>
       <div class="album-info">
@@ -125,7 +125,7 @@
   </div>
 </div>
 
-<!-- 👇 相册内部 1（立绘参考） -->
+<!-- 👇 相册内部 1 -->
 <div id="gallery-1" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
   <div class="detail-title">立绘参考</div>
@@ -145,7 +145,7 @@
   </div>
 </div>
 
-<!-- 👇 相册内部 2（服设参考） -->
+<!-- 👇 相册内部 2 -->
 <div id="gallery-2" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
   <div class="detail-title">服设参考</div>
@@ -158,9 +158,9 @@
 </div>
 <!-- ====== 文字页 ================= -->
 <div id="text-page" class="detail-page">
-  <div class="back-btn green" onclick="showPage('home-page')">← 返回主页</div>
+  <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
   <div class="detail-title">角色文字设定</div>
-  <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
+  <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
   
   <div class="text-list-item" onclick="showPage('text-detail-1')">
     <div><div class="text-list-title">狭雾有江</div><div class="text-list-desc">角色设定</div></div>
@@ -182,7 +182,7 @@
 
 <!-- 👇 文字详情页 1 -->
 <div id="text-detail-1" class="detail-page">
-  <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
+  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">狭雾有江</div>
   <div class="text-box">
 狭雾有江（鸟）24岁 178cm 德日混血<br><br>
@@ -194,7 +194,7 @@
 
 <!-- 👇 文字详情页 2 -->
 <div id="text-detail-2" class="detail-page">
-  <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
+  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">四月一日一期</div>
   <div class="text-box">
   四月一日一期（鼠）24岁 174cm 日本人<br><br>
@@ -207,15 +207,17 @@
 
 <!-- 👇 文字详情页 3 -->
 <div id="text-detail-3" class="detail-page">
-  <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
+  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">相处模式</div>
   <div class="text-box">
-    <span style="font-weight: bold; color: #8b5cf6;">▼相处关系——：</span><br>
+    <!-- 小标题变成了深灰色 -->
+    <span style="font-weight: bold; color: #333333;">▼相处关系——：</span><br>
     这俩位属于是不做什么只是待在对方身边的关系，仅此而已。没有过多存在的关系，没有过多询问的话语，仅仅是对方还没离开这里所以自己也还待着。<br><br>
     ——习惯。一个既不轻又不重的词。在无意间，在下意识中，因为某些东西而潜移默化改变自己维持已久的习性，就像人类学习自己的母语一般，有些字有些词不需要特地学习却懂得如何将其读出。<br><br>
     世界上的人太多了，多到就算你我分离开也显得不痛不痒甚至毫无察觉，但是、但是。我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br><br><br>
-    <span style="font-weight: bold; color: #8b5cf6;">▼相处方式——：</span><br>
-    <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 8px;">A是4 B是5</span>
+    
+    <span style="font-weight: bold; color: #333333;">▼相处方式——：</span><br>
+    <span style="font-size: 13px; color: #999999; display: block; margin-bottom: 8px;">A是4 B是5</span>
    <span style="font-weight: bold;">【A】</span>：经常逗弄<span style="font-weight: bold;">【B】</span>，或是黏着<span style="font-weight: bold;">【B】</span>。对<span style="font-weight: bold;">【B】</span>可以毫不吝惜地低声说出那种沉重与轻浮并存的甜言蜜语。对于献出自己毫无犹豫，哪怕身心全都变成<span style="font-weight: bold;">【B】</span>的东西，被利用也好、被玩弄也好、被施加暴力也好，全都无所谓。甚至还期望着被那样对待。其目的只在引出<span style="font-weight: bold;">【B】</span>的反应，借此满足自身的需求。<br><br>
    <span style="font-weight: bold;">【B】</span>：将<span style="font-weight: bold;">【A】</span>当成是偶尔给予回应就会回馈可爱礼物的自动贩卖机。将<span style="font-weight: bold;">【A】</span>视为玩具或人偶，喜欢用仿佛要将全身包裹起来、从各个方向围拢般的独占性抱法。不认为自己对待<span style="font-weight: bold;">【A】</span>的方式是一种暴力，虽然偶尔自己的动作显得粗暴，但对于<span style="font-weight: bold;">【B】</span>，更像是一种理解对方所求并满足对方需求的心态。
   </div>
@@ -223,7 +225,7 @@
 
 <!-- 👇 文字详情页 4 -->
 <div id="text-detail-4" class="detail-page">
-  <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
+  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">主线故事</div>
   <div class="text-box">
 <br>我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br>
@@ -239,7 +241,6 @@
   <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(1);" style="position: absolute; right: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">›</div>
 </div>
 <script>
-  // 👇 注意这里，加了 gallery-1 和 gallery-2
   const allPages = ['home-page', 'gallery-page', 'gallery-1', 'gallery-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
   let currentAlbum = []; 
   let currentIndex = 0;
