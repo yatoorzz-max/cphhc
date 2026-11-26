@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>你我之间约等于紫次方</title>
 <style>
-  /* 全局：纯白背景，极简黑白 */
+  /* 全局：纯白底色 */
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
@@ -13,51 +13,48 @@
   .header h1 { margin: 0; color: #111111; letter-spacing: 2px; font-size: 26px; }
 
   .home-avatar { text-align: center; margin-bottom: 20px; }
-  /* 头像边框变浅灰，去掉了滤镜 */
-  .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #e5e5e5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
 
-  /* 首页卡片：微灰底色，深灰左边框 */
+  /* 首页卡片：微灰底色，完全去掉了左边框 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
-  .menu-card { background: #f9f9f9; border-radius: 16px; padding: 16px; cursor: pointer; transition: 0.2s; border-left: 6px solid #d4d4d4; display: flex; align-items: center; gap: 16px; }
+  .menu-card { background: #f8f8f8; border-radius: 16px; padding: 16px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; align-items: center; gap: 16px; }
   .menu-card img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
   .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #111111; }
   .menu-desc { font-size: 14px; color: #737373; line-height: 1.5; }
 
   /* 详情页大盒子 */
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
-  
-  /* 返回按钮：黑底白字 */
   .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
 
-  /* 👇 相册列表样式（横向卡片） */
+  /* 相册列表 */
   .album-list { display: flex; flex-direction: column; gap: 12px; }
-  .album-item { background: #f9f9f9; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; }
-  .album-item:hover { border-color: #cccccc; background: #f5f5f5; }
+  .album-item { background: #f8f8f8; border: 1px solid #eeeeee; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; }
+  .album-item:hover { background: #f0f0f0; }
   .album-cover { width: 120px; height: 120px; flex-shrink: 0; background: #eeeeee; }
   .album-cover img { width: 100%; height: 100%; object-fit: cover; }
   .album-info { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
   .album-info-title { font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px; }
   .album-info-desc { font-size: 13px; color: #888888; }
 
-  /* 👇 相册内部的网格 */
+  /* 相册内部网格 */
   .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 15px; }
   .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f5f5f5; }
   .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
-  /* 文字框：微灰底 */
-  .text-box { background: #f9f9f9; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border-left: 4px solid #d4d4d4; }
+  /* 文字框 */
+  .text-box { background: #f8f8f8; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border: 1px solid #eeeeee; }
 
-  /* 文字列表按钮：微灰底，浅灰边 */
-  .text-list-item { background: #f9f9f9; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: center; }
+  /* 文字列表按钮 */
+  .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
   .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
-  /* 灯箱背景（保留黑色半透明以免刺眼） */
+  /* 灯箱 */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
-  #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+  #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -90,8 +87,7 @@
       </div>
     </div>
 
-    <!-- 第二个卡片的左侧边框颜色换成了浅灰 -->
-    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #a3a3a3;">
+    <div class="menu-card" onclick="showPage('text-page')">
       <img src="images/IMG_2760.JPG">
       <div>
         <div class="menu-title">▼文字设定内容</div>
@@ -111,7 +107,7 @@
       <div class="album-cover"><img src="images/20261119_3.PNG"></div>
       <div class="album-info">
         <div class="album-info-title">立绘参考</div>
-        <div class="album-info-desc">Wagle Boom 的类型 / 3张图片</div>
+        <div class="album-info-desc">3张图片</div>
       </div>
     </div>
 
@@ -119,7 +115,7 @@
       <div class="album-cover"><img src="images/IMG_2760.JPG"></div>
       <div class="album-info">
         <div class="album-info-title">服设参考</div>
-        <div class="album-info-desc">歌曲歌词类型 / 1张图片</div>
+        <div class="album-info-desc">1张图片</div>
       </div>
     </div>
   </div>
@@ -210,12 +206,10 @@
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">相处模式</div>
   <div class="text-box">
-    <!-- 小标题变成了深灰色 -->
     <span style="font-weight: bold; color: #333333;">▼相处关系——：</span><br>
     这俩位属于是不做什么只是待在对方身边的关系，仅此而已。没有过多存在的关系，没有过多询问的话语，仅仅是对方还没离开这里所以自己也还待着。<br><br>
     ——习惯。一个既不轻又不重的词。在无意间，在下意识中，因为某些东西而潜移默化改变自己维持已久的习性，就像人类学习自己的母语一般，有些字有些词不需要特地学习却懂得如何将其读出。<br><br>
     世界上的人太多了，多到就算你我分离开也显得不痛不痒甚至毫无察觉，但是、但是。我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br><br><br>
-    
     <span style="font-weight: bold; color: #333333;">▼相处方式——：</span><br>
     <span style="font-size: 13px; color: #999999; display: block; margin-bottom: 8px;">A是4 B是5</span>
    <span style="font-weight: bold;">【A】</span>：经常逗弄<span style="font-weight: bold;">【B】</span>，或是黏着<span style="font-weight: bold;">【B】</span>。对<span style="font-weight: bold;">【B】</span>可以毫不吝惜地低声说出那种沉重与轻浮并存的甜言蜜语。对于献出自己毫无犹豫，哪怕身心全都变成<span style="font-weight: bold;">【B】</span>的东西，被利用也好、被玩弄也好、被施加暴力也好，全都无所谓。甚至还期望着被那样对待。其目的只在引出<span style="font-weight: bold;">【B】</span>的反应，借此满足自身的需求。<br><br>
@@ -231,7 +225,6 @@
 <br>我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br>
   </div>
 </div>
-
 <!-- 灯箱 -->
 <div id="lightbox">
   <div id="lightbox-counter" style="position: absolute; top: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10000;">1 / 1</div>
@@ -240,6 +233,7 @@
   <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
   <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(1);" style="position: absolute; right: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">›</div>
 </div>
+
 <script>
   const allPages = ['home-page', 'gallery-page', 'gallery-1', 'gallery-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
   let currentAlbum = []; 
@@ -284,6 +278,9 @@
     currentIndex = currentAlbum.indexOf(src);
     updateLightbox();
     document.getElementById('lightbox').style.display = 'flex';
+    
+    // 阻止背景页面滚动
+    document.body.style.overflow = 'hidden';
   }
 
   function updateLightbox() {
@@ -302,7 +299,10 @@
   document.addEventListener('keydown', e => {
     const lightbox = document.getElementById('lightbox');
     if (lightbox.style.display === 'flex') {
-      if (e.key === 'Escape') lightbox.style.display = 'none';
+      if (e.key === 'Escape') {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = ''; // 恢复滚动
+      }
       if (e.key === 'ArrowLeft') changeImage(-1);
       if (e.key === 'ArrowRight') changeImage(1);
     }
@@ -315,12 +315,13 @@
   lb.addEventListener('click', e => {
     if (e.target.id === 'lightbox') {
       lb.style.display = 'none';
+      document.body.style.overflow = ''; // 恢复滚动
     }
   });
 
   lb.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
-  }, false);
+  }, { passive: false }); // 阻止系统默认滑动
 
   lb.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
@@ -328,8 +329,9 @@
   }, false);
 
   function handleSwipe() {
-    if (touchEndX < touchStartX - 50) changeImage(1);
-    if (touchEndX > touchStartX + 50) changeImage(-1);
+    // 把阈值从 50 调大到 80，防止误触
+    if (touchEndX < touchStartX - 80) changeImage(1); 
+    if (touchEndX > touchStartX + 80) changeImage(-1); 
   }
 </script>
 </body>
