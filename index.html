@@ -3,55 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>点击功能测试</title>
+<title>我的 OC 档案库</title>
 <style>
-  body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
-  .menu-card { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; border-left: 6px solid #a78bfa; }
-  .detail-page { display: none; background: #fff; padding: 20px; border-radius: 12px; }
-  .back-btn { background: #a78bfa; color: #fff; padding: 10px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; display: inline-block; }
-  .upload-fab { position: fixed; bottom: 30px; right: 30px; background: #34d399; color: white; padding: 15px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; }
-  #upload-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; }
-  .modal-content { background: #fff; padding: 20px; border-radius: 12px; text-align: center; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #eef2f6; padding: 20px; color: #333; margin: 0; max-width: 800px; margin: 0 auto; }
+  * { box-sizing: border-box; }
+  .header { text-align: center; padding: 30px 0; }
+  .header h1 { margin: 0; color: #1e293b; font-size: 26px; letter-spacing: 2px; }
+  .header p { color: #64748b; font-size: 14px; margin-top: 8px; }
+  .menu-grid { display: grid; gap: 20px; margin: 0 auto; }
+  .menu-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; border-left: 6px solid #a78bfa; }
+  .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .menu-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; color: #4c1d95; }
+  .menu-desc { font-size: 14px; color: #64748b; line-height: 1.5; }
+  .detail-page { display: none; background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 20px; }
+  .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; color: #1e293b; }
+  .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .sub-menu-item { padding: 8px 16px; background: #f1f5f9; border-radius: 20px; font-size: 14px; cursor: pointer; color: #475569; transition: 0.2s; }
+  .sub-menu-item:hover, .sub-menu-item.active { background: #a78bfa; color: #fff; }
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; margin-top: 15px; }
+  .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #e2e8f0; }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+  .img-box:hover img { transform: scale(1.1); }
+  .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.6); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+  .upload-fab { position: fixed; bottom: 30px; right: 30px; background: #34d399; color: white; padding: 15px 20px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 12px rgba(52, 211, 153, 0.4); cursor: pointer; z-index: 100; }
+  input[type="file"] { display: none; }
+  textarea { width: 100%; height: 300px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; line-height: 1.6; font-family: inherit; resize: vertical; }
+  .save-btn { background: #34d399; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; display: block; width: 100%; }
+  #upload-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+  .modal-content { background: #fff; padding: 24px; border-radius: 16px; width: 85%; max-width: 320px; text-align: center; }
+  .upload-choice-btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; color: white; cursor: pointer; text-decoration: none; border: none; font-size: 16px; }
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; }
+  #lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
 <div id="home-page">
-  <h2>我的 OC 档案库</h2>
-  <div class="menu-card" onclick="showPage('gallery-page')">
-    📸 参考图册 (点我测试)
+  <div class="header">
+    <h1>我的 OC 档案库</h1>
+    <p>点击下方卡片查看详细内容</p>
   </div>
-  <div class="menu-card" onclick="showPage('text-page')">
-    📝 角色文字设定 (点我测试)
+  <div class="menu-grid">
+    <div class="menu-card" onclick="showPage('gallery-page')">
+      <div class="menu-title">📸 参考图册</div>
+      <div class="menu-desc">各种立绘、服设参考和摸鱼。</div>
+    </div>
+    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399;">
+      <div class="menu-title">📝 角色文字设定</div>
+      <div class="menu-desc">背景故事、性格特点、世界观等。</div>
+    </div>
   </div>
 </div>
 
 <div id="gallery-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
-  <h3>参考图册页面</h3>
+  <div class="detail-title">参考图册</div>
+  <div class="sub-menu">
+    <div class="sub-menu-item active" onclick="showSubGallery('gallery1', this)">立绘参考</div>
+    <div class="sub-menu-item" onclick="showSubGallery('gallery2', this)">服设参考</div>
+  </div>
+  <div id="gallery1" class="sub-gallery"><div class="img-grid" id="grid-gallery1"></div></div>
+  <div id="gallery2" class="sub-gallery" style="display: none;"><div class="img-grid" id="grid-gallery2"></div></div>
 </div>
 
 <div id="text-page" class="detail-page">
-  <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
-  <h3>文字设定页面</h3>
+  <div class="back-btn" onclick="showPage('home-page')" style="background: #34d399;">← 返回主页</div>
+  <div class="detail-title">角色文字设定</div>
+  <textarea id="oc-text" placeholder="在这里输入你的 OC 设定..."></textarea>
+  <button class="save-btn" onclick="saveText()">保存设定</button>
 </div>
 
 <div class="upload-fab" onclick="document.getElementById('upload-modal').style.display='flex'">+ 上传</div>
-
 <div id="upload-modal">
   <div class="modal-content">
-    <h3>这是弹窗</h3>
-    <button onclick="document.getElementById('upload-modal').style.display='none'">关闭</button>
+    <h3 style="margin-top:0;">传到哪里？</h3>
+    <label class="upload-choice-btn" style="background:#a78bfa;">传为「立绘参考」<input type="file" class="file-upload" data-album="立绘" multiple accept="image/*"></label>
+    <label class="upload-choice-btn" style="background:#34d399;">传为「服设参考」<input type="file" class="file-upload" data-album="服设" multiple accept="image/*"></label>
+    <button onclick="document.getElementById('upload-modal').style.display='none'" style="background:#e2e8f0; color:#475569; border:none; padding:12px; width:100%; border-radius:8px; font-size:16px;">取消</button>
   </div>
 </div>
-
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
 <script>
+  // ⚠️ 重要：替换为你的 Supabase URL 和 Key
+  const supabaseUrl = '你的URL';       
+  const supabaseKey = '你的API_KEY';   
+
+  let supabase = null;
+  try {
+    if(supabaseUrl !== '你的URL' && supabaseKey !== '你的API_KEY'){
+      supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    } else {
+      alert("提示：请先在代码里填入 Supabase 的 URL 和 Key。");
+    }
+  } catch (e) { console.error("初始化失败", e); }
+
+  const bucketName = 'images';
+
   function showPage(pageId) {
     document.getElementById('home-page').style.display = 'none';
     document.getElementById('gallery-page').style.display = 'none';
     document.getElementById('text-page').style.display = 'none';
     document.getElementById(pageId).style.display = 'block';
+    window.scrollTo(0,0);
+    if(pageId === 'text-page') loadText();
+    if(pageId === 'gallery-page') loadImages();
   }
+
+  function showSubGallery(galleryId, element) {
+    document.querySelectorAll('.sub-gallery').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.sub-menu-item').forEach(el => el.classList.remove('active'));
+    document.getElementById(galleryId).style.display = 'block';
+    element.classList.add('active');
+  }
+
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  async function loadImages() {
+    if(!supabase) return;
+    const { data, error } = await supabase.storage.from(bucketName).list();
+    if (error) return console.error(error);
+    document.getElementById('grid-gallery1').innerHTML = '';
+    document.getElementById('grid-gallery2').innerHTML = '';
+    if(!data || data.length === 0) return;
+    data.sort((a, b) => a.name.localeCompare(b.name)).forEach((file, index) => {
+      const { data: urlData } = supabase.storage.from(bucketName).getPublicUrl(file.name);
+      const imgUrl = urlData.publicUrl;
+      let targetGridId = 'grid-gallery1';
+      if (file.name.includes('服设')) targetGridId = 'grid-gallery2';
+      const box = document.createElement('div');
+      box.className = 'img-box';
+      box.onclick = () => openLightbox(imgUrl);
+      box.innerHTML = `<span class="img-num">${index + 1}</span><img src="${imgUrl}" loading="lazy">`;
+      document.getElementById(targetGridId).appendChild(box);
+    });
+  }
+
+  document.querySelectorAll('.file-upload').forEach(input => {
+    input.addEventListener('change', async (e) => {
+      if(!supabase) return;
+      const files = e.target.files;
+      if (files.length === 0) return;
+      const album = e.target.getAttribute('data-album');
+      document.getElementById('upload-modal').style.display = 'none';
+      const fab = document.querySelector('.upload-fab');
+      fab.innerText = "上传中...";
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const fileName = `${Date.now()}_${album}_${file.name}`;
+        await supabase.storage.from(bucketName).upload(fileName, file);
+      }
+      fab.innerText = "+ 上传";
+      alert('上传成功！');
+      loadImages();
+    });
+  });
+
+  async function loadText() {
+    if(!supabase) return;
+    const { data, error } = await supabase.from('oc_settings').select('content').limit(1);
+    if (error) { alert("读取文字失败，请检查是否建了 oc_settings 表！"); return; }
+    if (data && data.length > 0) document.getElementById('oc-text').value = data[0].content;
+  }
+
+  async function saveText() {
+    if(!supabase) return;
+    const text = document.getElementById('oc-text').value;
+    const { error } = await supabase.from('oc_settings').update({ content: text }).eq('id', 1);
+    if (error) alert("保存失败: " + error.message);
+    else alert("设定保存成功！");
+  }
+
+  loadImages();
 </script>
 </body>
 </html>
