@@ -56,20 +56,32 @@
 <body>
 
 <!-- ================= 首页 ================= -->
-<div id="home-page">
+<div id<div id="home-page">
   <div class="header">
     <h1>🐭设定存档🐦‍⬛</h1>
     <p>▼点击下方查看详细内容▼</p>
   </div>
   <div class="menu-grid">
-    <div class="menu-card" onclick="showPage('gallery-page')">
-      <div class="menu-title">▼参考图册</div>
-      <div class="menu-desc">供以参考的png与服设</div>
+    
+    <!-- 👇 第一个卡片：参考图册 -->
+    <div class="menu-card" onclick="showPage('gallery-page')" style="padding: 0; overflow: hidden;">
+      <!-- 图片放在最上面，撑满宽度，高度固定，自动裁切 -->
+      <img src="images/IMG_2760.JPG" style="width: 100%; height: 120px; object-fit: cover;">
+      <div style="padding: 20px;">
+        <div class="menu-title">▼参考图册</div>
+        <div class="menu-desc">供以参考的png与服设</div>
+      </div>
     </div>
-    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399;">
-      <div class="menu-title">▼文字设定内容</div>
-      <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
+
+    <!-- 👇 第二个卡片：文字设定内容 -->
+    <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399; padding: 0; overflow: hidden;">
+      <img src="images/IMG_2760.JPG" style="width: 100%; height: 120px; object-fit: cover;">
+      <div style="padding: 20px;">
+        <div class="menu-title">▼文字设定内容</div>
+        <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -125,8 +137,8 @@
 
   <div class="text-list-item" onclick="showPage('text-detail-2')">
     <div>
-      <div class="text-list-title">背景故事</div>
-      <div class="text-list-desc">角色的过往与经历</div>
+      <div class="text-list-title">四月一日一期</div>
+      <div class="text-list-desc">角色设定</div>
     </div>
     <div class="text-list-arrow">›</div>
   </div>
@@ -154,7 +166,7 @@
   <div class="back-btn green" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">四月一日一期</div>
   <div class="text-box">
-  四月一日一期（鼠）24岁 174cm 日本人
+  四月一日一期（鼠）24岁 174cm 日本人<br><br>
 欺诈师、诈骗犯，伪装得很好很常识人的反社会类型人。需要通过对另一个（在意的）人的痛苦、羞辱、恐惧、受控制或受折磨中映射出自己的存在来证明自己，反之被这样做也可以，爱也算。在对人不感兴趣后会抛弃得很彻底，甚至被缠上的话会无情地解决掉对方。<br><br>
 （在与相方相遇前，多数为施虐方）<br><br>
 微表情算丰富的一类很多变，内心常常飘忽不定，吐槽役，角色底色是自大的傲慢的虽然表现的不明显但会将目标拉进自己的理想国玩过家家一般闹剧的人，微妙的无视忽视对方的需求只做自己想做的事。<br><br>
