@@ -5,53 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>你我之间约等于紫次方</title>
 <style>
-  /* 👇 修改：全局 padding 从 20px 缩小到 12px，减少拥挤感 */
+  /* 全局基础设置 */
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #eef2f6; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
+  /* 首页大标题 */
   .header { text-align: center; padding: 20px 0; }
   .header h1 { margin: 0; color: #1e293b; letter-spacing: 2px; font-size: 26px; }
   .header p { color: #64748b; font-size: 14px; margin-top: 8px; }
 
-  /* 👇 修改：卡片间距缩小 */
+  /* 首页卡片：去掉了阴影和悬停浮动 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
-  /* 👇 修改：卡片内部 padding 缩小 */
-  .menu-card { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.3s ease; border-left: 6px solid #a78bfa; }
-  .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .menu-card { background: #fff; border-radius: 16px; padding: 16px; cursor: pointer; transition: 0.2s; border-left: 6px solid #a78bfa; }
   .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #4c1d95; }
   .menu-desc { font-size: 14px; color: #64748b; line-height: 1.5; }
 
-  /* 👇 修改：详情页 padding 缩小 */
-  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #fff; padding: 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-  .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: background 0.2s; }
-  .back-btn:hover { background: #8b5cf6; }
+  /* 详情页大盒子：去掉了阴影 */
+  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #fff; padding: 16px; border-radius: 16px; }
+  
+  /* 返回按钮：去掉了悬停特效 */
+  .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
   .back-btn.green { background: #34d399; }
-  .back-btn.green:hover { background: #10b981; }
+  
+  /* 详情页标题 */
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; color: #1e293b; }
 
+  /* 图册的子菜单 */
   .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
   .sub-menu-item { padding: 8px 16px; background: #f1f5f9; border-radius: 20px; font-size: 14px; cursor: pointer; color: #475569; transition: 0.2s; }
-  .sub-menu-item:hover, .sub-menu-item.active { background: #a78bfa; color: #fff; }
+  .sub-menu-item.active { background: #a78bfa; color: #fff; }
 
+  /* 图册网格：去掉了图片放大的悬停特效，纯平铺 */
   .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; margin-top: 15px; }
   .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f1f5f9; }
-  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; display: block; }
-  .img-box:hover img { transform: scale(1.1); }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
+  /* 灯箱背景 */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
   #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
 
+  /* 文字框 */
   .text-box { background: #f8fafc; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #334155; margin-bottom: 15px; border-left: 4px solid #34d399; }
   .text-box h3 { margin-top: 0; color: #047857; font-size: 16px; }
   .text-box p { margin-top: 6px; margin-bottom: 6px; }
 
-  .text-list-item { 
-    background: #f8fafc; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; 
-    cursor: pointer; transition: 0.2s; border: 1px solid #e2e8f0;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .text-list-item:hover { background: #fff; border-color: #34d399; box-shadow: 0 4px 12px rgba(52, 211, 153, 0.1); transform: translateX(5px); }
+  /* 文字列表：去掉了向右移动的悬停特效，纯平铺 */
+  .text-list-item { background: #f8fafc; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #1e293b; }
   .text-list-desc { font-size: 13px; color: #94a3b8; margin-top: 4px; }
   .text-list-arrow { color: #34d399; font-size: 20px; font-weight: bold; }
