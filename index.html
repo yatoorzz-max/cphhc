@@ -190,10 +190,15 @@
 <div id="lightbox" onclick="closeLightbox(event)">
   <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
 </div>
-
 <script>
   const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3'];
 
+  // 初始化，记录首页状态
+  window.onload = function() {
+    history.replaceState({ pageId: 'home-page' }, '', '#home-page');
+  };
+
+  // 页面跳转逻辑
   function showPage(pageId) {
     allPages.forEach(id => {
       const el = document.getElementById(id);
@@ -201,8 +206,31 @@
     });
     document.getElementById(pageId).style.display = 'block';
     window.scrollTo(0, 0);
+    
+    // 记录浏览历史，让手机返回键生效
+    history.pushState({ pageId: pageId }, '', '#' + pageId);
   }
 
+  // 监听手机返回键
+  window.onpopstate = function(event) {
+    if (event.state && event.state.pageId) {
+      const pageId = event.state.pageId;
+      allPages.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+      });
+      document.getElementById(pageId).style.display = 'block';
+      window.scrollTo(0, 0);
+    } else {
+      allPages.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+      });
+      document.getElementById('home-page').style.display = 'block';
+    }
+  };
+
+  // 切换子图册
   function showSubGallery(galleryId, element) {
     const page = element.closest('.detail-page');
     page.querySelectorAll('.sub-gallery').forEach(el => el.style.display = 'none');
@@ -211,6 +239,7 @@
     element.classList.add('active');
   }
 
+  // 图片灯箱
   function openLightbox(src) {
     const img = document.getElementById('lightbox-img');
     img.src = src;
