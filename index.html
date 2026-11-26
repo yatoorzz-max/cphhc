@@ -5,70 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我的 OC 档案库</title>
 <style>
-  /* 全局样式与背景 */
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #eef2f6; padding: 20px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
   
-  /* 主标题区域 */
   .header { text-align: center; padding: 30px 0; }
   .header h1 { margin: 0; color: #1e293b; letter-spacing: 2px; font-size: 26px; }
   .header p { color: #64748b; font-size: 14px; margin-top: 8px; }
 
-  /* 首页大菜单（卡片） */
   .menu-grid { display: grid; gap: 20px; max-width: 800px; margin: 0 auto; }
-  .menu-card { 
-    background: #fff; border-radius: 16px; padding: 24px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer;
-    transition: all 0.3s ease; border-left: 6px solid #a78bfa;
-  }
+  .menu-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.3s ease; border-left: 6px solid #a78bfa; }
   .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
   .menu-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; color: #4c1d95; }
   .menu-desc { font-size: 14px; color: #64748b; line-height: 1.5; }
 
-  /* 详情页/相册页通用样式 */
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
   .back-btn { display: inline-block; padding: 8px 16px; background: #a78bfa; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 20px; transition: background 0.2s; }
   .back-btn:hover { background: #8b5cf6; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; color: #1e293b; }
 
-  /* 小相册菜单（二级菜单） */
   .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
   .sub-menu-item { padding: 8px 16px; background: #f1f5f9; border-radius: 20px; font-size: 14px; cursor: pointer; color: #475569; transition: 0.2s; }
   .sub-menu-item:hover, .sub-menu-item.active { background: #a78bfa; color: #fff; }
 
-  /* 核心：横向排列的图片网格 */
-  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-top: 15px; }
-  .img-grid img { 
-    width: 100%; aspect-ratio: 1 / 1; /* 强制正方形 */
-    object-fit: cover; /* 裁剪填满，不变形 */
-    border-radius: 8px; cursor: pointer; transition: transform 0.2s; 
+  /* 👇核心修改：改成 70px，一行能放 3-4 张 */
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; margin-top: 15px; }
+  
+  /* 👇核心修改：给图片加了相对定位，为了放序号 */
+  .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+  .img-box:hover img { transform: scale(1.1); }
+  
+  /* 👇核心修改：画加风格的左上角序号标签 */
+  .img-num {
+    position: absolute; top: 4px; left: 4px; 
+    background: rgba(0,0,0,0.6); color: #fff; 
+    font-size: 10px; padding: 2px 6px; border-radius: 4px;
+    pointer-events: none;
   }
-  .img-grid img:hover { transform: scale(1.05); }
 
-  /* 点击放大的遮罩层 */
-  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
   #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
 
-  /* 纯文字区块 */
   .text-box { background: #f8fafc; padding: 20px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #334155; margin-bottom: 15px; border-left: 4px solid #34d399; }
   .text-box h3 { margin-top: 0; color: #047857; font-size: 16px; }
 </style>
 </head>
 <body>
 
-<!-- 首页：分类菜单 -->
 <div id="home-page">
   <div class="header">
     <h1>我的 OC 档案库</h1>
     <p>点击下方卡片查看详细内容</p>
   </div>
-
   <div class="menu-grid">
     <div class="menu-card" onclick="showPage('gallery-page')">
       <div class="menu-title">📸 参考图册</div>
       <div class="menu-desc">各种立绘、服设参考和摸鱼。点击进入分类查看。</div>
     </div>
-
     <div class="menu-card" onclick="showPage('text-page')" style="border-left-color: #34d399;">
       <div class="menu-title">📝 角色文字设定</div>
       <div class="menu-desc">背景故事、性格特点、世界观等文字记录。</div>
@@ -76,87 +69,81 @@
   </div>
 </div>
 
-<!-- 详情页 1：图片相册（含二级菜单） -->
 <div id="gallery-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
   <div class="detail-title">参考图册</div>
   
-  <!-- 二级菜单：可以自己加名字 -->
   <div class="sub-menu">
     <div class="sub-menu-item active" onclick="showSubGallery('gallery1', this)">立绘参考</div>
     <div class="sub-menu-item" onclick="showSubGallery('gallery2', this)">服设参考</div>
   </div>
 
-  <!-- 小相册 1：立绘参考 -->
   <div id="gallery1" class="sub-gallery">
     <p style="font-size: 14px; color: #666;">这里写立绘参考的说明文字。</p>
     <div class="img-grid">
-      <!-- 你的图片放这里 -->
-      <img src="images/IMG_2759.JPG" onclick="openLightbox(this.src)" alt="图1">
-      <img src="images/IMG_2760.JPG" onclick="openLightbox(this.src)" alt="图2">
-      <img src="images/IMG_2759.JPG" onclick="openLightbox(this.src)" alt="图3"> <!-- 重复测试多图效果 -->
+      
+      <!-- 👇这就是带序号的单张图片代码，想加图直接复制这段即可 -->
+      <div class="img-box" onclick="openLightbox('images/IMG_2759.JPG')">
+        <span class="img-num">1</span>
+        <img src="images/IMG_2759.JPG" alt="图1">
+      </div>
+      
+      <div class="img-box" onclick="openLightbox('images/IMG_2760.JPG')">
+        <span class="img-num">2</span>
+        <img src="images/IMG_2760.JPG" alt="图2">
+      </div>
+      
+      <!-- 复制上面的格式可以一直加图片，注意把图片路径和序号改一下 -->
+      
     </div>
   </div>
 
-  <!-- 小相册 2：服设参考 -->
   <div id="gallery2" class="sub-gallery" style="display: none;">
     <p style="font-size: 14px; color: #666;">这里写服设参考的说明文字。</p>
     <div class="img-grid">
-      <img src="images/IMG_2760.JPG" onclick="openLightbox(this.src)" alt="图4">
+      <div class="img-box" onclick="openLightbox('images/IMG_2760.JPG')">
+        <span class="img-num">1</span>
+        <img src="images/IMG_2760.JPG" alt="图4">
+      </div>
     </div>
   </div>
 </div>
 
-<!-- 详情页 2：文字设定 -->
 <div id="text-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')" style="background: #34d399;">← 返回主页</div>
   <div class="detail-title">角色文字设定</div>
-  
   <div class="text-box">
     <h3>基础信息</h3>
     <p>姓名：兔兔<br>年龄：24岁<br>性格：表面懒散，其实很聪明。</p>
   </div>
-
   <div class="text-box">
     <h3>背景故事</h3>
     <p>这里写长篇大论的背景故事。文字多了会自动换行排版，很方便。</p>
   </div>
 </div>
 
-<!-- 放大图片的遮罩 -->
 <div id="lightbox" onclick="this.style.display='none'">
   <img id="lightbox-img" src="">
 </div>
 
 <script>
-  // 切换主页和详情页
   function showPage(pageId) {
     document.getElementById('home-page').style.display = 'none';
     document.getElementById('gallery-page').style.display = 'none';
     document.getElementById('text-page').style.display = 'none';
-    
     document.getElementById(pageId).style.display = 'block';
     window.scrollTo(0,0);
   }
-
-  // 切换相册里的小分类（二级菜单）
   function showSubGallery(galleryId, element) {
-    // 隐藏所有小相册
     document.querySelectorAll('.sub-gallery').forEach(el => el.style.display = 'none');
-    // 取消所有菜单的高亮
     document.querySelectorAll('.sub-menu-item').forEach(el => el.classList.remove('active'));
-    
-    // 显示选中的相册，并高亮菜单
     document.getElementById(galleryId).style.display = 'block';
     element.classList.add('active');
   }
-
-  // 点击图片放大
   function openLightbox(src) {
     document.getElementById('lightbox-img').src = src;
     document.getElementById('lightbox').style.display = 'flex';
   }
 </script>
-
 </body>
 </html>
