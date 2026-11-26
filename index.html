@@ -12,13 +12,14 @@
   .header { text-align: center; padding: 20px 0; }
   .header h1 { margin: 0; color: #111111; letter-spacing: 2px; font-size: 26px; }
 
-  .home-avatar { text-align: center; margin-bottom: 20px; }
+  .home-avatar { text-align: center; margin-bottom: 24px; }
   .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
 
-  /* 首页卡片：微灰底色，完全去掉了左边框 */
+  /* 首页卡片 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
   .menu-card { background: #f8f8f8; border-radius: 16px; padding: 16px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; align-items: center; gap: 16px; }
-  .menu-card img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+  .menu-card-img-box { width: 90px; height: 90px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #eee; }
+  .menu-card-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #111111; }
   .menu-desc { font-size: 14px; color: #737373; line-height: 1.5; }
 
@@ -27,33 +28,42 @@
   .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
 
-  /* 相册列表 */
+  /* 👇 列表模式的相册目录（填满侧边） */
   .album-list { display: flex; flex-direction: column; gap: 12px; }
-  .album-item { background: #f8f8f8; border: 1px solid #eeeeee; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; }
+  .album-item { background: #f8f8f8; border: 1px solid #eeeeee; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; height: 100px; }
   .album-item:hover { background: #f0f0f0; }
-  .album-cover { width: 120px; height: 120px; flex-shrink: 0; background: #eeeeee; }
-  .album-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .album-cover { width: 100px; height: 100px; flex-shrink: 0; background: #eeeeee; }
+  .album-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .album-info { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
   .album-info-title { font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px; }
   .album-info-desc { font-size: 13px; color: #888888; }
 
-  /* 相册内部网格 */
-  .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 15px; }
+  /* 👇 相册内部的吸顶切换菜单 */
+  .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; position: sticky; top: 0; background: #fff; padding: 10px 0; z-index: 100; border-bottom: 1px solid #f5f5f5; }
+  .sub-menu-item { padding: 8px 16px; background: #f8f8f8; border-radius: 20px; font-size: 14px; cursor: pointer; color: #555; transition: 0.2s; border: 1px solid #eaeaea; }
+  .sub-menu-item.active { background: #333333; color: #fff; border-color: #333333; }
+
+  /* 相册内部的平铺模块 */
+  .gallery-section { margin-bottom: 30px; scroll-margin-top: 60px; }
+  .album-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
+  .album-title { font-size: 18px; font-weight: bold; color: #111; }
+  .album-desc { font-size: 13px; color: #888; }
+
+  /* 网格：3列铺满 */
+  .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f5f5f5; }
   .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
-  /* 文字框 */
+  /* 文字框 & 列表 */
   .text-box { background: #f8f8f8; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border: 1px solid #eeeeee; }
-
-  /* 文字列表按钮 */
   .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
   .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
   /* 灯箱 */
-  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; touch-action: none; }
   #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; pointer-events: none; }
 </style>
 </head>
@@ -67,20 +77,10 @@
   <div class="home-avatar">
     <img src="images/IMG_2760.JPG" alt="头像">
   </div>
-
-  <div style="text-align: center; margin-bottom: 20px;">
-    <span style="font-size: 13px; color: #999999; display: block; margin-bottom: 4px;">▇ 出身▇</span>
-    <span style="font-size: 13px; color: #999999; line-height: 1.5;">
-      TRPG模组《雨降らしの蝶》normal·全魔改版<br>
-      ↑为以上模组中的HO3×HO4组成的PC产品<br>
-      所携带的内容与PNG全由俩位PC的PL的演绎、捏造、口嗨<br>
-      有log节选无模组内剧透 请放心食用
-    </span>
-  </div>
   
   <div class="menu-grid">
     <div class="menu-card" onclick="showPage('gallery-page')">
-      <img src="images/IMG_2760.JPG">
+      <div class="menu-card-img-box"><img src="images/IMG_2760.JPG"></div>
       <div>
         <div class="menu-title">▼参考图册</div>
         <div class="menu-desc">供以参考的png与服设</div>
@@ -88,7 +88,7 @@
     </div>
 
     <div class="menu-card" onclick="showPage('text-page')">
-      <img src="images/IMG_2760.JPG">
+      <div class="menu-card-img-box"><img src="images/IMG_2760.JPG"></div>
       <div>
         <div class="menu-title">▼文字设定内容</div>
         <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
@@ -97,13 +97,14 @@
   </div>
 </div>
 
-<!-- ============图册目录（只有列表） ================= -->
+<!-- ============图册目录（列表模式） ================= -->
 <div id="gallery-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回上一页</div>
   <div class="detail-title">参考图册</div>
   
   <div class="album-list">
-    <div class="album-item" onclick="showPage('gallery-1')">
+    <!-- 点击进入相册内部 1 -->
+    <div class="album-item" onclick="showPage('album-detail-1')">
       <div class="album-cover"><img src="images/20261119_3.PNG"></div>
       <div class="album-info">
         <div class="album-info-title">立绘参考</div>
@@ -111,7 +112,8 @@
       </div>
     </div>
 
-    <div class="album-item" onclick="showPage('gallery-2')">
+    <!-- 点击进入相册内部 2 -->
+    <div class="album-item" onclick="showPage('album-detail-2')">
       <div class="album-cover"><img src="images/IMG_2760.JPG"></div>
       <div class="album-info">
         <div class="album-info-title">服设参考</div>
@@ -121,31 +123,55 @@
   </div>
 </div>
 
-<!-- 👇 相册内部 1 -->
-<div id="gallery-1" class="detail-page">
+<!-- 👇 相册内部详情 1（包含吸顶菜单与网格） -->
+<div id="album-detail-1" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
   <div class="detail-title">立绘参考</div>
-  <div class="img-grid">
-    <div class="img-box" onclick="openLightbox('images/20261119_3.PNG', this)">
-      <span class="img-num">1</span>
-      <img src="images/20261119_3.PNG">
+  
+  <!-- 这里就是你要的吸顶切换菜单 -->
+  <div class="sub-menu">
+    <div class="sub-menu-item active" onclick="scrollToGallery('sub-1-1', this)">全身立绘</div>
+    <div class="sub-menu-item" onclick="scrollToGallery('sub-1-2', this)">半身/头像</div>
+  </div>
+
+  <!-- 子分类 1 -->
+  <div id="sub-1-1" class="gallery-section">
+    <div class="album-header">
+      <div class="album-title">全身立绘</div>
+      <div class="album-desc">2张</div>
     </div>
-    <div class="img-box" onclick="openLightbox('images/IMG_2792.PNG', this)">
-      <span class="img-num">2</span>
-      <img src="images/IMG_2792.PNG">
+    <div class="img-grid">
+      <div class="img-box" onclick="openLightbox('images/20261119_3.PNG', this)">
+        <span class="img-num">1</span>
+        <img src="images/20261119_3.PNG">
+      </div>
+      <div class="img-box" onclick="openLightbox('images/IMG_2792.PNG', this)">
+        <span class="img-num">2</span>
+        <img src="images/IMG_2792.PNG">
+      </div>
     </div>
-    <div class="img-box" onclick="openLightbox('images/IMG_2797.PNG', this)">
-      <span class="img-num">3</span>
-      <img src="images/IMG_2797.PNG">
+  </div>
+
+  <!-- 子分类 2 -->
+  <div id="sub-1-2" class="gallery-section">
+    <div class="album-header">
+      <div class="album-title">半身/头像</div>
+      <div class="album-desc">1张</div>
+    </div>
+    <div class="img-grid">
+      <div class="img-box" onclick="openLightbox('images/IMG_2797.PNG', this)">
+        <span class="img-num">1</span>
+        <img src="images/IMG_2797.PNG">
+      </div>
     </div>
   </div>
 </div>
 
-<!-- 👇 相册内部 2 -->
-<div id="gallery-2" class="detail-page">
+<!-- 👇 相册内部详情 2 -->
+<div id="album-detail-2" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
   <div class="detail-title">服设参考</div>
-  <div class="img-grid">
+  <div class="img-grid" style="margin-top: 15px;">
     <div class="img-box" onclick="openLightbox('images/IMG_2760.JPG', this)">
       <span class="img-num">1</span>
       <img src="images/IMG_2760.JPG">
@@ -228,14 +254,15 @@
 <!-- 灯箱 -->
 <div id="lightbox">
   <div id="lightbox-counter" style="position: absolute; top: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10000;">1 / 1</div>
-  <div onclick="document.getElementById('lightbox').style.display='none';" style="position: absolute; top: 10px; right: 20px; color: white; font-size: 20px; cursor: pointer; padding: 10px; z-index: 10000; user-select: none;">✕</div>
+  <div onclick="document.getElementById('lightbox').style.display='none'; document.body.style.overflow='';" style="position: absolute; top: 10px; right: 20px; color: white; font-size: 20px; cursor: pointer; padding: 10px; z-index: 10000; user-select: none;">✕</div>
   <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(-1);" style="position: absolute; left: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">‹</div>
   <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
   <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(1);" style="position: absolute; right: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">›</div>
 </div>
 
 <script>
-  const allPages = ['home-page', 'gallery-page', 'gallery-1', 'gallery-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
+  // 注意：加入了新的相册内部页面 ID
+  const allPages = ['home-page', 'gallery-page', 'album-detail-1', 'album-detail-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
   let currentAlbum = []; 
   let currentIndex = 0;
 
@@ -271,15 +298,30 @@
     }
   };
 
+  // 滚动定位逻辑
+  function scrollToGallery(galleryId, element) {
+    const parent = element.parentElement;
+    parent.querySelectorAll('.sub-menu-item').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+
+    const target = document.getElementById(galleryId);
+    if(target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   function openLightbox(src, element) {
-    const galleryContainer = element.closest('.img-grid');
+    const galleryContainer = element.closest('.detail-page'); // 在整个详情页中找图
     const allImages = Array.from(galleryContainer.querySelectorAll('.img-box img'));
     currentAlbum = allImages.map(img => img.getAttribute('src'));
+    
+    // 去重，防止同图在多个分类里出现导致计数混乱
+    currentAlbum = [...new Set(currentAlbum)]; 
+    
     currentIndex = currentAlbum.indexOf(src);
     updateLightbox();
     document.getElementById('lightbox').style.display = 'flex';
     
-    // 阻止背景页面滚动
     document.body.style.overflow = 'hidden';
   }
 
@@ -301,7 +343,7 @@
     if (lightbox.style.display === 'flex') {
       if (e.key === 'Escape') {
         lightbox.style.display = 'none';
-        document.body.style.overflow = ''; // 恢复滚动
+        document.body.style.overflow = ''; 
       }
       if (e.key === 'ArrowLeft') changeImage(-1);
       if (e.key === 'ArrowRight') changeImage(1);
@@ -315,13 +357,13 @@
   lb.addEventListener('click', e => {
     if (e.target.id === 'lightbox') {
       lb.style.display = 'none';
-      document.body.style.overflow = ''; // 恢复滚动
+      document.body.style.overflow = ''; 
     }
   });
 
   lb.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
-  }, { passive: false }); // 阻止系统默认滑动
+  }, { passive: false });
 
   lb.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
@@ -329,7 +371,7 @@
   }, false);
 
   function handleSwipe() {
-    // 把阈值从 50 调大到 80，防止误触
+    // 触发距离调至 80px，彻底防误触
     if (touchEndX < touchStartX - 80) changeImage(1); 
     if (touchEndX > touchStartX + 80) changeImage(-1); 
   }
