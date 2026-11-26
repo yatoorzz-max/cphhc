@@ -9,20 +9,20 @@
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
-  /* 首页：只保留出身说明和头像 */
-  .home-header { text-align: center; padding: 30px 0 20px 0; }
-  .home-subtitle { font-size: 13px; color: #999999; line-height: 1.6; display: inline-block; text-align: left; }
-
-  .home-avatar { text-align: center; margin-bottom: 24px; }
+  /* 首页头像区 */
+  .home-avatar { text-align: center; margin-top: 30px; margin-bottom: 16px; }
   .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
 
-  /* 首页卡片：去掉了 padding，图片完美贴边 */
+  /* 出身文字说明（放在头像下面） */
+  .home-subtitle { text-align: center; font-size: 13px; color: #999999; line-height: 1.6; margin-bottom: 30px; }
+
+  /* 首页卡片：恢复了舒适的大尺寸，左侧图片完美贴边 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
-  .menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: center; border: 1px solid #eeeeee; padding: 0; }
-  .menu-card-img-box { width: 100px; height: 100px; flex-shrink: 0; background: #eee; }
+  .menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 0; }
+  .menu-card-img-box { width: 110px; height: 110px; flex-shrink: 0; background: #eee; }
   .menu-card-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .menu-card-text { padding: 12px 16px; }
-  .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #111111; }
+  .menu-card-text { padding: 16px; display: flex; flex-direction: column; justify-content: center; }
+  .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 6px; color: #111111; }
   .menu-desc { font-size: 14px; color: #737373; line-height: 1.5; }
 
   /* 详情页大盒子 */
@@ -30,7 +30,7 @@
   .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
 
-  /* 图册目录（列表模式）：图片贴边 */
+  /* 图册目录 */
   .album-list { display: flex; flex-direction: column; gap: 12px; }
   .album-item { background: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; height: 100px; border: 1px solid #eeeeee; padding: 0; }
   .album-cover { width: 100px; height: 100px; flex-shrink: 0; background: #eeeeee; }
@@ -39,12 +39,11 @@
   .album-info-title { font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px; }
   .album-info-desc { font-size: 13px; color: #888888; }
 
-  /* 相册内部的吸顶分类菜单 */
+  /* 相册内部吸顶菜单 */
   .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; position: sticky; top: 0; background: #fff; padding: 10px 0; z-index: 100; border-bottom: 1px solid #f5f5f5; }
   .sub-menu-item { padding: 8px 16px; background: #f8f8f8; border-radius: 20px; font-size: 14px; cursor: pointer; color: #555; transition: 0.2s; border: 1px solid #eaeaea; }
   .sub-menu-item.active { background: #333333; color: #fff; border-color: #333333; }
 
-  /* 相册内部平铺模块 */
   .gallery-section { margin-bottom: 30px; scroll-margin-top: 60px; }
   .album-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
   .album-title { font-size: 18px; font-weight: bold; color: #111; }
@@ -56,7 +55,7 @@
   .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
-  /* 文字框 & 列表 */
+  /* 文字框 */
   .text-box { background: #f8f8f8; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border: 1px solid #eeeeee; }
   .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
@@ -71,23 +70,22 @@
 <body>
 <!-- ================= 首页 ================= -->
 <div id="home-page">
-  <!-- 只留下了出身小字 -->
-  <div class="home-header">
-    <div class="home-subtitle">
-      <span style="font-weight: bold; display: block; margin-bottom: 4px;">▇ 出身▇</span>
-      TRPG模组《雨降らしの蝶》normal·全魔改版<br>
-      ↑为以上模组中的HO3×HO4组成的PC产品<br>
-      所携带的内容与PNG全由俩位PC的PL的演绎、捏造、口嗨<br>
-      有log节选无模组内剧透 请放心食用
-    </div>
-  </div>
   
-  <!-- 头像 -->
+  <!-- 1. 头像 -->
   <div class="home-avatar">
     <img src="images/IMG_2760.JPG" alt="头像">
   </div>
+
+  <!-- 2. 出身小字（移到头像下面了） -->
+  <div class="home-subtitle">
+    <span style="font-weight: bold; display: block; margin-bottom: 4px;">▇ 出身▇</span>
+    TRPG模组《雨降らしの蝶》normal·全魔改版<br>
+    ↑为以上模组中的HO3×HO4组成的PC产品<br>
+    所携带的内容与PNG全由俩位PC的PL的演绎、捏造、口嗨<br>
+    有log节选无模组内剧透 请放心食用
+  </div>
   
-  <!-- 卡片（图片完美贴边） -->
+  <!-- 3. 卡片（恢复大尺寸，图片完美贴边） -->
   <div class="menu-grid">
     <div class="menu-card" onclick="showPage('gallery-page')">
       <div class="menu-card-img-box"><img src="images/IMG_2760.JPG"></div>
@@ -107,7 +105,7 @@
   </div>
 </div>
 
-<!-- ============图册目录（纯列表模式） ================= -->
+<!-- ============图册目录 ================= -->
 <div id="gallery-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回上一页</div>
   <div class="detail-title">参考图册</div>
@@ -131,7 +129,7 @@
   </div>
 </div>
 
-<!-- 👇 相册 1 内部（带定位切换） -->
+<!-- 👇 相册 1 内部 -->
 <div id="album-1" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
   <div class="detail-title">立绘参考</div>
@@ -207,7 +205,6 @@
   </div>
 </div> 
 
-<!-- 👇 文字详情页 1 -->
 <div id="text-detail-1" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">狭雾有江</div>
@@ -219,7 +216,6 @@
   </div>
 </div>
 
-<!-- 👇 文字详情页 2 -->
 <div id="text-detail-2" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">四月一日一期</div>
@@ -232,7 +228,6 @@
   </div>
 </div>
 
-<!-- 👇 文字详情页 3 -->
 <div id="text-detail-3" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">相处模式</div>
@@ -248,7 +243,6 @@
   </div>
 </div>
 
-<!-- 👇 文字详情页 4 -->
 <div id="text-detail-4" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">主线故事</div>
@@ -256,74 +250,125 @@
 <br>我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br>
   </div>
 </div>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>你我之间约等于紫次方</title>
-<style>
-  /* 全局：纯白底色 */
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
-  * { box-sizing: border-box; }
+<!-- 灯箱 -->
+<div id="lightbox">
+  <div id="lightbox-counter" style="position: absolute; top: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10000;">1 / 1</div>
+  <div onclick="document.getElementById('lightbox').style.display='none'; document.body.style.overflow='';" style="position: absolute; top: 10px; right: 20px; color: white; font-size: 20px; cursor: pointer; padding: 10px; z-index: 10000; user-select: none;">✕</div>
+  <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(-1);" style="position: absolute; left: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">‹</div>
+  <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
+  <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(1);" style="position: absolute; right: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">›</div>
+</div>
 
-  /* 首页：只保留出身说明和头像 */
-  .home-header { text-align: center; padding: 30px 0 20px 0; }
-  .home-subtitle { font-size: 13px; color: #999999; line-height: 1.6; display: inline-block; text-align: left; }
+<script>
+  const allPages = ['home-page', 'gallery-page', 'album-1', 'album-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
+  let currentAlbum = []; 
+  let currentIndex = 0;
 
-  .home-avatar { text-align: center; margin-bottom: 24px; }
-  .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+  window.onload = function() {
+    history.replaceState({ pageId: 'home-page' }, '', '#home-page');
+  };
 
-  /* 首页卡片：去掉了 padding，图片完美贴边 */
-  .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
-  .menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: center; border: 1px solid #eeeeee; padding: 0; }
-  .menu-card-img-box { width: 100px; height: 100px; flex-shrink: 0; background: #eee; }
-  .menu-card-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .menu-card-text { padding: 12px 16px; }
-  .menu-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: #111111; }
-  .menu-desc { font-size: 14px; color: #737373; line-height: 1.5; }
+  function showPage(pageId) {
+    allPages.forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.style.display = 'none';
+    });
+    document.getElementById(pageId).style.display = 'block';
+    window.scrollTo(0, 0);
+    history.pushState({ pageId: pageId }, '', '#' + pageId);
+  }
 
-  /* 详情页大盒子 */
-  .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
-  .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
-  .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
+  window.onpopstate = function(event) {
+    if (event.state && event.state.pageId) {
+      const pageId = event.state.pageId;
+      allPages.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+      });
+      document.getElementById(pageId).style.display = 'block';
+      window.scrollTo(0, 0);
+    } else {
+      allPages.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+      });
+      document.getElementById('home-page').style.display = 'block';
+    }
+  };
 
-  /* 图册目录（列表模式）：图片贴边 */
-  .album-list { display: flex; flex-direction: column; gap: 12px; }
-  .album-item { background: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s; height: 100px; border: 1px solid #eeeeee; padding: 0; }
-  .album-cover { width: 100px; height: 100px; flex-shrink: 0; background: #eeeeee; }
-  .album-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .album-info { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
-  .album-info-title { font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px; }
-  .album-info-desc { font-size: 13px; color: #888888; }
+  function scrollToGallery(galleryId, element) {
+    const parent = element.parentElement;
+    parent.querySelectorAll('.sub-menu-item').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
 
-  /* 相册内部的吸顶分类菜单 */
-  .sub-menu { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; position: sticky; top: 0; background: #fff; padding: 10px 0; z-index: 100; border-bottom: 1px solid #f5f5f5; }
-  .sub-menu-item { padding: 8px 16px; background: #f8f8f8; border-radius: 20px; font-size: 14px; cursor: pointer; color: #555; transition: 0.2s; border: 1px solid #eaeaea; }
-  .sub-menu-item.active { background: #333333; color: #fff; border-color: #333333; }
+    const target = document.getElementById(galleryId);
+    if(target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
-  /* 相册内部平铺模块 */
-  .gallery-section { margin-bottom: 30px; scroll-margin-top: 60px; }
-  .album-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
-  .album-title { font-size: 18px; font-weight: bold; color: #111; }
-  .album-desc { font-size: 13px; color: #888; }
+  function openLightbox(src, element) {
+    const galleryContainer = element.closest('.detail-page'); 
+    const allImages = Array.from(galleryContainer.querySelectorAll('.img-box img'));
+    currentAlbum = allImages.map(img => img.getAttribute('src'));
+    currentAlbum = [...new Set(currentAlbum)]; 
+    
+    currentIndex = currentAlbum.indexOf(src);
+    updateLightbox();
+    document.getElementById('lightbox').style.display = 'flex';
+    
+    document.body.style.overflow = 'hidden';
+  }
 
-  /* 网格 3列 */
-  .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f5f5f5; }
-  .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-  .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+  function updateLightbox() {
+    if(currentAlbum.length === 0) return;
+    document.getElementById('lightbox-img').src = currentAlbum[currentIndex];
+    document.getElementById('lightbox-counter').innerText = (currentIndex + 1) + ' / ' + currentAlbum.length;
+  }
 
-  /* 文字框 & 列表 */
-  .text-box { background: #f8f8f8; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border: 1px solid #eeeeee; }
-  .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
-  .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
-  .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
-  .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
+  function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = 0;
+    if (currentIndex >= currentAlbum.length) currentIndex = currentAlbum.length - 1;
+    updateLightbox();
+  }
 
-  /* 灯箱 */
-  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; touch-action: none; }
-  #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; pointer-events: none; }
-</style>
-</head>
-<body>
+  document.addEventListener('keydown', e => {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox.style.display === 'flex') {
+      if (e.key === 'Escape') {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = ''; 
+      }
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'ArrowRight') changeImage(1);
+    }
+  });
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const lb = document.getElementById('lightbox');
+  
+  lb.addEventListener('click', e => {
+    if (e.target.id === 'lightbox') {
+      lb.style.display = 'none';
+      document.body.style.overflow = ''; 
+    }
+  });
+
+  lb.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: false });
+
+  lb.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, false);
+
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 80) changeImage(1); 
+    if (touchEndX > touchStartX + 80) changeImage(-1); 
+  }
+</script>
+</body>
+</html>
