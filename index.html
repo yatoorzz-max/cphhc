@@ -1,144 +1,524 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>我的 OC 档案库</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7661c9">
+<title>OC Archive | 我的角色档案库</title>
 <style>
-:root{--purple:#8b70c9;--purple-dark:#62449f;--mint:#8ed9c2;--ink:#343044;--muted:#817b91;--paper:#fff;--bg:#f5f1fa;--line:#e9e2f1;--danger:#c45b70}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f7f2fb,#eef8f4);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}button{border:0;border-radius:12px;padding:10px 15px;background:var(--purple);color:white;cursor:pointer;font-weight:650}button:hover{filter:brightness(.96)}button.secondary{background:#eee8f6;color:var(--purple-dark)}button.mint{background:#5eae96}button.danger{background:var(--danger)}button:disabled{opacity:.5;cursor:not-allowed}.wrap{max-width:1100px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 0 24px}.brand h1{margin:0;font-size:clamp(24px,4vw,34px);letter-spacing:2px;color:var(--purple-dark)}.brand p{margin:5px 0;color:var(--muted);font-size:14px}.panel,.card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 28px #5a3b7a0c}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}.archive-card{cursor:pointer;transition:.18s}.archive-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px #5a3b7a18}.archive-card h3{margin:4px 0 8px}.muted{color:var(--muted);font-size:14px}.hidden{display:none!important}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;color:var(--muted);font-weight:650}input,textarea,select{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;background:#fff;color:var(--ink)}textarea{min-height:100px;resize:vertical}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.tab{background:#eee8f6;color:var(--purple-dark)}.tab.active{background:var(--purple);color:white}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:12px}.photo{border:1px solid var(--line);border-radius:14px;padding:7px;background:white}.photo img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;cursor:zoom-in}.photo p{font-size:12px;margin:7px 2px;overflow-wrap:anywhere}.photo .toolbar button{padding:6px 9px;font-size:12px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.notice{padding:12px 14px;border-radius:12px;background:#effaf5;color:#367e69;font-size:14px;margin:12px 0}.error{background:#fff0f2;color:#a83f55}.modal{position:fixed;inset:0;background:#21172dcc;display:grid;place-items:center;padding:16px;z-index:10}.modal>div{max-width:600px;width:100%;max-height:90vh;overflow:auto;background:white;border-radius:20px;padding:22px}.lightbox{position:fixed;inset:0;background:#100d18ed;display:none;place-items:center;z-index:20;padding:20px}.lightbox img{max-width:95vw;max-height:90vh;object-fit:contain}.pill{display:inline-block;padding:4px 9px;border-radius:99px;background:#f0eafa;color:var(--purple-dark);font-size:12px}.empty{text-align:center;padding:34px 12px;color:var(--muted)}.footer{padding:28px 0;text-align:center;color:var(--muted);font-size:12px}
+:root {
+  --purple:#7661c9;
+  --deep:#55439e;
+  --mint:#b8f0df;
+  --bg:#f6f3ff;
+  --ink:#30284b;
+  --muted:#827a99;
+  --white:#fff;
+  --line:#e8e1f5;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,sans-serif;
+}
+header {
+  padding:22px 18px;
+  max-width:1000px;
+  margin:auto;
+}
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo {font-weight:900;font-size:19px}
+.logo span {color:var(--purple)}
+button {
+  border:0;
+  border-radius:13px;
+  padding:11px 16px;
+  background:var(--purple);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+button.mint {background:var(--mint);color:#245748}
+button.light {background:white;color:var(--purple);border:1px solid var(--line)}
+.hero {
+  margin-top:22px;
+  padding:28px 22px;
+  border-radius:25px;
+  color:white;
+  background:linear-gradient(135deg,#7661c9,#a394e3);
+}
+.hero h1 {font-size:30px;line-height:1.3;margin:0 0 10px}
+.hero p {margin:0;opacity:.9}
+main {max-width:1000px;margin:auto;padding:0 18px 45px}
+.toolbar {display:flex;gap:9px;margin:20px 0;flex-wrap:wrap}
+input,textarea,select {
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  color:var(--ink);
+  font:inherit;
+}
+#search {flex:1;min-width:180px}
+.categories {
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:5px 0 15px;
+}
+.category {
+  white-space:nowrap;
+  background:white;
+  color:var(--muted);
+  border:1px solid var(--line);
+  border-radius:30px;
+}
+.category.active {
+  background:var(--mint);
+  color:#245748;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:15px;
+}
+.card {
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+.cover {
+  height:175px;
+  background:linear-gradient(135deg,#e9e2ff,#d8f8ec);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  color:#9988c8;
+}
+.cover img {width:100%;height:100%;object-fit:cover}
+.card-content {padding:15px}
+.tag {
+  display:inline-block;
+  background:#e4f8f0;
+  color:#437d6b;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+.card h3 {margin:10px 0 5px}
+.description {font-size:14px;color:var(--muted)}
+.card-actions {display:flex;gap:7px;margin-top:13px}
+.card-actions button {flex:1;font-size:13px;padding:9px}
+.empty {
+  text-align:center;
+  padding:40px 10px;
+  color:var(--muted);
+}
+dialog {
+  border:0;
+  border-radius:22px;
+  width:min(550px,calc(100% - 24px));
+  padding:20px;
+  color:var(--ink);
+  max-height:90vh;
+  overflow:auto;
+}
+dialog::backdrop {background:#21153e77}
+form {display:grid;gap:13px}
+label {display:grid;gap:6px;font-size:14px;font-weight:700}
+textarea {min-height:100px;resize:vertical}
+.form-actions {display:flex;justify-content:flex-end;gap:8px}
+#adminPanel {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:15px;
+  margin:15px 0;
+}
+footer {
+  text-align:center;
+  color:var(--muted);
+  padding:25px;
+  font-size:13px;
+}
+[hidden] {display:none!important}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
- <div class="brand"><h1>我的 OC 档案库</h1><p>把每一个故事，好好收藏起来。</p></div>
- <div class="toolbar" id="topActions"><button class="secondary" id="authBtn">登录 / 注册</button></div>
+
+<header>
+<nav>
+  <div class="logo">✦ <span>OC</span> ARCHIVE</div>
+  <button class="light" id="adminButton">管理员入口</button>
+</nav>
+
+<section class="hero">
+  <h1>角色档案，<br>收藏每一种故事。</h1>
+  <p>一个属于原创角色与世界观的小小收藏室。</p>
+</section>
 </header>
-<div id="configNotice" class="panel">
- <h2>先连接你的 Supabase</h2>
- <p class="muted">打开本文件，找到最下面脚本开头的 SUPABASE_URL 和 SUPABASE_ANON_KEY，把项目 URL 和 Publishable key 填进去，再上传到 GitHub。</p>
-</div>
-<div id="authPanel" class="panel hidden">
- <h2 id="authTitle">登录 / 注册</h2>
- <div class="field"><label>邮箱</label><input id="email" type="email" autocomplete="email" placeholder="你的邮箱"></div>
- <div class="field"><label>密码（至少 6 位）</label><input id="password" type="password" autocomplete="current-password" placeholder="密码"></div>
- <div class="toolbar"><button id="loginBtn">登录</button><button class="secondary" id="signupBtn">注册新账号</button><button class="secondary" id="cancelAuth">取消</button></div>
- <p class="muted">如果开启了邮箱验证，请先到邮箱点击 Supabase 发来的验证链接。</p>
-</div>
-<div id="app" class="hidden">
- <section id="home">
-  <div class="section-title"><div><h2>我的档案</h2><p class="muted">你拥有的档案，以及别人邀请你协作的档案。</p></div><button id="newArchive">＋ 新建 OC</button></div>
-  <div id="archiveList" class="grid"></div>
- </section>
- <section id="detail" class="hidden">
-  <div class="toolbar" style="margin-bottom:14px"><button class="secondary" id="backHome">← 返回档案库</button><span id="roleTag" class="pill"></span></div>
-  <div class="panel">
-   <div class="section-title"><div><h2 id="archiveTitle">OC 档案</h2><p class="muted" id="archiveMeta"></p></div><div class="toolbar" id="archiveActions"></div></div>
-   <div class="tabs"><button class="tab active" data-tab="profile">文字设定</button><button class="tab" data-tab="images">参考图册</button><button class="tab" data-tab="team">协作者</button></div>
-   <div id="tab-profile">
-    <div class="field"><label>档案名称</label><input id="editTitle"></div>
-    <div class="field"><label>角色简介</label><textarea id="editDescription" placeholder="简单介绍这个 OC"></textarea></div>
-    <div class="field"><label>基础信息 / 角色设定</label><textarea id="editContent" style="min-height:240px" placeholder="姓名、年龄、性格、背景故事、世界观……"></textarea></div>
-    <button id="saveProfile">保存设定</button>
-   </div>
-   <div id="tab-images" class="hidden">
-    <div class="row"><div class="field"><label>图片分类</label><select id="categorySelect"></select></div><div class="field"><label>新增分类</label><div class="row"><input id="newCategoryName" placeholder="例如：立绘参考"><button id="addCategory" class="mint">添加</button></div></div></div>
-    <div class="toolbar"><label class="pill" style="cursor:pointer">＋ 上传图片<input id="uploadFiles" type="file" accept="image/*" multiple hidden></label><span class="muted">支持一次选择多张图片</span></div>
-    <div id="imageList" class="gallery" style="margin-top:15px"></div>
-   </div>
-   <div id="tab-team" class="hidden">
-    <p class="muted">全局邀请适用于你拥有的全部档案；单档邀请只开放当前档案。协作者可以完整编辑内容和图片，但不能删除档案或管理成员。</p>
-    <div class="panel" style="margin:12px 0">
-     <h3>邀请协作者</h3>
-     <div class="field"><label>对方注册邮箱</label><input id="inviteEmail" type="email" placeholder="friend@example.com"></div>
-     <div class="field"><label>邀请范围</label><select id="inviteScope"><option value="archive">仅当前 OC 档案</option><option value="global">我拥有的全部档案（全局）</option></select></div>
-     <button id="makeInvite">生成邀请链接</button><div id="inviteResult"></div>
-    </div>
-    <h3>当前档案协作者</h3><div id="memberList" class="muted"></div>
-    <h3>待接受邀请</h3><div id="pendingList" class="muted"></div>
-   </div>
+
+<main>
+
+<section id="adminPanel" hidden>
+  <h3>管理模式</h3>
+  <div class="toolbar">
+    <button id="addButton">＋ 新建 OC</button>
+    <button class="mint" id="exportButton">导出备份</button>
+    <button class="light" id="importButton">导入备份</button>
+    <button class="light" id="exitButton">退出管理</button>
   </div>
- </section>
+  <input type="file" id="backupFile" accept=".json" hidden>
+</section>
+
+<div class="toolbar">
+  <input id="search" placeholder="搜索角色名称、设定……">
+  <button class="mint" id="refreshButton">刷新</button>
 </div>
-<div class="footer">OC Archive · GitHub Pages + Supabase</div>
+
+<div class="categories" id="categories"></div>
+<div class="grid" id="cardGrid"></div>
+<div class="empty" id="emptyMessage">
+  这里还没有 OC 档案。
 </div>
-<div class="lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+
+</main>
+
+<footer>Made with care · OC Archive</footer>
+
+<dialog id="editor">
+<form id="ocForm">
+<h2 id="formTitle">新建 OC</h2>
+<input type="hidden" id="ocId">
+
+<label>角色名称
+<input id="ocName" required maxlength="100">
+</label>
+
+<label>分类
+<input id="ocCategory" placeholder="例如：主角、反派、原创世界">
+</label>
+
+<label>角色简介
+<textarea id="ocDescription"></textarea>
+</label>
+
+<label>详细设定
+<textarea id="ocDetails" style="min-height:170px"></textarea>
+</label>
+
+<label>角色封面
+<input type="file" id="ocImage" accept="image/*">
+</label>
+
+<div class="form-actions">
+<button type="button" class="light" id="cancelButton">取消</button>
+<button type="submit">保存档案</button>
+</div>
+</form>
+</dialog>
+
+<dialog id="detail">
+<div id="detailContent"></div>
+<div class="form-actions">
+<button class="light" id="closeDetail">关闭</button>
+</div>
+</dialog>
+
 <script>
-// 只填写 Project URL 和 Publishable key。绝对不要放 service_role / secret key。
-const SUPABASE_URL = "https://vlkdjobmowbbfmbmjsop.supabase.co/rest/v1/";
-const SUPABASE_ANON_KEY = "sb_publishable_-GBNhIUKSQgbsOMcRE2VqA_7CEYWipJ";
-const { createClient } = supabase;
-let db=null,user=null,current=null,role="viewer",categories=[],images=[],members=[],pending=[];
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const say=(msg,bad=false)=>{let n=document.createElement("div");n.className="notice"+(bad?" error":"");n.textContent=msg;document.querySelector(".wrap").prepend(n);setTimeout(()=>n.remove(),5000)};
-const editable=()=>role==="owner"||role==="editor";
-function showAuth(){ $("authPanel").classList.remove("hidden"); }
-function hideAuth(){ $("authPanel").classList.add("hidden"); }
-function showHome(){ $("home").classList.remove("hidden");$("detail").classList.add("hidden");current=null;loadArchives();}
-function showDetail(){ $("home").classList.add("hidden");$("detail").classList.remove("hidden");}
-async function init(){
- if(SUPABASE_URL.startsWith("在这里")||SUPABASE_ANON_KEY.startsWith("在这里"))return;
- db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
- $("configNotice").classList.add("hidden");
- db.auth.onAuthStateChange(async(_event,session)=>{user=session?.user||null;await updateAuthUI();});
- const {data:{session}}=await db.auth.getSession();user=session?.user||null;await updateAuthUI();
- const token=new URLSearchParams(location.search).get("invite");
- if(token && user){await acceptInvite(token);history.replaceState({}, "", location.pathname+location.hash);}
+
+const $ = id => document.getElementById(id);
+
+let archives = JSON.parse(
+  localStorage.getItem("oc_archive_data") || "[]"
+);
+
+let isAdmin = false;
+let currentCategory = "全部";
+
+function saveData() {
+  localStorage.setItem(
+    "oc_archive_data",
+    JSON.stringify(archives)
+  );
 }
-async function updateAuthUI(){
- $("topActions").innerHTML=user?`<span class="muted">${esc(user.email)}</span><button class="secondary" id="backupBtn">导出备份</button><button id="logoutBtn" class="secondary">退出登录</button>`:`<button id="authBtn">登录 / 注册</button>`;
- if(user){$("app").classList.remove("hidden");$("authPanel").classList.add("hidden");$("logoutBtn").onclick=async()=>{await db.auth.signOut();};$("backupBtn").onclick=backupAll;await loadArchives();}
- else if(new URLSearchParams(location.search).get("id")){$("app").classList.remove("hidden");$("home").classList.add("hidden");}
- else{$("app").classList.add("hidden");}
- const ab=$("authBtn");if(ab)ab.onclick=showAuth;
+
+function safe(text = "") {
+  return String(text).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
 }
-async function loadArchives(){
- if(!user)return;
- const {data,error}=await db.from("archives").select("id,title,description,owner_id,is_public,updated_at").order("updated_at",{ascending:false});
- if(error){say(error.message,true);return;}
- $("archiveList").innerHTML="";
- if(!data?.length){$("archiveList").innerHTML='<div class="panel empty">这里还没有档案，点击「新建 OC」开始收藏你的角色。</div>';return;}
- data.forEach(a=>{const el=document.createElement("div");el.className="card archive-card";el.innerHTML=`<span class="pill">${a.owner_id===user.id?"我的档案":"协作档案"}</span><h3>${esc(a.title)}</h3><p class="muted">${esc(a.description||"还没有简介")}</p><p class="muted">${a.is_public?"公开分享":"仅登录成员可见"}</p>`;el.onclick=()=>openArchive(a.id);$("archiveList").append(el);});
+
+function render() {
+  const categories = [
+    "全部",
+    ...new Set(archives.map(a => a.category || "未分类"))
+  ];
+
+  $("categories").innerHTML = categories.map(category => `
+    <button class="category ${
+      category === currentCategory ? "active" : ""
+    }" data-category="${safe(category)}">
+      ${safe(category)}
+    </button>
+  `).join("");
+
+  document.querySelectorAll("[data-category]").forEach(button => {
+    button.onclick = () => {
+      currentCategory = button.dataset.category;
+      render();
+    };
+  });
+
+  const keyword = $("search").value.toLowerCase().trim();
+
+  const filtered = archives.filter(archive => {
+    const matchesCategory =
+      currentCategory === "全部" ||
+      archive.category === currentCategory;
+
+    const text = [
+      archive.name,
+      archive.category,
+      archive.description,
+      archive.details
+    ].join(" ").toLowerCase();
+
+    return matchesCategory && text.includes(keyword);
+  });
+
+  $("cardGrid").innerHTML = filtered.map(archive => `
+    <article class="card">
+      <div class="cover">
+        ${
+          archive.image
+          ? `<img src="${archive.image}" alt="">`
+          : "✦"
+        }
+      </div>
+
+      <div class="card-content">
+        <span class="tag">
+          ${safe(archive.category || "未分类")}
+        </span>
+
+        <h3>${safe(archive.name)}</h3>
+
+        <div class="description">
+          ${safe(archive.description || "暂无简介")}
+        </div>
+
+        <div class="card-actions">
+          <button class="mint" data-view="${archive.id}">
+            查看
+          </button>
+
+          ${
+            isAdmin
+            ? `<button data-edit="${archive.id}">编辑</button>
+               <button style="background:#c45472"
+               data-delete="${archive.id}">删除</button>`
+            : ""
+          }
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  $("emptyMessage").hidden = filtered.length > 0;
+
+  document.querySelectorAll("[data-view]").forEach(button => {
+    button.onclick = () => showDetail(button.dataset.view);
+  });
+
+  document.querySelectorAll("[data-edit]").forEach(button => {
+    button.onclick = () => editArchive(button.dataset.edit);
+  });
+
+  document.querySelectorAll("[data-delete]").forEach(button => {
+    button.onclick = () => deleteArchive(button.dataset.delete);
+  });
 }
-async function openArchive(id){
- const {data:a,error}=await db.from("archives").select("*").eq("id",id).single();if(error){say(error.message,true);return;}
- current=a;role=user&&a.owner_id===user.id?"owner":"viewer";
- if(user&&role!=="owner"){const {data:m}=await db.from("archive_members").select("role").eq("archive_id",id).eq("user_id",user.id).maybeSingle();if(m)role=m.role;else{const {data:g}=await db.from("global_members").select("role").eq("user_id",user.id).eq("owner_id",a.owner_id).maybeSingle();role=g?.role||"viewer";}}
- if(role==="viewer"){say("你目前只有查看权限。",true);}
- $("roleTag").textContent=role==="owner"?"档案主人":role==="editor"?"协作者 · 可编辑":"访客 · 只读";
- $("archiveTitle").textContent=a.title;$("archiveMeta").textContent=a.description||"";
- $("editTitle").value=a.title;$("editDescription").value=a.description||"";$("editContent").value=a.content||"";
- $("archiveActions").innerHTML=role==="owner"?`<button class="secondary" id="shareToggle">${a.is_public?"关闭公开分享":"开启公开分享"}</button><button class="secondary" id="copyShare">复制分享链接</button><button class="danger" id="deleteArchive">删除档案</button>`:`<button class="secondary" id="copyShare">复制分享链接</button>`;
- $("copyShare").onclick=()=>{navigator.clipboard.writeText(location.origin+location.pathname+"?id="+a.id);say("分享链接已复制");};
- if(role==="owner"){$("shareToggle").onclick=async()=>{const {error}=await db.from("archives").update({is_public:!current.is_public}).eq("id",current.id);if(error)say(error.message,true);else{current.is_public=!current.is_public;say("分享设置已更新");openArchive(current.id);}};$("deleteArchive").onclick=deleteArchive;}
- ["editTitle","editDescription","editContent","saveProfile","uploadFiles","addCategory","newCategoryName","inviteEmail","inviteScope","makeInvite"].forEach(id=>$(id).disabled=!editable()|| (id==="inviteEmail"||id==="inviteScope"||id==="makeInvite")&&role!=="owner");
- document.querySelectorAll(".tabs .tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
- await Promise.all([loadCategories(),loadMembers()]);switchTab("profile");showDetail();
+
+function showDetail(id) {
+  const archive = archives.find(a => a.id === id);
+  if (!archive) return;
+
+  $("detailContent").innerHTML = `
+    <h2>${safe(archive.name)}</h2>
+    <span class="tag">${safe(archive.category || "未分类")}</span>
+    <p>${safe(archive.description)}</p>
+    <hr style="border:0;border-top:1px solid #e8e1f5">
+    <div style="white-space:pre-wrap;overflow-wrap:anywhere">
+      ${safe(archive.details || "暂无详细设定")}
+    </div>
+  `;
+
+  $("detail").showModal();
 }
-function switchTab(tab){document.querySelectorAll(".tabs .tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));["profile","images","team"].forEach(t=>$("tab-"+t).classList.toggle("hidden",t!==tab));}
-async function saveProfile(){const {error}=await db.from("archives").update({title:$("editTitle").value.trim(),description:$("editDescription").value,content:$("editContent").value,updated_at:new Date().toISOString()}).eq("id",current.id);if(error)say(error.message,true);else{say("设定已保存");current.title=$("editTitle").value;current.description=$("editDescription").value;$("archiveTitle").textContent=current.title;$("archiveMeta").textContent=current.description;}}
-async function loadCategories(){const {data,error}=await db.from("archive_categories").select("*").eq("archive_id",current.id).order("sort_order");if(error){say(error.message,true);return;}categories=data||[];if(!categories.length&&role==="owner"){const {data:d}=await db.from("archive_categories").insert({archive_id:current.id,name:"未分类"}).select().single();if(d)categories=[d];}
- $("categorySelect").innerHTML=categories.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");await loadImages();}
-async function loadImages(){const {data,error}=await db.from("archive_images").select("*").eq("archive_id",current.id).order("sort_order");if(error){say(error.message,true);return;}images=data||[];$("imageList").innerHTML="";for(const im of images){const {data}=db.storage.from("oc-images").getPublicUrl(im.storage_path);const el=document.createElement("div");el.className="photo";el.innerHTML=`<img src="${data.publicUrl}" alt=""><p>${esc(im.caption||"无说明")}</p><div class="toolbar">${editable()?`<button class="secondary edit-caption">说明</button><button class="danger del-image">删除</button>`:""}</div>`;el.querySelector("img").onclick=()=>{$("lightboxImg").src=data.publicUrl;$("lightbox").style.display="grid";};if(editable()){el.querySelector(".edit-caption").onclick=async()=>{const v=prompt("编辑图片说明",im.caption||"");if(v===null)return;const {error}=await db.from("archive_images").update({caption:v}).eq("id",im.id);if(error)say(error.message,true);else loadImages();};el.querySelector(".del-image").onclick=async()=>{if(!confirm("确定删除这张图片？"))return;await db.storage.from("oc-images").remove([im.storage_path]);const {error}=await db.from("archive_images").delete().eq("id",im.id);if(error)say(error.message,true);else loadImages();};}$("imageList").append(el);}}
-async function addCategory(){const name=$("newCategoryName").value.trim();if(!name)return;const {error}=await db.from("archive_categories").insert({archive_id:current.id,name,sort_order:categories.length});if(error)say(error.message,true);else{$("newCategoryName").value="";loadCategories();}}
-async function uploadImages(files){const cat=$("categorySelect").value;if(!cat||!files.length)return;for(const file of files){if(!file.type.startsWith("image/"))continue;const path=`${current.id}/${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`;const up=await db.storage.from("oc-images").upload(path,file,{upsert:false});if(up.error){say(up.error.message,true);continue;}const {error}=await db.from("archive_images").insert({archive_id:current.id,category_id:cat,storage_path:path,caption:file.name,sort_order:images.length});if(error)say(error.message,true);}say("图片上传处理完成");loadImages();}
-async function createArchive(){const title=prompt("给这个 OC 档案起个名字");if(!title?.trim())return;const {data,error}=await db.from("archives").insert({owner_id:user.id,title:title.trim(),content:""}).select().single();if(error)say(error.message,true);else{await db.from("archive_categories").insert({archive_id:data.id,name:"未分类",sort_order:0});openArchive(data.id);}}
-async function deleteArchive(){if(!confirm("确定删除整个 OC 档案？图片也会被删除，此操作不可撤销。"))return;const paths=images.map(i=>i.storage_path);if(paths.length)await db.storage.from("oc-images").remove(paths);const {error}=await db.from("archives").delete().eq("id",current.id);if(error)say(error.message,true);else{say("档案已删除");showHome();}}
-async function loadMembers(){if(role!=="owner"){$("memberList").textContent="只有档案主人可以管理协作者。";$("pendingList").textContent="";return;}
- const {data:m}=await db.from("archive_members").select("user_id,role").eq("archive_id",current.id);members=m||[];$("memberList").innerHTML=members.length?members.map(x=>`<div class="row"><span>${esc(x.user_id)}</span><button class="danger" data-remove="${x.user_id}">移除</button></div>`).join(""):"暂无单档协作者";$("memberList").querySelectorAll("[data-remove]").forEach(b=>b.onclick=async()=>{if(!confirm("移除这位协作者？"))return;const {error}=await db.from("archive_members").delete().eq("archive_id",current.id).eq("user_id",b.dataset.remove);if(error)say(error.message,true);else loadMembers();});
- const {data:p}=await db.from("collab_invites").select("id,email,scope,created_at").eq("owner_id",user.id).eq("archive_id",current.id).is("accepted_at",null);pending=p||[];$("pendingList").innerHTML=pending.length?pending.map(x=>`<div>${esc(x.email)} · ${x.scope==="global"?"全局":"本档案"}</div>`).join(""):"暂无待接受邀请";
+
+function editArchive(id = "") {
+  const archive = archives.find(a => a.id === id);
+
+  $("formTitle").textContent = archive ? "编辑 OC" : "新建 OC";
+
+  $("ocId").value = archive?.id || "";
+  $("ocName").value = archive?.name || "";
+  $("ocCategory").value = archive?.category || "";
+  $("ocDescription").value = archive?.description || "";
+  $("ocDetails").value = archive?.details || "";
+  $("ocImage").value = "";
+
+  $("editor").showModal();
 }
-async function createInvite(){const email=$("inviteEmail").value.trim().toLowerCase(),scope=$("inviteScope").value;if(!email)return say("请填写邮箱",true);const token=crypto.randomUUID()+crypto.randomUUID();const archive_id=scope==="global"?null:current.id;const {error}=await db.from("collab_invites").insert({owner_id:user.id,archive_id,email,scope,token});if(error){say(error.message,true);return;}const url=location.origin+location.pathname+"?invite="+token;$("inviteResult").innerHTML=`<p class="notice">邀请链接已生成，请复制发给对方：</p><input readonly value="${url}" id="inviteUrl"><button id="copyInvite">复制邀请链接</button>`;$("copyInvite").onclick=()=>{navigator.clipboard.writeText(url);say("邀请链接已复制");};loadMembers();}
-async function acceptInvite(token){const {data,error}=await db.rpc("accept_collab_invite",{invite_token:token});if(error)say("接受邀请失败："+error.message,true);else say("已加入协作档案！");}
-async function backupAll(){const {data:ar,error}=await db.from("archives").select("*");if(error)return say(error.message,true);const zip=new JSZip(),manifest=[];for(const a of ar){const {data:ims}=await db.from("archive_images").select("*").eq("archive_id",a.id);const folder=zip.folder(a.id);for(const im of ims||[]){const {data}=await db.storage.from("oc-images").download(im.storage_path);if(data){folder.file(im.storage_path.split("/").pop(),data);manifest.push({...im,archive_id:a.id,backup_file:im.storage_path.split("/").pop()});}}folder.file("archive.json",JSON.stringify(a,null,2));}zip.file("manifest.json",JSON.stringify(manifest,null,2));const blob=await zip.generateAsync({type:"blob"});const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download="oc-archive-backup.zip";link.click();URL.revokeObjectURL(link.href);}
-$("loginBtn").onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(error)say(error.message,true);else hideAuth();};
-$("signupBtn").onclick=async()=>{const {data,error}=await db.auth.signUp({email:$("email").value,password:$("password").value,options:{emailRedirectTo:location.origin+location.pathname}});if(error)say(error.message,true);else say(data.session?"注册成功":"注册成功！请检查邮箱完成验证。");};
-$("cancelAuth").onclick=hideAuth;$("newArchive").onclick=createArchive;$("backHome").onclick=showHome;$("saveProfile").onclick=saveProfile;$("addCategory").onclick=addCategory;$("uploadFiles").onchange=e=>uploadImages([...e.target.files]);$("makeInvite").onclick=createInvite;$("lightbox").onclick=()=>$("lightbox").style.display="none";
-const shareId=new URLSearchParams(location.search).get("id");
-(async()=>{await init();if(shareId&&db){const {data:a,error}=await db.from("archives").select("id").eq("id",shareId).single();if(!error&&a)openArchive(a.id);else say("档案不存在，或主人尚未开启公开分享。",true);}})();
+
+async function deleteArchive(id) {
+  if (!confirm("确定删除这个 OC 档案吗？")) return;
+
+  archives = archives.filter(a => a.id !== id);
+
+  saveData();
+  render();
+}
+
+$("ocForm").onsubmit = async event => {
+  event.preventDefault();
+
+  const id = $("ocId").value || crypto.randomUUID();
+
+  const old = archives.find(a => a.id === id);
+
+  let image = old?.image || "";
+
+  const file = $("ocImage").files[0];
+
+  if (file) {
+    image = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const archive = {
+    id,
+    name: $("ocName").value.trim(),
+    category: $("ocCategory").value.trim() || "未分类",
+    description: $("ocDescription").value,
+    details: $("ocDetails").value,
+    image
+  };
+
+  archives = archives.filter(a => a.id !== id);
+  archives.unshift(archive);
+
+  saveData();
+
+  $("editor").close();
+  render();
+};
+
+$("adminButton").onclick = () => {
+  if (!isAdmin) {
+    const password = prompt("请输入管理员密码");
+
+    if (password !== "CHANGE_THIS_PASSWORD") {
+      alert("密码不正确");
+      return;
+    }
+
+    isAdmin = true;
+    $("adminPanel").hidden = false;
+    $("adminButton").textContent = "管理中";
+    render();
+  } else {
+    $("adminPanel").hidden = false;
+  }
+};
+
+$("exitButton").onclick = () => {
+  isAdmin = false;
+  $("adminPanel").hidden = true;
+  $("adminButton").textContent = "管理员入口";
+  render();
+};
+
+$("addButton").onclick = () => editArchive();
+
+$("cancelButton").onclick = () => {
+  $("editor").close();
+};
+
+$("closeDetail").onclick = () => {
+  $("detail").close();
+};
+
+$("search").oninput = render;
+$("refreshButton").onclick = render;
+
+$("exportButton").onclick = () => {
+  const backup = new Blob(
+    [JSON.stringify({version:1,archives}, null, 2)],
+    {type:"application/json"}
+  );
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(backup);
+  link.download = "OC档案备份.json";
+  link.click();
+
+  URL.revokeObjectURL(link.href);
+};
+
+$("importButton").onclick = () => {
+  $("backupFile").click();
+};
+
+$("backupFile").onchange = async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  try {
+    const data = JSON.parse(await file.text());
+
+    if (!Array.isArray(data.archives)) {
+      throw new Error("备份格式不正确");
+    }
+
+    if (!confirm("导入会替换当前浏览器中的档案，继续吗？")) {
+      return;
+    }
+
+    archives = data.archives;
+    saveData();
+    render();
+
+    alert("档案导入成功！");
+  } catch (error) {
+    alert("导入失败：" + error.message);
+  }
+
+  event.target.value = "";
+};
+
+render();
 </script>
-</body></html>
+</body>
+</html>
