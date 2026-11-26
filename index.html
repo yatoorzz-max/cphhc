@@ -48,330 +48,311 @@
   /* 灯箱 */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
   #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; pointer-events: auto; user-select: none; }
+  
+/* ======================================
+   原版精修 V1
+   保留白底、浅灰卡片、简洁圆角风格
+   仅优化视觉，不改变原有功能
+====================================== */
 
-/* =========================================
-   个人角色档案 · Editorial Style
-   只修改视觉，不修改原有内容和功能
-========================================= */
-
-:root {
-  --bg: #faf9f7;
-  --paper: #ffffff;
-  --soft: #f3f1ee;
-  --line: #e8e5e1;
-  --text: #292725;
-  --muted: #96918b;
-  --accent: #8c8179;
-}
-
-/* 页面整体 */
+/* 全局 */
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  padding: 24px 18px;
-  font-family:
-    "Noto Sans SC",
-    "PingFang SC",
-    "Microsoft YaHei",
-    sans-serif;
-  letter-spacing: 0.015em;
+  background: #ffffff;
+  color: #333333;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-#home-page,
-.detail-page {
-  max-width: 760px;
-  margin: 0 auto;
+* {
+  box-sizing: border-box;
 }
 
 /* 首页头像 */
 
 .home-avatar {
-  margin-top: 48px;
+  margin-top: 36px;
   margin-bottom: 22px;
 }
 
 .home-avatar img {
-  width: 104px;
-  height: 104px;
-  border: none;
-  box-shadow: none;
-  outline: 1px solid var(--line);
-  outline-offset: 5px;
+  width: 112px;
+  height: 112px;
+  border: 2px solid #eeeeee;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.035);
 }
 
-/* 首页介绍 */
+/* 首页简介 */
 
 .home-subtitle {
-  max-width: 480px;
-  margin: 0 auto 48px;
-  padding: 0 12px;
+  max-width: 460px;
+  margin: 0 auto 36px;
+  padding: 0 10px;
   font-size: 12px;
-  line-height: 2;
-  color: var(--muted);
-  letter-spacing: 0.04em;
+  line-height: 1.9;
+  color: #999999;
+  letter-spacing: 0.01em;
 }
 
 .home-subtitle span {
-  color: var(--text) !important;
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 13px;
+  margin-bottom: 7px !important;
+  color: #555555 !important;
 }
 
-/* 首页入口卡片 */
+/* 首页卡片 */
 
 .menu-grid {
   gap: 14px;
-  max-width: 600px;
+  max-width: 680px;
 }
 
 .menu-card {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ededed;
+  border-radius: 14px;
   padding: 14px;
-  gap: 18px;
-  transition:
-    border-color 0.25s,
-    transform 0.25s;
+  gap: 15px;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .menu-card:hover {
-  border-color: #c9c1b9;
-  transform: translateY(-2px);
+  background: #f5f5f5;
+  border-color: #e4e4e4;
 }
 
 .menu-card-img-box {
   width: 100px;
   height: 100px;
-  background: var(--soft);
-  border-radius: 6px;
-  padding: 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 9px;
 }
 
 .menu-card-text {
-  padding: 4px 0;
+  padding: 5px 0;
 }
 
 .menu-title {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-size: 18px;
+  font-weight: 650;
   margin-bottom: 7px;
-  color: var(--text);
+  color: #222222;
+  line-height: 1.4;
 }
 
 .menu-desc {
-  font-size: 12px;
-  line-height: 1.8;
-  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #888888;
 }
 
 /* 详情页 */
 
 .detail-page {
-  background: transparent;
-  padding: 20px 0 50px;
-  border-radius: 0;
+  max-width: 820px;
+  padding: 12px 4px 40px;
+  background: #ffffff;
+  border-radius: 14px;
 }
 
 /* 返回按钮 */
 
 .back-btn {
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 7px 12px;
-  font-size: 12px;
-  margin-bottom: 34px;
+  padding: 8px 14px;
+  background: #f5f5f5;
+  color: #555555;
+  border-radius: 7px;
+  font-size: 13px;
+  margin-bottom: 22px;
 }
 
 .back-btn:hover {
-  background: var(--paper);
-  color: var(--text);
+  background: #eeeeee;
 }
 
-/* 页面标题 */
+/* 详情页标题 */
 
 .detail-title {
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--text);
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 16px;
-  margin-bottom: 28px;
+  font-size: 21px;
+  font-weight: 650;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  color: #222222;
+  letter-spacing: 0.015em;
 }
 
 /* 图册目录 */
 
 .album-list {
-  gap: 16px !important;
+  gap: 14px !important;
 }
 
 .album-item {
-  background: var(--paper) !important;
-  border: 1px solid var(--line) !important;
-  border-radius: 8px !important;
-  height: 112px !important;
-  transition: border-color 0.2s;
+  height: 104px !important;
+  background: #f8f8f8 !important;
+  border: 1px solid #ededed !important;
+  border-radius: 12px !important;
+  transition: background 0.2s;
 }
 
 .album-item:hover {
-  border-color: #c9c1b9 !important;
+  background: #f3f3f3 !important;
 }
 
 .album-cover {
-  width: 112px !important;
-  height: 112px !important;
-}
-
-.album-cover img {
-  transition: transform 0.35s;
-}
-
-.album-item:hover .album-cover img {
-  transform: scale(1.04);
+  width: 104px !important;
+  height: 104px !important;
 }
 
 .album-info {
-  padding: 14px 18px !important;
+  padding: 12px 16px !important;
 }
 
 .album-info-title {
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  color: var(--text) !important;
-  letter-spacing: 0.03em;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  color: #222222 !important;
+  margin-bottom: 6px;
 }
 
 .album-info-desc {
-  font-size: 11px !important;
-  color: var(--muted) !important;
-  letter-spacing: 0.04em;
+  font-size: 12px !important;
+  color: #999999 !important;
 }
 
 /* 图片九宫格 */
 
 .img-grid {
-  gap: 10px;
-  margin-top: 20px;
+  gap: 9px;
+  margin-top: 14px;
 }
 
 .img-box {
-  border-radius: 5px;
-  background: var(--soft);
+  border-radius: 8px;
+  background: #f5f5f5;
 }
 
 .img-box img {
-  transition: transform 0.35s;
+  transition: transform 0.25s ease;
 }
 
 .img-box:hover img {
-  transform: scale(1.04);
+  transform: scale(1.025);
 }
 
 .img-num {
-  background: rgba(30, 28, 26, 0.55);
+  top: 5px;
+  left: 5px;
+  background: rgba(0,0,0,0.48);
   font-size: 10px;
-  font-weight: 400;
   padding: 3px 6px;
-  border-radius: 3px;
 }
 
 /* 文字目录 */
 
 .text-list-item {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 16px 18px;
-  margin-bottom: 12px;
+  background: #f8f8f8;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 11px;
+  transition: background 0.2s;
 }
 
 .text-list-item:hover {
-  border-color: #c9c1b9;
+  background: #f2f2f2;
 }
 
 .text-list-title {
   font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  color: #222222;
 }
 
 .text-list-desc {
   font-size: 12px;
-  color: var(--muted);
-  line-height: 1.7;
+  color: #999999;
+  margin-top: 5px;
 }
 
 .text-list-arrow {
-  font-size: 18px;
-  color: #b8b1aa;
-  font-weight: 400;
+  color: #aaaaaa;
+  font-size: 21px;
 }
 
-/* 角色正文 */
+/* 文字正文 */
 
 .text-box {
-  background: var(--paper);
-  border: none;
-  border-left: 2px solid var(--line);
-  border-radius: 0;
-  padding: 4px 0 4px 20px;
-  margin-bottom: 28px;
+  background: #f8f8f8;
+  padding: 19px 18px;
+  border-radius: 11px;
+  border: 1px solid #eeeeee;
   font-size: 14px;
-  line-height: 2.15;
-  color: #5c5853;
-  letter-spacing: 0.025em;
+  line-height: 2;
+  color: #444444;
+  margin-bottom: 18px;
+  letter-spacing: 0.015em;
   overflow-wrap: anywhere;
 }
 
-/* 正文中的章节标题 */
+/* 正文中的粗体 */
 
 .text-box span[style*="font-weight: bold"] {
-  color: var(--text) !important;
+  color: #333333;
 }
 
 /* 灯箱 */
 
 #lightbox {
-  background: rgba(22, 21, 20, 0.94);
+  background: rgba(0,0,0,0.87);
+  padding: 18px;
 }
 
 #lightbox img {
-  border-radius: 3px;
+  border-radius: 8px;
 }
 
-/* 手机端 */
+/* 手机屏幕适配 */
 
 @media (max-width: 600px) {
+
   body {
-    padding: 18px 16px;
+    padding: 12px;
   }
 
   .home-avatar {
-    margin-top: 38px;
+    margin-top: 32px;
+    margin-bottom: 20px;
+  }
+
+  .home-avatar img {
+    width: 106px;
+    height: 106px;
   }
 
   .home-subtitle {
-    margin-bottom: 36px;
+    margin-bottom: 30px;
+    font-size: 12px;
+    line-height: 1.85;
   }
 
   .menu-card {
     padding: 12px;
-    gap: 14px;
+    gap: 12px;
   }
 
   .menu-card-img-box {
-    width: 82px;
-    height: 82px;
+    width: 88px;
+    height: 88px;
   }
 
   .menu-title {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .menu-desc {
@@ -379,12 +360,11 @@ body {
   }
 
   .detail-page {
-    padding-top: 12px;
+    padding: 10px 2px 30px;
   }
 
   .detail-title {
-    font-size: 21px;
-    margin-bottom: 24px;
+    font-size: 20px;
   }
 
   .album-item {
@@ -397,7 +377,11 @@ body {
   }
 
   .album-info {
-    padding: 12px !important;
+    padding: 10px 13px !important;
+  }
+
+  .album-info-title {
+    font-size: 15px !important;
   }
 
   .img-grid {
@@ -405,9 +389,13 @@ body {
   }
 
   .text-box {
-    padding-left: 14px;
+    padding: 15px 13px;
     font-size: 13px;
-    line-height: 2.1;
+    line-height: 2;
+  }
+
+  .text-list-item {
+    padding: 13px 14px;
   }
 }
 
