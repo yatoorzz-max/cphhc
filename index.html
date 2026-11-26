@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -437,9 +436,9 @@ $("ocForm").onsubmit = async event => {
 
 $("adminButton").onclick = () => {
   if (!isAdmin) {
-    const password = prompt("123456");
+    const password = prompt("请输入管理员密码");
 
-    if (password !== "CHANGE_THIS_PASSWORD") {
+    if (password !== "123456") {
       alert("密码不正确");
       return;
     }
