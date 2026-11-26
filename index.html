@@ -1,455 +1,102 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#eef2f6">
 <title>我的 OC 档案库</title>
-
 <style>
-:root {
-  --bg: #eef2f6;
-  --card: #ffffff;
-  --primary: #a78bfa;
-  --primary-dark: #8b5cf6;
-  --primary-light: #f3efff;
-  --green: #34d399;
-  --green-dark: #047857;
-  --text: #334155;
-  --muted: #94a3b8;
-  --border: #e2e8f0;
-  --shadow: 0 4px 16px rgba(15,23,42,.06);
-  --radius: 16px;
-}
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #eef2f6; padding: 20px; color: #333; margin: 0; min-height: 100vh; max-width: 800px; margin: 0 auto; }
+  * { box-sizing: border-box; }
+  
+  .header { text-align: center; padding: 30px 0; }
+  .header h1 { margin: 0; color: #1e293b; letter-spacing: 2px; font-size: 26px; }
+  
+  .detail-page { background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; color: #1e293b; }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 20px;
-  min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-button {
-  font: inherit;
-}
-
-button:focus-visible {
-  outline: 3px solid #c4b5fd;
-  outline-offset: 3px;
-}
-
-/* 主页 */
-
-.header {
-  text-align: center;
-  padding: 38px 0 30px;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 27px;
-  letter-spacing: 3px;
-  color: #1e293b;
-}
-
-.header p {
-  color: #64748b;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.menu-grid {
-  display: grid;
-  gap: 18px;
-  max-width: 800px;
-  margin: auto;
-}
-
-.menu-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 25px;
-  box-shadow: var(--shadow);
-  border-left: 6px solid var(--primary);
-  cursor: pointer;
-  transition: .25s ease;
-}
-
-.menu-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,.09);
-}
-
-.menu-title {
-  font-size: 19px;
-  font-weight: 700;
-  color: #5b3a9c;
-  margin-bottom: 9px;
-}
-
-.menu-desc {
-  font-size: 14px;
-  color: #64748b;
-  line-height: 1.7;
-}
-
-/* 内容页面 */
-
-.detail-page {
-  display: none;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 25px;
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  animation: fadeIn .25s ease;
-}
-
-.detail-page.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 0;
-  padding: 9px 16px;
-  border-radius: 8px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  margin-bottom: 20px;
-  transition: .2s;
-}
-
-.back-btn:hover {
-  background: var(--primary-dark);
-}
-
-.back-btn.green {
-  background: var(--green);
-}
-
-.back-btn.green:hover {
-  background: #10b981;
-}
-
-.detail-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 13px;
-  border-bottom: 2px solid #f1f5f9;
-  color: #1e293b;
-}
-
-/* 分类导航 */
-
-.sub-menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-bottom: 20px;
-}
-
-.sub-menu-item {
-  border: 0;
-  padding: 9px 17px;
-  border-radius: 30px;
-  background: #f1f5f9;
-  color: #475569;
-  cursor: pointer;
-  font-size: 14px;
-  transition: .2s;
-}
-
-.sub-menu-item:hover,
-.sub-menu-item.active {
-  background: var(--primary);
-  color: white;
-}
-
-/* 图片区域 */
-
-.gallery-desc {
-  font-size: 14px;
-  color: #64748b;
-  line-height: 1.7;
-  margin: 0 0 14px;
-}
-
-.img-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(85px, 1fr)
-  );
-  gap: 9px;
-  margin-top: 15px;
-}
-
-.img-box {
-  position: relative;
-  aspect-ratio: 1;
-  border-radius: 9px;
-  overflow: hidden;
-  cursor: pointer;
-  background: #f1f5f9;
-}
-
-.img-box img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform .3s;
-}
-
-.img-box:hover img {
-  transform: scale(1.08);
-}
-
-.img-num {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  padding: 3px 7px;
-  border-radius: 5px;
-  color: white;
-  background: rgba(0,0,0,.58);
-  font-size: 10px;
-  pointer-events: none;
-}
-
-.img-box img:not([src]),
-.img-box img[src=""] {
-  visibility: hidden;
-}
-
-.img-error {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94a3b8;
-  font-size: 12px;
-  background: #f1f5f9;
-  text-align: center;
-  padding: 5px;
-}
-
-/* 文字设定 */
-
-.text-box {
-  background: #f8fafc;
-  padding: 20px;
-  border-radius: 12px;
-  font-size: 15px;
-  line-height: 1.9;
-  color: #475569;
-  margin-bottom: 16px;
-  border-left: 4px solid var(--green);
-  overflow-wrap: anywhere;
-}
-
-.text-box h3 {
-  margin: 0 0 12px;
-  color: var(--green-dark);
-  font-size: 16px;
-}
-
-.text-box p {
-  margin: 0;
-}
-
-/* 图片预览 */
-
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: rgba(15,23,42,.92);
-}
-
-.lightbox.active {
-  display: flex;
-}
-
-.lightbox-content {
-  position: relative;
-  max-width: 100%;
-  max-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lightbox img {
-  display: block;
-  max-width: 100%;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: -42px;
-  right: 0;
-  border: 0;
-  background: transparent;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.lightbox-nav {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 0;
-  background: rgba(255,255,255,.2);
-  color: white;
-  width: 42px;
-  height: 50px;
-  border-radius: 8px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.lightbox-prev {
-  left: 15px;
-}
-
-.lightbox-next {
-  right: 15px;
-}
-
-.lightbox-count {
-  position: fixed;
-  bottom: 20px;
-  color: white;
-  font-size: 13px;
-}
-
-/* 手机适配 */
-
-@media (max-width: 600px) {
-  body {
-    padding: 12px;
+  /* 图片网格：固定 4 列（在窄屏手机上会自动变成 3 列） */
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-top: 15px; }
+  
+  .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f1f5f9; }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+  .img-box:hover img { transform: scale(1.1); }
+  
+  /* 序号标签 */
+  .img-num {
+    position: absolute; top: 4px; left: 4px; 
+    background: rgba(0,0,0,0.6); color: #fff; 
+    font-size: 10px; padding: 2px 6px; border-radius: 4px;
+    pointer-events: none;
   }
 
-  .header {
-    padding: 30px 0 24px;
-  }
-
-  .header h1 {
-    font-size: 23px;
-  }
-
-  .menu-card {
-    padding: 20px;
-  }
-
-  .detail-page {
-    padding: 17px;
-  }
-
-  .detail-title {
-    font-size: 20px;
-  }
-
-  .img-grid {
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(70px, 1fr)
-    );
-    gap: 7px;
-  }
-
-  .lightbox-nav {
-    width: 34px;
-    height: 42px;
-  }
-
-  .lightbox-prev {
-    left: 5px;
-  }
-
-  .lightbox-next {
-    right: 5px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+  #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
 </style>
 </head>
-
 <body>
 
-<!-- 主页 -->
+<div class="header">
+  <h1>我的 OC 档案库</h1>
+  <p style="color:#64748b; font-size:14px;">图片自动读取展示，只需往 images 文件夹里传图即可</p>
+</div>
 
-<div id="home-page" class="page active">
+<div class="detail-page">
+  <div class="detail-title">📸 全部图册</div>
+  <div class="img-grid" id="auto-gallery">
+    <!-- 代码会自动把图片塞进这里 -->
+    <p style="text-align:center; width:100%; grid-column: 1/-1; color:#94a3b8;">图片加载中...</p>
+  </div>
+</div>
 
-  <header class="header">
-    <h1>我的 OC 档案库</h1>
-    <p>记录角色、收集灵感，保存每一个创作瞬间。</p>
-  </header>
+<div id="lightbox" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="">
+</div>
 
-  <main class="menu-grid">
+<script>
+  // 这是 GitHub 的 API 接口，用来获取你 images 文件夹里的所有文件列表
+  const apiUrl = 'https://api.github.com/repos/yatoorzz-max/cphhc/contents/images';
 
-    <div class="menu-card"
-         role="button"
-         tabindex="0"
-         onclick="showPage('gallery-page')"
-         onkeydown="if(event.key==='Enter'||event.key===' ')showPage('gallery-page')">
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const gallery = document.getElementById('auto-gallery');
+      gallery.innerHTML = ''; // 清空加载提示
 
-      <div class="menu-title">📸 参考图册</div>
-      <div class="menu-desc">
-        各种立绘、服设参考和摸鱼。
-        点击进入分类查看。
-      </div>
-    </div>
+      // 过滤出图片格式的文件，并按名字排序
+      const imageFiles = data.filter(file => 
+        /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
+      ).sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true}));
 
-    <div class="menu-card"
-         style="border-left-color:var(--green)"
-         role="button"
-         tabindex="0"
-         onclick="showPage('text-page')"
-         onkeydown="if(event.key==='Enter'||event.key===' ')showPage('text-page')">
+      if (imageFiles.length === 0) {
+        gallery.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1; color:#94a3b8;">还没有图片哦，快去上传吧！</p>';
+        return;
+      }
 
-      <div class="menu-title">📝 角色文字设定</div>
-      <div class="menu-desc">
-        背景故事、性格特点、世界
+      // 循环生成图片卡片
+      imageFiles.forEach((file, index) => {
+        const imgSrc = `images/${file.name}`;
+        
+        const box = document.createElement('div');
+        box.className = 'img-box';
+        box.onclick = () => openLightbox(imgSrc);
+
+        box.innerHTML = `
+          <span class="img-num">${index + 1}</span>
+          <img src="${imgSrc}" alt="${file.name}" loading="lazy">
+        `;
+        gallery.appendChild(box);
+      });
+    })
+    .catch(error => {
+      console.error('获取图片失败:', error);
+      document.getElementById('auto-gallery').innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1; color:red;">图片读取失败，请检查网络或文件夹名称。</p>';
+    });
+
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+</script>
+
+</body>
+</html>
