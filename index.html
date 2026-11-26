@@ -438,7 +438,7 @@ $("adminButton").onclick = () => {
   if (!isAdmin) {
     const password = prompt("请输入管理员密码");
 
-    if (password !== "123456") {
+    if ((password || "").trim() !== "123456") {
       alert("密码不正确");
       return;
     }
