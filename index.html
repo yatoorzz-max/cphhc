@@ -17,169 +17,54 @@
   .home-subtitle { text-align: center; font-size: 13px; color: #999999; line-height: 1.6; margin-bottom: 30px; }
 
   /* 首页卡片 */
-.menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
-.menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 0; }
-.menu-card-img-box { width: 110px; height: 110px; flex-shrink: 0; background: #ffffff; border-radius: 12px; display: flex; justify-content: center; align-items: center; padding: 10px; }
-.menu-card-img-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
-/* 文字区：增加内边距，垂直居中 */
-.menu-card-text { padding: 4px 0; display: flex; flex-direction: column; justify-content: center; }
-.menu-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; color: #111111; }
-.menu-desc { font-size: 13px; color: #737373; line-height: 1.6; }
+  .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
+  .menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 0; }
+  
+  /* 文字区 */
+  .menu-card-text { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
+  .menu-title { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #111111; }
+  .menu-desc { font-size: 13px; color: #737373; line-height: 1.5; }
 
   /* 详情页大盒子 */
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
-  .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; transition: 0.2s; }
+  .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
 
-  /* 👇 核心修改：相册内部变成严格的 3 列九宫格 */
+  /* 相册九宫格 */
   .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
   .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f5f5f5; }
   .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
-  /* 文字框 */
-  .text-box { background: #f8f8f8; padding: 16px; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #333333; margin-bottom: 15px; border: 1px solid #eeeeee; }
-  .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
+  /* 文字框（只保留这一套最干净的） */
+  .text-box {
+    background: transparent;
+    border: none;
+    border-left: 2px solid #eeeeee;
+    border-radius: 0;
+    padding: 4px 0 4px 20px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    line-height: 2.15;
+    color: #5c5853;
+    letter-spacing: 0.025em;
+    overflow-wrap: anywhere;
+  }
+  .text-box span[style*="font-weight: bold"] { color: #333333 !important; }
+  
+  .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
   .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
-
-/* 灯箱 */
-#lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 20px;
-  background: rgba(0,0,0,0.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  touch-action: none;
-  overscroll-behavior: contain;
-}
-
-#lightbox img {
-  max-width: calc(100vw - 40px);
-  max-height: calc(100vh - 40px);
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-  pointer-events: auto;
-  user-select: none;
-  -webkit-user-drag: none;
-  touch-action: none;
-  transform-origin: center center;
-  cursor: grab;
-}
-
-
-.text-box {
-  background: transparent;
-  border: none;
-  border-left: 2px solid #eeeeee;
-  border-radius: 0;
-  padding: 4px 0 4px 20px;
-  margin-bottom: 28px;
-  font-size: 14px;
-  line-height: 2.15;
-  color: #5c5853;
-  letter-spacing: 0.025em;
-  overflow-wrap: anywhere;
-}
-
-/* 正文中的章节标题 */
-
-.text-box span[style*="font-weight: bold"] {
-  color: #333333 !important;
-}
-
-/* 手机端正文排版 */
-
-@media (max-width: 600px) {
-  .text-box {
-    padding: 4px 0 4px 14px;
-    font-size: 13px;
-    line-height: 2.1;
+  /* 手机端正文排版 */
+  @media (max-width: 600px) {
+    .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; }
   }
-}
 
-
-
-.text-box {
-  background: transparent;
-  border: none;
-  border-left: 2px solid #eeeeee;
-  border-radius: 0;
-  padding: 4px 0 4px 20px;
-  margin-bottom: 28px;
-  font-size: 14px;
-  line-height: 2.15;
-  color: #5c5853;
-  letter-spacing: 0.025em;
-  overflow-wrap: anywhere;
-}
-
-/* 正文中的章节标题 */
-
-.text-box span[style*="font-weight: bold"] {
-  color: #333333 !important;
-}
-
-/* 手机端正文排版 */
-
-@media (max-width: 600px) {
-  .text-box {
-    padding: 4px 0 4px 14px;
-    font-size: 13px;
-    line-height: 2.1;
-  }
-}
-
-
-/* 首页左侧图片：真正铺满卡片 */
-
-.menu-card-img-box {
-  width: 90px !important;
-  height: 90px !important;
-  padding: 0 !important;
-  flex: 0 0 90px !important;
-  display: block !important;
-  overflow: hidden !important;
-  border-radius: 10px !important;
-  background: transparent !important;
-}
-
-.menu-card-img-box img {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 10px !important;
-  transform: none !important;
-}
-
-/* 手机端 */
-
-@media (max-width: 600px) {
-  .menu-card-img-box {
-    width: 88px !important;
-    height: 88px !important;
-    flex-basis: 88px !important;
-  }
-}
-
+  /* 灯箱 */
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; box-sizing: border-box; padding: 20px; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; touch-action: none; overscroll-behavior: contain; }
+  #lightbox img { max-width: calc(100vw - 40px); max-height: calc(100vh - 40px); width: auto; height: auto; object-fit: contain; border-radius: 8px; pointer-events: auto; user-select: none; -webkit-user-drag: none; touch-action: none; transform-origin: center center; cursor: grab; }
 </style>
 </head>
 <body>
