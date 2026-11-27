@@ -167,6 +167,41 @@
   }
 }
 
+/* 首页左侧图片：强制铺满图片区域 */
+
+.menu-card .menu-card-img-box {
+  width: 100px !important;
+  height: 100px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  flex: 0 0 100px !important;
+  background: transparent !important;
+  border-radius: 10px !important;
+}
+
+.menu-card .menu-card-img-box img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 10px !important;
+}
+
+/* 手机端 */
+
+@media (max-width: 600px) {
+  .menu-card .menu-card-img-box {
+    width: 88px !important;
+    height: 88px !important;
+    flex-basis: 88px !important;
+  }
+}
+
 </style>
 </head>
 <body>
