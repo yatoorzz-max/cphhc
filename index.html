@@ -8,77 +8,75 @@
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
-  /* 首页头像 */
+  /* ===== 首页 ===== */
   .home-avatar { text-align: center; margin-top: 30px; margin-bottom: 16px; }
   .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-
-  /* 出身描述 */
   .home-subtitle { text-align: center; font-size: 13px; color: #999999; line-height: 1.6; margin-bottom: 30px; }
-
-  /* 首页菜单 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
   .menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 0; }
   .menu-card-text { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
   .menu-title { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #111111; }
   .menu-desc { font-size: 13px; color: #737373; line-height: 1.5; }
 
-  /* 详情页 */
+  /* ===== 详情页 & 新返回键标题 ===== */
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
-  .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; }
-  .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
+  
+  /* 新增：合并后的页头 */
+  .page-header { display: flex; align-items: center; margin-bottom: 20px; }
+  .back-icon { font-size: 20px; color: #aaaaaa; cursor: pointer; padding: 5px 10px 5px 0; user-select: none; font-weight: normal; transition: 0.2s; }
+  .back-icon:hover { color: #333; }
+  .page-title { font-size: 18px; font-weight: bold; margin: 0; padding: 0; color: #111111; }
 
-  /* 文字框 */
-  .text-box {
-    background: transparent; border: none; border-left: 2px solid #eeeeee;
-    border-radius: 0; padding: 4px 0 4px 20px; margin-bottom: 28px;
-    font-size: 14px; line-height: 2.15; color: #5c5853;
-    letter-spacing: 0.025em; overflow-wrap: anywhere;
-  }
+  /* ===== 文字框 ===== */
+  .text-box { background: transparent; border: none; border-left: 2px solid #eeeeee; border-radius: 0; padding: 4px 0 4px 20px; margin-bottom: 28px; font-size: 14px; line-height: 2.15; color: #5c5853; letter-spacing: 0.025em; overflow-wrap: anywhere; }
   .text-box span[style*="font-weight: bold"] { color: #333333 !important; }
   .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
   .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
-  /* ===== 图册目录列表样式（新增） ===== */
+  @media (max-width: 600px) {
+    .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; }
+  }
+
+  /* ===== 图册目录样式 ===== */
   .album-list { display: flex; flex-direction: column; gap: 16px; }
   .album-section { background: #f8f8f8; border-radius: 12px; padding: 16px; border: 1px solid #eeeeee; }
   .album-header { font-size: 16px; font-weight: bold; color: #111111; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
   .album-count { font-size: 13px; color: #888888; font-weight: normal; }
   .album-preview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .preview-box { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #ffffff; }
-  .preview-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  
+  /* 修改：外查看时图片聚焦偏上 */
+  .preview-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .preview-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; pointer-events: none; }
 
-  @media (max-width: 600px) {
-    .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; }
-  }
-
-  /* ===== 完美版灯箱样式（修复遮挡与空隙） ===== */
-  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; box-sizing: border-box; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; touch-action: none; overscroll-behavior: contain; overflow: hidden; }
+  /* ===== 灯箱核心样式 ===== */
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; z-index: 9999; touch-action: none; overscroll-behavior: contain; overflow: hidden; }
   
-  /* 让 track 处于底层，防止遮挡按钮 */
   #lightbox-track { display: flex; width: 100vw; height: 100vh; will-change: transform; position: absolute; top: 0; left: 0; z-index: 1; }
   .lightbox-slide { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; flex: 0 0 100vw; }
   
-  /* 图片铺满，去掉圆角，消除空隙 */
+  /* 修改：还原图片自然尺寸，保障放大清晰度，解决变糊问题 */
   .lightbox-slide img { 
-    width: 100vw; height: 100vh; object-fit: contain; border-radius: 0; 
+    max-width: 100vw; max-height: 100vh; width: auto; height: auto; object-fit: contain; border-radius: 0; 
+    image-rendering: -webkit-optimize-contrast; /* 核心：提升渲染对比度以增加清晰感 */
     pointer-events: auto; user-select: none; -webkit-user-drag: none; transform-origin: center center; cursor: grab; 
   }
   
-  /* 顶部控制按钮（提升层级防遮挡） */
-  #lightbox-counter { position: absolute; top: 20px; left: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10; pointer-events: none; }
-  #lightbox-close { position: absolute; top: 10px; right: 20px; color: white; font-size: 24px; cursor: pointer; padding: 10px; z-index: 10; user-select: none; }
+  /* 新增：顶部控制栏对齐 */
+  #lightbox-top-bar { position: absolute; top: 0; left: 0; width: 100%; height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 10; pointer-events: none; }
+  #lightbox-counter { color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; }
   
-  /* 网格总览按钮 */
-  #lightbox-grid-btn { position: absolute; top: 10px; right: 60px; color: white; cursor: pointer; padding: 10px; z-index: 10; user-select: none; display: flex; align-items: center; justify-content: center; }
+  .lightbox-controls { display: flex; align-items: center; gap: 15px; pointer-events: auto; }
+  #lightbox-grid-btn { display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; user-select: none; }
   #lightbox-grid-btn svg { width: 22px; height: 22px; fill: white; }
+  #lightbox-close { color: white; font-size: 24px; cursor: pointer; user-select: none; line-height: 1; }
 
   /* 网格总览展开视图 */
   #lightbox-grid-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 20; display: none; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 60px 20px 20px; overflow-y: auto; align-content: start; }
   #lightbox-grid-view.active { display: grid; }
-  #lightbox-grid-view img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; opacity: 0.5; transition: 0.2s; border: 2px solid transparent; }
+  #lightbox-grid-view img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top; border-radius: 4px; cursor: pointer; opacity: 0.5; transition: 0.2s; border: 2px solid transparent; }
   #lightbox-grid-view img.active { opacity: 1; border-color: #fff; }
   #lightbox-grid-view img:hover { opacity: 0.9; }
 
@@ -87,6 +85,7 @@
 </style>
 </head>
 
+<body>
 <!-- ===========首页=============== -->
 <div id="home-page">
   <div class="home-avatar">
@@ -120,8 +119,11 @@
 
 <!-- ============图册目录 ================= -->
 <div id="gallery-page" class="detail-page">
-  <div class="back-btn" onclick="showPage('home-page')">← 返回上一页</div>
-  <div class="detail-title">参考图册</div>
+  <!-- 修改：返回键和标题合并 -->
+  <div class="page-header">
+    <span class="back-icon" onclick="showPage('home-page')">＜</span>
+    <span class="page-title">参考图册</span>
+  </div>
   
   <div class="album-list">
     <!-- 相册 1：立绘参考 -->
@@ -152,8 +154,12 @@
 
 <!-- ====== 文字页 ========= -->
 <div id="text-page" class="detail-page">
-  <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
-  <div class="detail-title">角色文字设定</div>
+  <!-- 修改：返回键和标题合并 -->
+  <div class="page-header">
+    <span class="back-icon" onclick="showPage('home-page')">＜</span>
+    <span class="page-title">角色文字设定</span>
+  </div>
+  
   <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
   <div class="text-list-item" onclick="showPage('text-detail-1')"><div><div class="text-list-title">狭雾有江</div><div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
   <div class="text-list-item" onclick="showPage('text-detail-2')"><div><div class="text-list-title">四月一日一期</div><div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
@@ -161,9 +167,12 @@
   <div class="text-list-item" onclick="showPage('text-detail-4')"><div><div class="text-list-title">主线故事</div><div class="text-list-desc">还会回到那里吗？你我的身边。</div></div><div class="text-list-arrow">›</div></div>
 </div> 
 
+<!-- 文字子详情页（同理合并返回键） -->
 <div id="text-detail-1" class="detail-page">
-  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
-  <div class="detail-title">狭雾有江</div>
+  <div class="page-header">
+    <span class="back-icon" onclick="showPage('text-page')">＜</span>
+    <span class="page-title">狭雾有江</span>
+  </div>
   <div class="text-box">
 狭雾有江（鸟）24岁 178cm 德日混血<br><br>
 出生于复杂的贵族杀手家庭，具有家族遗传性精神障碍，喜欢打理外貌且有一定程度的强迫-洁癖。(伪)高功能反社会人格障碍。几乎没有同理心的概念，对世界上大多数事物的态度是无聊与不在乎。解离，阴晴不定，对不感兴趣的事基本没有耐心的及时行乐主义，恶趣味，好奇心。喜爱看到人真实、难堪的一面。<br><br>
@@ -173,8 +182,10 @@
 </div>
 
 <div id="text-detail-2" class="detail-page">
-  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
-  <div class="detail-title">四月一日一期</div>
+  <div class="page-header">
+    <span class="back-icon" onclick="showPage('text-page')">＜</span>
+    <span class="page-title">四月一日一期</span>
+  </div>
   <div class="text-box">
   四月一日一期（鼠）24岁 174cm 日本人<br><br>
   欺诈师、诈骗犯，伪装得很好很常识人的反社会类型人。需要通过对另一个（在意的）人的痛苦、羞辱、恐惧、受控制或受折磨中映射出自己的存在来证明自己，反之被这样做也可以，爱也算。在对人不感兴趣后会抛弃得很彻底，甚至被缠上的话会无情地解决掉对方。<br><br>
@@ -185,8 +196,10 @@
 </div>
 
 <div id="text-detail-3" class="detail-page">
-  <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
-  <div class="detail-title">相处模式</div>
+  <div class="page-header">
+    <span class="back-icon" onclick="showPage('text-page')">＜</span>
+    <span class="page-title">相处模式</span>
+  </div>
   <div class="text-box">
     <span style="font-weight: bold; color: #333333;">▼相处关系——：</span><br>
     这俩位属于是不做什么只是待在对方身边的关系，仅此而已。没有过多存在的关系，没有过多询问的话语，仅仅是对方还没离开这里所以自己也还待着。<br><br>
@@ -200,24 +213,32 @@
 </div>
 
 <div id="text-detail-4" class="detail-page">
-  <div class="back-btn" onclick="showPage('text-page')">← 返回上一页</div>
-  <div class="detail-title">主线故事</div>
+  <div class="page-header">
+    <span class="back-icon" onclick="showPage('text-page')">＜</span>
+    <span class="page-title">主线故事</span>
+  </div>
   <div class="text-box">
 <br>我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br>
   </div>
 </div>
 
-<!-- ======== 灯箱 ======== -->
+<!-- ======== 灯箱（修改了顶部排版） ======== -->
 <div id="lightbox">
-  <div id="lightbox-counter">1 / 1</div>
-  <div id="lightbox-grid-btn" onclick="toggleGridView()" title="总览">
-    <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+  <div id="lightbox-top-bar">
+    <div id="lightbox-counter">1 / 1</div>
+    <div class="lightbox-controls">
+      <div id="lightbox-grid-btn" onclick="toggleGridView()" title="总览">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+      </div>
+      <div id="lightbox-close" onclick="closeLightbox()">✕</div>
+    </div>
   </div>
-  <div id="lightbox-close" onclick="closeLightbox()">✕</div>
+  
   <div id="lightbox-track"></div>
   <div id="lightbox-thumbnails"></div>
   <div id="lightbox-grid-view"></div>
 </div>
+
 
 <script>
 const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
