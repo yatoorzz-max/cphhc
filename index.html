@@ -17,8 +17,8 @@
   .home-subtitle { text-align: center; font-size: 13px; color: #999999; line-height: 1.6; margin-bottom: 30px; }
 
   /* 首页卡片 */
-.menu-grid { display: grid; gap: 16px; max-width: 800px; margin: 0 auto; }
-.menu-card { background: #f8f8f8; border-radius: 16px; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 16px; gap: 16px; }
+.menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
+.menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 0; }
 .menu-card-img-box { width: 110px; height: 110px; flex-shrink: 0; background: #ffffff; border-radius: 12px; display: flex; justify-content: center; align-items: center; padding: 10px; }
 .menu-card-img-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
@@ -198,28 +198,27 @@
     有log节选无模组内剧透 请放心食用
   </div>
   
-  <div class="menu-grid">
-    <!-- 第一个卡片：参考图册 -->
-    <div class="menu-card" onclick="showPage('gallery-page')">
-      <div style="width: 100px; height: 100px; flex-shrink: 0; overflow: hidden; border-radius: 10px;">
-        <img src="images/ding_.png" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-      </div>
-      <div class="menu-card-text">
-        <div class="menu-title">▼参考图册</div>
-        <div class="menu-desc">供以参考的png与服设</div>
-      </div>
-    </div>
+<div class="menu-grid">
+  <!-- 第一个卡片：参考图册 -->
+<div class="menu-card" onclick="showPage('gallery-page')">
+  <!-- 直接抄图册页面的代码，保证铺满 -->
+  <div style="width: 100px; height: 100px; flex-shrink: 0;">
+    <img src="images/ding_.png" style="width: 100%; height: 100%; object-fit: cover;">
+  </div>
+  <div class="menu-card-text">
+    <div class="menu-title">▼参考图册</div>
+    <div class="menu-desc">供以参考的png与服设</div>
+  </div>
+</div>
 
-    <!-- 第二个卡片：文字设定 -->
-    <div class="menu-card" onclick="showPage('text-page')">
-      <div style="width: 100px; height: 100px; flex-shrink: 0; overflow: hidden; border-radius: 10px;">
-        <img src="images/die_.jpg" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-      </div>
-      <div class="menu-card-text">
-        <div class="menu-title">▼文字设定内容</div>
-        <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
-      </div>
-    </div>
+  <!-- 第二个卡片：文字设定 -->
+  <div class="menu-card" onclick="showPage('text-page')">
+  <div style="width: 100px; height: 100px; flex-shrink: 0;">
+    <img src="images/die_.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+  </div>
+  <div class="menu-card-text">
+    <div class="menu-title">▼文字设定内容</div>
+    <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
   </div>
 </div>
 
