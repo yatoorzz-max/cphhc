@@ -8,7 +8,6 @@
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
-  /* ===== 首页 ===== */
   .home-avatar { text-align: center; margin-top: 30px; margin-bottom: 16px; }
   .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
   .home-subtitle { text-align: center; font-size: 13px; color: #999999; line-height: 1.6; margin-bottom: 30px; }
@@ -18,16 +17,12 @@
   .menu-title { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #111111; }
   .menu-desc { font-size: 13px; color: #737373; line-height: 1.5; }
 
-  /* ===== 详情页 & 新返回键标题 ===== */
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
-  
-  /* 新增：合并后的页头 */
   .page-header { display: flex; align-items: center; margin-bottom: 20px; }
   .back-icon { font-size: 20px; color: #aaaaaa; cursor: pointer; padding: 5px 10px 5px 0; user-select: none; font-weight: normal; transition: 0.2s; }
   .back-icon:hover { color: #333; }
   .page-title { font-size: 18px; font-weight: bold; margin: 0; padding: 0; color: #111111; }
 
-  /* ===== 文字框 ===== */
   .text-box { background: transparent; border: none; border-left: 2px solid #eeeeee; border-radius: 0; padding: 4px 0 4px 20px; margin-bottom: 28px; font-size: 14px; line-height: 2.15; color: #5c5853; letter-spacing: 0.025em; overflow-wrap: anywhere; }
   .text-box span[style*="font-weight: bold"] { color: #333333 !important; }
   .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
@@ -35,52 +30,47 @@
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
   .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
-  @media (max-width: 600px) {
-    .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; }
-  }
+  @media (max-width: 600px) { .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; } }
 
-  /* ===== 图册目录样式 ===== */
   .album-list { display: flex; flex-direction: column; gap: 16px; }
   .album-section { background: #f8f8f8; border-radius: 12px; padding: 16px; border: 1px solid #eeeeee; }
   .album-header { font-size: 16px; font-weight: bold; color: #111111; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
   .album-count { font-size: 13px; color: #888888; font-weight: normal; }
   .album-preview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .preview-box { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #ffffff; }
-  
-  /* 修改：外查看时图片聚焦偏上 */
   .preview-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .preview-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; pointer-events: none; }
 
-  /* ===== 灯箱核心样式 ===== */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; z-index: 9999; touch-action: none; overscroll-behavior: contain; overflow: hidden; }
-  
   #lightbox-track { display: flex; width: 100vw; height: 100vh; will-change: transform; position: absolute; top: 0; left: 0; z-index: 1; }
   .lightbox-slide { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; flex: 0 0 100vw; }
   
-  /* 修改：还原图片自然尺寸，保障放大清晰度，解决变糊问题 */
+  /* 核心：强制高清渲染，去除多余的缩放限制 */
   .lightbox-slide img { 
-    max-width: 100vw; max-height: 100vh; width: auto; height: auto; object-fit: contain; border-radius: 0; 
-    image-rendering: -webkit-optimize-contrast; /* 核心：提升渲染对比度以增加清晰感 */
-    pointer-events: auto; user-select: none; -webkit-user-drag: none; transform-origin: center center; cursor: grab; 
+    width: auto; height: auto; 
+    max-width: 100vw; max-height: 100vh; 
+    object-fit: contain; border-radius: 0; 
+    transform-origin: center center; cursor: grab; 
+    user-select: none; -webkit-user-drag: none; 
+    pointer-events: auto;
+    /* 下面两行是防糊神器：强制启用硬件高清渲染 */
+    transform: translateZ(0); 
+    backface-visibility: hidden;
   }
   
-  /* 新增：顶部控制栏对齐 */
   #lightbox-top-bar { position: absolute; top: 0; left: 0; width: 100%; height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 10; pointer-events: none; }
   #lightbox-counter { color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; }
-  
   .lightbox-controls { display: flex; align-items: center; gap: 15px; pointer-events: auto; }
   #lightbox-grid-btn { display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; user-select: none; }
   #lightbox-grid-btn svg { width: 22px; height: 22px; fill: white; }
   #lightbox-close { color: white; font-size: 24px; cursor: pointer; user-select: none; line-height: 1; }
 
-  /* 网格总览展开视图 */
   #lightbox-grid-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 20; display: none; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 60px 20px 20px; overflow-y: auto; align-content: start; }
   #lightbox-grid-view.active { display: grid; }
   #lightbox-grid-view img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top; border-radius: 4px; cursor: pointer; opacity: 0.5; transition: 0.2s; border: 2px solid transparent; }
   #lightbox-grid-view img.active { opacity: 1; border-color: #fff; }
   #lightbox-grid-view img:hover { opacity: 0.9; }
 
-  /* 底部缩略图 */
   #lightbox-thumbnails { position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; padding: 0 20px; overflow-x: auto; pointer-events: auto; align-items: center; }
 </style>
 </head>
@@ -240,7 +230,6 @@
 </div>
 
 
-<script>
 const allPages = ['home-page', 'gallery-page', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
 let currentAlbum = [], currentIndex = 0;
 const lb = document.getElementById('lightbox'), lbTrack = document.getElementById('lightbox-track'), thumbnailBar = document.getElementById('lightbox-thumbnails');
@@ -252,6 +241,7 @@ let imageScale = 1, imageX = 0, imageY = 0, isDragging = false, startX = 0, star
 const MAX_SCALE = 4;
 const activePointers = new Map();
 let gestureHadPinch = false, pinch = null;
+let lastTap = 0; 
 
 function getCurrentImg() {
   const slide = lbTrack.children[currentIndex];
@@ -260,7 +250,7 @@ function getCurrentImg() {
 
 function applyImageTransform(img) {
   if (!img) return;
-  img.style.transform = `translate3d(${imageX}px, ${imageY}px, 0) scale(${imageScale})`;
+  img.style.transform = `translate3d(${imageX}px, ${imageY}px, 0) scale(${imageScale}) translateZ(0)`;
 }
 
 function clampPan(img) {
@@ -275,11 +265,8 @@ function clampPan(img) {
 
 window.onload = function () {
   const hash = location.hash.replace('#', '');
-  if (hash && allPages.includes(hash)) {
-    showPage(hash, true);
-  } else {
-    history.replaceState({ pageId: 'home-page' }, '', '#home-page');
-  }
+  if (hash && allPages.includes(hash)) showPage(hash, true);
+  else history.replaceState({ pageId: 'home-page' }, '', '#home-page');
 };
 
 function showPage(pageId, replace) {
@@ -287,11 +274,8 @@ function showPage(pageId, replace) {
   const target = document.getElementById(pageId);
   if (target) target.style.display = 'block';
   window.scrollTo(0, 0);
-  if (replace) {
-    history.replaceState({ pageId: pageId }, '', '#' + pageId);
-  } else {
-    history.pushState({ pageId: pageId }, '', '#' + pageId);
-  }
+  if (replace) history.replaceState({ pageId: pageId }, '', '#' + pageId);
+  else history.pushState({ pageId: pageId }, '', '#' + pageId);
 }
 
 window.onpopstate = function (event) {
@@ -308,10 +292,7 @@ window.onpopstate = function (event) {
   }
 };
 function openLightbox(src, element) {
-  let galleryContainer = element.closest('.img-grid');
-  if (!galleryContainer) galleryContainer = element.closest('.album-preview');
-  if (!galleryContainer) galleryContainer = element.closest('.album-list');
-  
+  let galleryContainer = element.closest('.album-preview') || element.closest('.album-list');
   const allImages = Array.from(galleryContainer.querySelectorAll('img'));
   currentAlbum = allImages.map(img => img.getAttribute('src'));
   currentIndex = currentAlbum.indexOf(src);
@@ -333,7 +314,6 @@ function openLightbox(src, element) {
   lb.style.display = 'flex';
   document.body.style.overflow = 'hidden';
   lightboxOpen = true;
-  
   gridViewOpen = false;
   gridViewEl.classList.remove('active');
 
@@ -350,11 +330,8 @@ function closeLightbox(fromHistory = false) {
   lightboxOpen = false;
   activePointers.clear();
   lbTrack.style.transform = 'translate3d(0,0,0)';
-  pinch = null;
-  gestureHadPinch = false;
-  isDragging = false;
+  pinch = null; gestureHadPinch = false; isDragging = false;
   imageScale = 1; imageX = 0; imageY = 0;
-  
   gridViewOpen = false;
   gridViewEl.classList.remove('active');
   
@@ -362,9 +339,7 @@ function closeLightbox(fromHistory = false) {
     lightboxHistoryEntry = false;
     suppressNextPopstate = true;
     history.back();
-  } else {
-    lightboxHistoryEntry = false;
-  }
+  } else lightboxHistoryEntry = false;
 }
 
 function renderThumbnails() {
@@ -374,7 +349,7 @@ function renderThumbnails() {
   currentAlbum.forEach((src, idx) => {
     const thumb = document.createElement('img');
     thumb.src = src;
-    thumb.style.cssText = `width:40px;height:40px;object-fit:cover;border-radius:4px;cursor:pointer;transition:.2s;opacity:${idx === currentIndex ? '1' : '0.4'};transform:${idx === currentIndex ? 'scale(1.1)' : 'scale(1)'};border:2px solid ${idx === currentIndex ? '#fff' : 'transparent'};pointer-events:auto;flex-shrink:0;`;
+    thumb.style.cssText = `width:40px;height:40px;object-fit:cover;object-position:top;border-radius:4px;cursor:pointer;transition:.2s;opacity:${idx === currentIndex ? '1' : '0.4'};transform:${idx === currentIndex ? 'scale(1.1)' : 'scale(1)'};border:2px solid ${idx === currentIndex ? '#fff' : 'transparent'};pointer-events:auto;flex-shrink:0;`;
     thumb.onclick = (e) => { e.stopPropagation(); currentIndex = idx; updateLightbox(true); };
     thumbnailBar.appendChild(thumb);
   });
@@ -384,10 +359,9 @@ function updateLightbox(animate = false) {
   if (currentAlbum.length === 0) return;
   lbTrack.querySelectorAll('img').forEach(img => {
     img.style.transition = 'transform 0.2s';
-    img.style.transform = `translate3d(0,0,0) scale(1)`;
+    img.style.transform = `translate3d(0,0,0) scale(1) translateZ(0)`;
   });
-  imageScale = 1; imageX = 0; imageY = 0;
-  pinch = null;
+  imageScale = 1; imageX = 0; imageY = 0; pinch = null;
 
   lbTrack.style.transition = animate ? 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none';
   lbTrack.style.transform = `translate3d(-${currentIndex * 100}vw, 0, 0)`;
@@ -410,49 +384,53 @@ function updateLightbox(animate = false) {
 function toggleGridView() {
   gridViewOpen = !gridViewOpen;
   if (gridViewOpen) {
-    renderGrid();
+    gridViewEl.innerHTML = '';
+    currentAlbum.forEach((src, idx) => {
+      const img = document.createElement('img');
+      img.src = src;
+      if (idx === currentIndex) img.classList.add('active');
+      img.onclick = (e) => { e.stopPropagation(); currentIndex = idx; updateLightbox(true); toggleGridView(); };
+      gridViewEl.appendChild(img);
+    });
     gridViewEl.classList.add('active');
   } else {
     gridViewEl.classList.remove('active');
   }
 }
 
-function renderGrid() {
-  gridViewEl.innerHTML = '';
-  currentAlbum.forEach((src, idx) => {
-    const img = document.createElement('img');
-    img.src = src;
-    if (idx === currentIndex) img.classList.add('active');
-    img.onclick = (e) => {
-      e.stopPropagation();
-      currentIndex = idx;
-      updateLightbox(true);
-      toggleGridView();
-    };
-    gridViewEl.appendChild(img);
-  });
-}
-
-gridViewEl.addEventListener('click', (e) => {
-  if (e.target === gridViewEl) {
-    toggleGridView();
-  }
-});
+gridViewEl.addEventListener('click', (e) => { if (e.target === gridViewEl) toggleGridView(); });
 lb.addEventListener('pointerdown', e => {
-  if (!lightboxOpen || e.target.closest('#lightbox-thumbnails') || e.target.closest('#lightbox-grid-btn') || e.target.closest('#lightbox-grid-view')) return;
-  
+  if (!lightboxOpen || e.target.closest('#lightbox-thumbnails') || e.target.closest('#lightbox-top-bar') || e.target.closest('#lightbox-grid-view')) return;
   e.preventDefault();
   lb.setPointerCapture(e.pointerId);
   activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
   if (activePointers.size === 1) {
-    isDragging = true;
-    gestureHadPinch = false;
-    startX = e.clientX;
-    startY = e.clientY;
-    startTx = imageX;
-    startTy = imageY;
+    isDragging = true; gestureHadPinch = false;
+    startX = e.clientX; startY = e.clientY;
+    startTx = imageX; startTy = imageY;
     lbTrack.style.transition = 'none';
+
+    // 双击处理
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      const img = getCurrentImg();
+      if (img) {
+        if (imageScale > 1) {
+          imageScale = 1; imageX = 0; imageY = 0;
+          img.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          applyImageTransform(img);
+        } else {
+          imageScale = 2.5;
+          imageX = (window.innerWidth / 2 - e.clientX) * (imageScale - 1);
+          imageY = (window.innerHeight / 2 - e.clientY) * (imageScale - 1);
+          clampPan(img);
+          img.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          applyImageTransform(img);
+        }
+      }
+    }
+    lastTap = now;
   }
 
   if (activePointers.size === 2) {
@@ -461,15 +439,10 @@ lb.addEventListener('pointerdown', e => {
     if (!targetImg) return;
     pinch = {
       startDistance: Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y) || 1,
-      startScale: imageScale,
-      startCenterX: (points[0].x + points[1].x) / 2,
-      startCenterY: (points[0].y + points[1].y) / 2,
-      startTx: imageX,
-      startTy: imageY,
-      targetImg
+      startScale: imageScale, startCenterX: (points[0].x + points[1].x) / 2, startCenterY: (points[0].y + points[1].y) / 2,
+      startTx: imageX, startTy: imageY, targetImg
     };
-    gestureHadPinch = true;
-    isDragging = false;
+    gestureHadPinch = true; isDragging = false;
   }
 });
 
@@ -482,12 +455,9 @@ lb.addEventListener('pointermove', e => {
     const points = Array.from(activePointers.values());
     const distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y) || 1;
     imageScale = Math.max(1, Math.min(MAX_SCALE, pinch.startScale * (distance / pinch.startDistance)));
-
-    const cx = (points[0].x + points[1].x) / 2;
-    const cy = (points[0].y + points[1].y) / 2;
+    const cx = (points[0].x + points[1].x) / 2, cy = (points[0].y + points[1].y) / 2;
     imageX = pinch.startTx + (cx - pinch.startCenterX);
     imageY = pinch.startTy + (cy - pinch.startCenterY);
-
     clampPan(pinch.targetImg);
     pinch.targetImg.style.transition = 'none';
     applyImageTransform(pinch.targetImg);
@@ -495,13 +465,10 @@ lb.addEventListener('pointermove', e => {
   }
 
   if (activePointers.size === 1 && isDragging) {
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
+    const dx = e.clientX - startX, dy = e.clientY - startY;
     const img = getCurrentImg();
-
     if (imageScale > 1 && img) {
-      imageX = startTx + dx;
-      imageY = startTy + dy;
+      imageX = startTx + dx; imageY = startTy + dy;
       clampPan(img);
       img.style.transition = 'none';
       applyImageTransform(img);
@@ -517,8 +484,7 @@ function finishPointer(e) {
   
   if (activePointers.size === 0) {
     if (isDragging && !gestureHadPinch && imageScale === 1 && currentAlbum.length > 1) {
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0 && currentIndex < currentAlbum.length - 1) currentIndex++;
         else if (dx > 0 && currentIndex > 0) currentIndex--;
@@ -528,37 +494,22 @@ function finishPointer(e) {
         lbTrack.style.transform = `translate3d(-${currentIndex * 100}vw, 0, 0)`;
       }
     }
-
     if (imageScale <= 1.02) {
       const img = getCurrentImg();
       if (img) {
         imageScale = 1; imageX = 0; imageY = 0;
         img.style.transition = 'transform 0.2s';
-        img.style.transform = `translate3d(0,0,0) scale(1)`;
+        img.style.transform = `translate3d(0,0,0) scale(1) translateZ(0)`;
       }
     }
-
-    isDragging = false;
-    pinch = null;
-    gestureHadPinch = false;
+    isDragging = false; pinch = null; gestureHadPinch = false;
   }
 
   if (activePointers.size === 1) {
     const remaining = Array.from(activePointers.values())[0];
-    startX = remaining.x;
-    startY = remaining.y;
-    startTx = imageX;
-    startTy = imageY;
+    startX = remaining.x; startY = remaining.y; startTx = imageX; startTy = imageY;
     if (pinch) {
-      pinch = {
-        startDistance: 1,
-        startScale: imageScale,
-        startCenterX: remaining.x,
-        startCenterY: remaining.y,
-        startTx: imageX,
-        startTy: imageY,
-        targetImg: pinch.targetImg
-      };
+      pinch = { startDistance: 1, startScale: imageScale, startCenterX: remaining.x, startCenterY: remaining.y, startTx: imageX, startTy: imageY, targetImg: pinch.targetImg };
     }
   }
 }
