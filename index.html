@@ -8,41 +8,39 @@
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, sans-serif; background: #ffffff; padding: 12px; color: #333; margin: 0; min-height: 100vh; }
   * { box-sizing: border-box; }
 
+  /* 首页头像 */
   .home-avatar { text-align: center; margin-top: 30px; margin-bottom: 16px; }
   .home-avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #eaeaea; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
 
+  /* 出身描述 */
   .home-subtitle { text-align: center; font-size: 13px; color: #999999; line-height: 1.6; margin-bottom: 30px; }
 
+  /* 首页菜单 */
   .menu-grid { display: grid; gap: 12px; max-width: 800px; margin: 0 auto; }
   .menu-card { background: #f8f8f8; border-radius: 16px; overflow: hidden; cursor: pointer; transition: 0.2s; display: flex; align-items: stretch; border: 1px solid #eeeeee; padding: 0; }
   .menu-card-text { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
   .menu-title { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #111111; }
   .menu-desc { font-size: 13px; color: #737373; line-height: 1.5; }
 
+  /* 详情页 */
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
   .back-btn { display: inline-block; padding: 8px 16px; background: #222222; color: #ffffff; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 16px; }
   .detail-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; color: #111111; }
 
+  /* 相册九宫格 */
   .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
   .img-box { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; cursor: pointer; background: #f5f5f5; }
   .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .img-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
 
+  /* 文字框 */
   .text-box {
-    background: transparent;
-    border: none;
-    border-left: 2px solid #eeeeee;
-    border-radius: 0;
-    padding: 4px 0 4px 20px;
-    margin-bottom: 28px;
-    font-size: 14px;
-    line-height: 2.15;
-    color: #5c5853;
-    letter-spacing: 0.025em;
-    overflow-wrap: anywhere;
+    background: transparent; border: none; border-left: 2px solid #eeeeee;
+    border-radius: 0; padding: 4px 0 4px 20px; margin-bottom: 28px;
+    font-size: 14px; line-height: 2.15; color: #5c5853;
+    letter-spacing: 0.025em; overflow-wrap: anywhere;
   }
   .text-box span[style*="font-weight: bold"] { color: #333333 !important; }
-
   .text-list-item { background: #f8f8f8; padding: 12px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; border: 1px solid #eeeeee; display: flex; justify-content: space-between; align-items: center; }
   .text-list-title { font-size: 16px; font-weight: bold; color: #111111; }
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
@@ -52,94 +50,70 @@
     .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; }
   }
 
+  /* 完美版灯箱样式 */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; box-sizing: border-box; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; touch-action: none; overscroll-behavior: contain; overflow: hidden; }
-  #lightbox-track { display: flex; will-change: transform; }
+  #lightbox-track { display: flex; width: 100vw; height: 100vh; will-change: transform; }
   .lightbox-slide { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; padding-bottom: 60px; box-sizing: border-box; flex: 0 0 100vw; }
-  .lightbox-slide img {
-    max-width: calc(100vw - 40px);
-    max-height: calc(100vh - 120px);
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    pointer-events: auto;
-    user-select: none;
-    -webkit-user-drag: none;
-    transform-origin: center center;
-    cursor: grab;
+  .lightbox-slide img { 
+    max-width: calc(100vw - 40px); max-height: calc(100vh - 120px); width: auto; height: auto; object-fit: contain; 
+    border-radius: 8px; pointer-events: auto; user-select: none; -webkit-user-drag: none; transform-origin: center center; cursor: grab; 
   }
 </style>
 </head>
 <body>
-<!-- ===========产品啊产品个站首页=============== -->
+<!-- ===========首页=============== -->
 <div id="home-page">
   <div class="home-avatar">
-    <img src="images/IMG_20261005_135043.png" alt="头像"><!-- 改这里：首页头像 -->
+    <img src="images/IMG_20261005_135043.png" alt="头像">
   </div>
-
   <div class="home-subtitle">
-    <b>▇ 出身▇</b>
-    <!-- 改这里：首页出身描述 -->
+    <span style="font-weight: bold; display: block; margin-bottom: 4px;">▇ 出身▇</span>
     TRPG模组《雨降らしの蝶》normal·全魔改版<br>
     ↑为以上模组中的HO3×HO4组成的PC产品<br>
     所携带的内容与PNG全由俩位PC的PL的演绎、捏造、口嗨<br>
     有log节选无模组内剧透 请放心食用
   </div>
-
+  
   <div class="menu-grid">
-    <!-- 菜单卡片 1：参考图册 -->
     <div class="menu-card" onclick="showPage('gallery-page')">
-      <div class="menu-card-img"><img src="images/ding_.png" alt=""></div>
+      <div style="width: 100px; height: 100px; flex-shrink: 0;"><img src="images/ding_.png" style="width: 100%; height: 100%; object-fit: cover;"></div>
       <div class="menu-card-text">
-        <div class="menu-title">▼参考图册</div><!-- 改这里：卡片标题 -->
-        <div class="menu-desc">供以参考的png与服设</div><!-- 改这里：卡片描述 -->
+        <div class="menu-title">▼参考图册</div>
+        <div class="menu-desc">供以参考的png与服设</div>
       </div>
     </div>
-    <!-- 菜单卡片 2：文字设定 -->
     <div class="menu-card" onclick="showPage('text-page')">
-      <div class="menu-card-img"><img src="images/die_.jpg" alt=""></div>
+      <div style="width: 100px; height: 100px; flex-shrink: 0;"><img src="images/die_.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
       <div class="menu-card-text">
-        <div class="menu-title">▼文字设定内容</div><!-- 改这里：卡片标题 -->
-        <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div><!-- 改这里：卡片描述 -->
+        <div class="menu-title">▼文字设定内容</div>
+        <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
       </div>
-    </div>
-  </div>
+    </div> 
+  </div> 
 </div>
 
-<!-- ============================================================
-     图册目录（相册列表）
-     加相册：复制一个 <div class="album-item">...</div>，改标题/图片/张数
-     ============================================================ -->
+<!-- ============图册目录 ================= -->
 <div id="gallery-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回上一页</div>
   <div class="detail-title">参考图册</div>
-  <div class="album-list">
-
-    <!-- 相册 1：立绘参考 -->
-    <div class="album-item" onclick="showPage('album-1')">
-      <div class="album-cover"><img src="images/20261119_3.PNG" alt=""></div>
-      <div class="album-info">
-        <div class="album-info-title">立绘参考</div><!-- 改这里：相册名 -->
-        <div class="album-info-desc">共 3 张图片</div><!-- 改这里：张数 -->
+  <div class="album-list" style="display: flex; flex-direction: column; gap: 12px;">
+    <div class="album-item" onclick="showPage('album-1')" style="background: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; height: 100px; border: 1px solid #eeeeee;">
+      <div class="album-cover" style="width: 100px; height: 100px; flex-shrink: 0;"><img src="images/20261119_3.PNG" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="album-info" style="padding: 12px 16px; display: flex; flex-direction: column; justify-content: center;">
+        <div class="album-info-title" style="font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px;">立绘参考</div>
+        <div class="album-info-desc" style="font-size: 13px; color: #888888;">共 3 张图片</div>
       </div>
     </div>
-
-    <!-- 相册 2：服设参考 -->
-    <div class="album-item" onclick="showPage('album-2')">
-      <div class="album-cover"><img src="images/IMG_2760.JPG" alt=""></div>
-      <div class="album-info">
-        <div class="album-info-title">服设参考</div><!-- 改这里：相册名 -->
-        <div class="album-info-desc">共 1 张图片</div><!-- 改这里：张数 -->
+    <div class="album-item" onclick="showPage('album-2')" style="background: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; cursor: pointer; height: 100px; border: 1px solid #eeeeee;">
+      <div class="album-cover" style="width: 100px; height: 100px; flex-shrink: 0;"><img src="images/IMG_2760.JPG" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="album-info" style="padding: 12px 16px; display: flex; flex-direction: column; justify-content: center;">
+        <div class="album-info-title" style="font-size: 18px; font-weight: bold; color: #111111; margin-bottom: 4px;">服设参考</div>
+        <div class="album-info-desc" style="font-size: 13px; color: #888888;">共 1 张图片</div>
       </div>
     </div>
-
   </div>
 </div>
-
-<!-- ============================================================
-     相册 1 内部（立绘参考）
-     加图：复制一个 <div class="img-box">...</div>，改图片路径和编号
-     ============================================================ -->
+<!-- 相册 1 内部 -->
 <div id="album-1" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回上一页</div>
   <div class="detail-title">立绘参考</div>
@@ -150,9 +124,7 @@
   </div>
 </div>
 
-<!-- ============================================================
-     相册 2 内部（服设参考）
-     ============================================================ -->
+<!-- 相册 2 内部 -->
 <div id="album-2" class="detail-page">
   <div class="back-btn" onclick="showPage('gallery-page')">← 返回上一页</div>
   <div class="detail-title">服设参考</div>
@@ -161,22 +133,16 @@
   </div>
 </div>
 
-<!-- ============================================================
-     文字设定目录
-     加条目：复制一个 <div class="text-list-item">...</div>
-     注意 onclick 里的目标页 id 要和下面详情页的 id 对应
-     ============================================================ -->
+<!-- ====== 文字页 ========= -->
 <div id="text-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
   <div class="detail-title">角色文字设定</div>
-  <p class="text-page-tip">点击下方小标题查看详细内容：</p>
-
+  <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
   <div class="text-list-item" onclick="showPage('text-detail-1')"><div><div class="text-list-title">狭雾有江</div><div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
   <div class="text-list-item" onclick="showPage('text-detail-2')"><div><div class="text-list-title">四月一日一期</div><div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
   <div class="text-list-item" onclick="showPage('text-detail-3')"><div><div class="text-list-title">相处模式</div><div class="text-list-desc">看不看其实无所谓</div></div><div class="text-list-arrow">›</div></div>
   <div class="text-list-item" onclick="showPage('text-detail-4')"><div><div class="text-list-title">主线故事</div><div class="text-list-desc">还会回到那里吗？你我的身边。</div></div><div class="text-list-arrow">›</div></div>
-</div>
-
+</div> 
 
 <div id="text-detail-1" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
@@ -188,8 +154,6 @@
 对待亲密关系…不，准确来说是人与人的关系（特指与相方时）具有一定的空虚感，常常处于观察、凝视、打量的状态，在相处时相当自信与潜藏着的得寸进尺、试探。存在较高的责任感，并不想让自己的生命为任何人负责，却会在长期习惯的驱使下将对方融入到自己的生命当中。习惯，一个可怕的词，正所谓巴甫洛夫和狗的条件反射。<br><br>
   </div>
 </div>
-
-
 <div id="text-detail-2" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">四月一日一期</div>
@@ -202,12 +166,10 @@
   </div>
 </div>
 
-<!-- 文字详情 3：相处模式 -->
 <div id="text-detail-3" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">相处模式</div>
   <div class="text-box">
-<!------相处模式的正文 ------>
     <span style="font-weight: bold; color: #333333;">▼相处关系——：</span><br>
     这俩位属于是不做什么只是待在对方身边的关系，仅此而已。没有过多存在的关系，没有过多询问的话语，仅仅是对方还没离开这里所以自己也还待着。<br><br>
     ——习惯。一个既不轻又不重的词。在无意间，在下意识中，因为某些东西而潜移默化改变自己维持已久的习性，就像人类学习自己的母语一般，有些字有些词不需要特地学习却懂得如何将其读出。<br><br>
@@ -219,12 +181,10 @@
   </div>
 </div>
 
-<!-- 文字详情 4：主线故事 -->
 <div id="text-detail-4" class="detail-page">
   <div class="back-btn" onclick="showPage('text-page')">← 返回设定列表</div>
   <div class="detail-title">主线故事</div>
   <div class="text-box">
-<!-- 改这里：主线故事的正文 -->
 <br>我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br>
   </div>
 </div>
@@ -233,25 +193,18 @@
   <div id="lightbox-counter" style="position: absolute; top: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10000;">1 / 1</div>
   <div onclick="closeLightbox()" style="position: absolute; top: 10px; right: 20px; color: white; font-size: 20px; cursor: pointer; padding: 10px; z-index: 10000; user-select: none;">✕</div>
   <div id="lightbox-track"></div>
-  <div id="lightbox-thumbnails" style="position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10000; padding: 0 20px; overflow-x: auto; pointer-events: auto;"></div>
+  <div id="lightbox-thumbnails" style="position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10000; padding: 0 20px; overflow-x: auto; pointer-events: auto; align-items: center;"></div>
 </div>
+
 <script>
 const allPages = ['home-page', 'gallery-page', 'album-1', 'album-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
 let currentAlbum = [], currentIndex = 0;
-const lb = document.getElementById('lightbox');
-const lbTrack = document.getElementById('lightbox-track');
-const thumbnailBar = document.getElementById('lightbox-thumbnails');
+const lb = document.getElementById('lightbox'), lbTrack = document.getElementById('lightbox-track'), thumbnailBar = document.getElementById('lightbox-thumbnails');
 let lightboxOpen = false, lightboxHistoryEntry = false, suppressNextPopstate = false;
-
-// 单图缩放/位移状态
-let imageScale = 1, imageX = 0, imageY = 0;
+let imageScale = 1, imageX = 0, imageY = 0, isDragging = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
 const MAX_SCALE = 4;
-
-// 手势状态
 const activePointers = new Map();
-let isDragging = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
-let gestureHadPinch = false;
-let pinch = null; // {startDistance, startScale, startCenterX, startCenterY, startTx, startTy, targetImg}
+let gestureHadPinch = false, pinch = null;
 
 function getCurrentImg() {
   const slide = lbTrack.children[currentIndex];
@@ -272,6 +225,7 @@ function clampPan(img) {
   imageX = Math.max(-maxX, Math.min(maxX, imageX));
   imageY = Math.max(-maxY, Math.min(maxY, imageY));
 }
+
 window.onload = function () {
   const hash = location.hash.replace('#', '');
   if (hash && allPages.includes(hash)) {
@@ -306,11 +260,12 @@ window.onpopstate = function (event) {
     document.getElementById('home-page').style.display = 'block';
   }
 };
+
 function openLightbox(src, element) {
   const galleryContainer = element.closest('.img-grid');
   const allImages = Array.from(galleryContainer.querySelectorAll('.img-box img'));
-currentAlbum = allImages.map(img => img.getAttribute('src'));
-currentIndex = currentAlbum.indexOf(src);
+  currentAlbum = allImages.map(img => img.getAttribute('src'));
+  currentIndex = currentAlbum.indexOf(src);
   if (currentIndex < 0) currentIndex = 0;
 
   lbTrack.innerHTML = '';
@@ -319,7 +274,6 @@ currentIndex = currentAlbum.indexOf(src);
     slide.className = 'lightbox-slide';
     const img = document.createElement('img');
     img.src = imgSrc;
-    img.style.imageRendering = 'high-quality';
     img.dataset.index = idx;
     slide.appendChild(img);
     lbTrack.appendChild(slide);
@@ -348,7 +302,7 @@ function closeLightbox(fromHistory = false) {
   gestureHadPinch = false;
   isDragging = false;
   imageScale = 1; imageX = 0; imageY = 0;
-
+  
   if (lightboxHistoryEntry && !fromHistory) {
     lightboxHistoryEntry = false;
     suppressNextPopstate = true;
@@ -365,7 +319,7 @@ function renderThumbnails() {
   currentAlbum.forEach((src, idx) => {
     const thumb = document.createElement('img');
     thumb.src = src;
-    thumb.style.cssText = `width:40px;height:40px;object-fit:cover;border-radius:4px;cursor:pointer;transition:.2s;opacity:${idx === currentIndex ? '1' : '0.4'};transform:${idx === currentIndex ? 'scale(1.1)' : 'scale(1)'};border:2px solid ${idx === currentIndex ? '#fff' : 'transparent'};pointer-events:auto;`;
+    thumb.style.cssText = `width:40px;height:40px;object-fit:cover;border-radius:4px;cursor:pointer;transition:.2s;opacity:${idx === currentIndex ? '1' : '0.4'};transform:${idx === currentIndex ? 'scale(1.1)' : 'scale(1)'};border:2px solid ${idx === currentIndex ? '#fff' : 'transparent'};pointer-events:auto;flex-shrink:0;`;
     thumb.onclick = (e) => { e.stopPropagation(); currentIndex = idx; updateLightbox(true); };
     thumbnailBar.appendChild(thumb);
   });
@@ -373,10 +327,9 @@ function renderThumbnails() {
 
 function updateLightbox(animate = false) {
   if (currentAlbum.length === 0) return;
-  // 重置所有图片的缩放
   lbTrack.querySelectorAll('img').forEach(img => {
     img.style.transition = 'transform 0.2s';
-    img.style.transform = 'translate3d(0,0,0) scale(1)';
+    img.style.transform = `translate3d(0,0,0) scale(1)`;
   });
   imageScale = 1; imageX = 0; imageY = 0;
   pinch = null;
@@ -391,6 +344,7 @@ function updateLightbox(animate = false) {
     thumb.style.border = `2px solid ${idx === currentIndex ? '#fff' : 'transparent'}`;
   });
 }
+
 lb.addEventListener('pointerdown', e => {
   if (!lightboxOpen || e.target.closest('#lightbox-thumbnails')) return;
   e.preventDefault();
@@ -430,7 +384,6 @@ lb.addEventListener('pointermove', e => {
   e.preventDefault();
   activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-  // 双指缩放/平移
   if (activePointers.size === 2 && pinch) {
     const points = Array.from(activePointers.values());
     const distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y) || 1;
@@ -447,7 +400,6 @@ lb.addEventListener('pointermove', e => {
     return;
   }
 
-  // 单指：放大时拖动图片，否则滑动切图
   if (activePointers.size === 1 && isDragging) {
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
@@ -464,12 +416,11 @@ lb.addEventListener('pointermove', e => {
     }
   }
 });
+
 function finishPointer(e) {
   if (!activePointers.has(e.pointerId)) return;
   activePointers.delete(e.pointerId);
-
-  if (activePointers.size === 0) {
-    // 单指滑动切图（仅当未缩放）
+    if (activePointers.size === 0) {
     if (isDragging && !gestureHadPinch && imageScale === 1 && currentAlbum.length > 1) {
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
@@ -483,13 +434,12 @@ function finishPointer(e) {
       }
     }
 
-    // 缩放后回弹到 1 倍
     if (imageScale <= 1.02) {
       const img = getCurrentImg();
       if (img) {
         imageScale = 1; imageX = 0; imageY = 0;
         img.style.transition = 'transform 0.2s';
-        img.style.transform = 'translate3d(0,0,0) scale(1)';
+        img.style.transform = `translate3d(0,0,0) scale(1)`;
       }
     }
 
@@ -504,7 +454,6 @@ function finishPointer(e) {
     startY = remaining.y;
     startTx = imageX;
     startTy = imageY;
-    // 双指变单指后，重新开始 pinch 的基准
     if (pinch) {
       pinch = {
         startDistance: 1,
