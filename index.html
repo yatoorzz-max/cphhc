@@ -45,358 +45,38 @@
   .text-list-desc { font-size: 13px; color: #888888; margin-top: 4px; }
   .text-list-arrow { color: #bbbbbb; font-size: 20px; font-weight: bold; }
 
-  /* 灯箱 */
-  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
-  #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; pointer-events: auto; user-select: none; }
-  
-/* ======================================
-   原版精修 V1
-   保留白底、浅灰卡片、简洁圆角风格
-   仅优化视觉，不改变原有功能
-====================================== */
-
-/* 全局 */
-
-body {
-  background: #ffffff;
-  color: #333333;
-  padding: 16px;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "PingFang SC",
-    "Microsoft YaHei", Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* 首页头像 */
-
-.home-avatar {
-  margin-top: 36px;
-  margin-bottom: 22px;
-}
-
-.home-avatar img {
-  width: 112px;
-  height: 112px;
-  border: 2px solid #eeeeee;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.035);
-}
-
-/* 首页简介 */
-
-.home-subtitle {
-  max-width: 460px;
-  margin: 0 auto 36px;
-  padding: 0 10px;
-  font-size: 12px;
-  line-height: 1.9;
-  color: #999999;
-  letter-spacing: 0.01em;
-}
-
-.home-subtitle span {
-  font-size: 13px;
-  margin-bottom: 7px !important;
-  color: #555555 !important;
-}
-
-/* 首页卡片 */
-
-.menu-grid {
-  gap: 14px;
-  max-width: 680px;
-}
-
-.menu-card {
-  background: #f9f9f9;
-  border: 1px solid #ededed;
-  border-radius: 14px;
-  padding: 14px;
-  gap: 15px;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.menu-card:hover {
-  background: #f5f5f5;
-  border-color: #e4e4e4;
-}
-
-.menu-card-img-box {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 9px;
-}
-
-.menu-card-text {
-  padding: 5px 0;
-}
-
-.menu-title {
-  font-size: 18px;
-  font-weight: 650;
-  margin-bottom: 7px;
-  color: #222222;
-  line-height: 1.4;
-}
-
-.menu-desc {
-  font-size: 13px;
-  line-height: 1.65;
-  color: #888888;
-}
-
-/* 详情页 */
-
-.detail-page {
-  max-width: 820px;
-  padding: 12px 4px 40px;
-  background: #ffffff;
-  border-radius: 14px;
-}
-
-/* 返回按钮 */
-
-.back-btn {
-  padding: 8px 14px;
-  background: #f5f5f5;
-  color: #555555;
-  border-radius: 7px;
-  font-size: 13px;
-  margin-bottom: 22px;
-}
-
-.back-btn:hover {
-  background: #eeeeee;
-}
-
-/* 详情页标题 */
-
-.detail-title {
-  font-size: 21px;
-  font-weight: 650;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #eeeeee;
-  color: #222222;
-  letter-spacing: 0.015em;
-}
-
-/* 图册目录 */
-
-.album-list {
-  gap: 14px !important;
-}
-
-.album-item {
-  height: 104px !important;
-  background: #f8f8f8 !important;
-  border: 1px solid #ededed !important;
-  border-radius: 12px !important;
-  transition: background 0.2s;
-}
-
-.album-item:hover {
-  background: #f3f3f3 !important;
-}
-
-.album-cover {
-  width: 104px !important;
-  height: 104px !important;
-}
-
-.album-info {
-  padding: 12px 16px !important;
-}
-
-.album-info-title {
-  font-size: 17px !important;
-  font-weight: 600 !important;
-  color: #222222 !important;
-  margin-bottom: 6px;
-}
-
-.album-info-desc {
-  font-size: 12px !important;
-  color: #999999 !important;
-}
-
-/* 图片九宫格 */
-
-.img-grid {
-  gap: 9px;
-  margin-top: 14px;
-}
-
-.img-box {
-  border-radius: 8px;
-  background: #f5f5f5;
-}
-
-.img-box img {
-  transition: transform 0.25s ease;
-}
-
-.img-box:hover img {
-  transform: scale(1.025);
-}
-
-.img-num {
-  top: 5px;
-  left: 5px;
-  background: rgba(0,0,0,0.48);
-  font-size: 10px;
-  padding: 3px 6px;
-}
-
-/* 文字目录 */
-
-.text-list-item {
-  background: #f8f8f8;
-  border: 1px solid #ededed;
-  border-radius: 10px;
-  padding: 14px 16px;
-  margin-bottom: 11px;
-  transition: background 0.2s;
-}
-
-.text-list-item:hover {
-  background: #f2f2f2;
-}
-
-.text-list-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #222222;
-}
-
-.text-list-desc {
-  font-size: 12px;
-  color: #999999;
-  margin-top: 5px;
-}
-
-.text-list-arrow {
-  color: #aaaaaa;
-  font-size: 21px;
-}
-
-/* 文字正文 */
-
-.text-box {
-  background: #f8f8f8;
-  padding: 19px 18px;
-  border-radius: 11px;
-  border: 1px solid #eeeeee;
-  font-size: 14px;
-  line-height: 2;
-  color: #444444;
-  margin-bottom: 18px;
-  letter-spacing: 0.015em;
-  overflow-wrap: anywhere;
-}
-
-/* 正文中的粗体 */
-
-.text-box span[style*="font-weight: bold"] {
-  color: #333333;
-}
 
 /* 灯箱 */
-
 #lightbox {
-  background: rgba(0,0,0,0.87);
-  padding: 18px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 #lightbox img {
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 40px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
-}
-
-/* 手机屏幕适配 */
-
-@media (max-width: 600px) {
-
-  body {
-    padding: 12px;
-  }
-
-  .home-avatar {
-    margin-top: 32px;
-    margin-bottom: 20px;
-  }
-
-  .home-avatar img {
-    width: 106px;
-    height: 106px;
-  }
-
-  .home-subtitle {
-    margin-bottom: 30px;
-    font-size: 12px;
-    line-height: 1.85;
-  }
-
-  .menu-card {
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .menu-card-img-box {
-    width: 88px;
-    height: 88px;
-  }
-
-  .menu-title {
-    font-size: 16px;
-  }
-
-  .menu-desc {
-    font-size: 12px;
-  }
-
-  .detail-page {
-    padding: 10px 2px 30px;
-  }
-
-  .detail-title {
-    font-size: 20px;
-  }
-
-  .album-item {
-    height: 94px !important;
-  }
-
-  .album-cover {
-    width: 94px !important;
-    height: 94px !important;
-  }
-
-  .album-info {
-    padding: 10px 13px !important;
-  }
-
-  .album-info-title {
-    font-size: 15px !important;
-  }
-
-  .img-grid {
-    gap: 6px;
-  }
-
-  .text-box {
-    padding: 15px 13px;
-    font-size: 13px;
-    line-height: 2;
-  }
-
-  .text-list-item {
-    padding: 13px 14px;
-  }
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+  transform-origin: center center;
+  cursor: grab;
 }
 
 </style>
@@ -565,111 +245,403 @@ body {
 <!-- 灯箱 -->
 <div id="lightbox">
   <div id="lightbox-counter" style="position: absolute; top: 20px; color: white; font-size: 16px; font-weight: bold; letter-spacing: 2px; z-index: 10000;">1 / 1</div>
-  <div onclick="document.getElementById('lightbox').style.display='none'; document.body.style.overflow='';" style="position: absolute; top: 10px; right: 20px; color: white; font-size: 20px; cursor: pointer; padding: 10px; z-index: 10000; user-select: none;">✕</div>
+  <div onclick="closeLightbox()" style="position: absolute; top: 10px; right: 20px; color: white; font-size: 20px; cursor: pointer; padding: 10px; z-index: 10000; user-select: none;">✕</div>
   <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(-1);" style="position: absolute; left: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">‹</div>
   <img id="lightbox-img" src="" alt="放大查看" onclick="event.stopPropagation()">
   <div class="nav-arrow" onclick="event.stopPropagation(); changeImage(1);" style="position: absolute; right: 15px; color: white; font-size: 40px; cursor: pointer; padding: 20px; user-select: none;">›</div>
 </div>
 
 <script>
-  const allPages = ['home-page', 'gallery-page', 'album-1', 'album-2', 'text-page', 'text-detail-1', 'text-detail-2', 'text-detail-3', 'text-detail-4'];
-  let currentAlbum = []; 
-  let currentIndex = 0;
+  
+const allPages = [
+  'home-page', 'gallery-page',
+  'album-1', 'album-2',
+  'text-page', 'text-detail-1',
+  'text-detail-2', 'text-detail-3',
+  'text-detail-4'
+];
 
-  window.onload = function() {
-    history.replaceState({ pageId: 'home-page' }, '', '#home-page');
-  };
+let currentAlbum = [];
+let currentIndex = 0;
 
-  function showPage(pageId) {
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+
+let lightboxOpen = false;
+let lightboxHistoryEntry = false;
+let suppressNextPopstate = false;
+
+let imageScale = 1;
+const MAX_SCALE = 4;
+let imageX = 0;
+let imageY = 0;
+
+const activePointers = new Map();
+let gesture = null;
+let gestureHadPinch = false;
+
+window.onload = function() {
+  history.replaceState(
+    { pageId: 'home-page' },
+    '',
+    '#home-page'
+  );
+};
+
+function showPage(pageId) {
+  allPages.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
+  document.getElementById(pageId).style.display = 'block';
+  window.scrollTo(0, 0);
+
+  history.pushState(
+    { pageId: pageId },
+    '',
+    '#' + pageId
+  );
+}
+
+function onPagePopState(event) {
+  if (suppressNextPopstate) {
+    suppressNextPopstate = false;
+    return;
+  }
+
+  if (lightboxOpen) {
+    closeLightbox(true);
+    return;
+  }
+
+  if (event.state && event.state.pageId) {
+    const pageId = event.state.pageId;
+
     allPages.forEach(id => {
       const el = document.getElementById(id);
-      if(el) el.style.display = 'none';
+      if (el) el.style.display = 'none';
     });
-    document.getElementById(pageId).style.display = 'block';
+
+    const target = document.getElementById(pageId);
+    if (target) target.style.display = 'block';
+
     window.scrollTo(0, 0);
-    history.pushState({ pageId: pageId }, '', '#' + pageId);
+  } else {
+    allPages.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+
+    document.getElementById('home-page').style.display = 'block';
+  }
+}
+
+window.onpopstate = onPagePopState;
+
+function openLightbox(src, element) {
+  const galleryContainer = element.closest('.img-grid');
+
+  const allImages = Array.from(
+    galleryContainer.querySelectorAll('.img-box img')
+  );
+
+  currentAlbum = [
+    ...new Set(allImages.map(img => img.getAttribute('src')))
+  ];
+
+  currentIndex = currentAlbum.indexOf(src);
+
+  if (currentIndex < 0) currentIndex = 0;
+
+  updateLightbox();
+
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  lightboxOpen = true;
+
+  if (!lightboxHistoryEntry) {
+    const pageId =
+      history.state?.pageId || 'home-page';
+
+    history.pushState(
+      { pageId: pageId, lightbox: true },
+      '',
+      location.href
+    );
+
+    lightboxHistoryEntry = true;
+  }
+}
+
+function closeLightbox(fromHistory = false) {
+  lb.style.display = 'none';
+  document.body.style.overflow = '';
+
+  lightboxOpen = false;
+
+  activePointers.clear();
+  gesture = null;
+  gestureHadPinch = false;
+
+  resetImageTransform();
+
+  if (lightboxHistoryEntry && !fromHistory) {
+    lightboxHistoryEntry = false;
+    suppressNextPopstate = true;
+    history.back();
+  } else {
+    lightboxHistoryEntry = false;
+  }
+}
+
+function resetImageTransform() {
+  imageScale = 1;
+  imageX = 0;
+  imageY = 0;
+  applyImageTransform();
+}
+
+function updateLightbox() {
+  if (currentAlbum.length === 0) return;
+
+  resetImageTransform();
+
+  lbImg.src = currentAlbum[currentIndex];
+
+  document.getElementById('lightbox-counter').innerText =
+    (currentIndex + 1) + ' / ' + currentAlbum.length;
+}
+
+function clampImagePosition() {
+  const width = lbImg.offsetWidth;
+  const height = lbImg.offsetHeight;
+
+  if (!width || !height) return;
+
+  const availableWidth = lb.clientWidth - 40;
+  const availableHeight = lb.clientHeight - 40;
+
+  const maxX = Math.max(
+    0,
+    (width * imageScale - availableWidth) / 2
+  );
+
+  const maxY = Math.max(
+    0,
+    (height * imageScale - availableHeight) / 2
+  );
+
+  imageX = Math.max(-maxX, Math.min(maxX, imageX));
+  imageY = Math.max(-maxY, Math.min(maxY, imageY));
+
+  if (imageScale <= 1) {
+    imageX = 0;
+    imageY = 0;
+  }
+}
+
+function applyImageTransform() {
+  clampImagePosition();
+
+  lbImg.style.transform =
+    `translate3d(${imageX}px, ${imageY}px, 0) scale(${imageScale})`;
+}
+
+lbImg.addEventListener('load', () => {
+  applyImageTransform();
+});
+
+function changeImage(direction) {
+  currentIndex += direction;
+
+  if (currentIndex < 0) currentIndex = 0;
+
+  if (currentIndex >= currentAlbum.length) {
+    currentIndex = currentAlbum.length - 1;
   }
 
-  window.onpopstate = function(event) {
-    if (event.state && event.state.pageId) {
-      const pageId = event.state.pageId;
-      allPages.forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.style.display = 'none';
-      });
-      document.getElementById(pageId).style.display = 'block';
-      window.scrollTo(0, 0);
-    } else {
-      allPages.forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.style.display = 'none';
-      });
-      document.getElementById('home-page').style.display = 'block';
-    }
+  updateLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (!lightboxOpen) return;
+
+  if (e.key === 'Escape') closeLightbox();
+
+  if (e.key === 'ArrowLeft') changeImage(-1);
+
+  if (e.key === 'ArrowRight') changeImage(1);
+});
+
+lb.addEventListener('click', e => {
+  if (e.target === lb) {
+    closeLightbox();
+  }
+});
+
+function getPointerDistance(pointerA, pointerB) {
+  const dx = pointerA.x - pointerB.x;
+  const dy = pointerA.y - pointerB.y;
+
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function getPointerCenter(pointerA, pointerB) {
+  return {
+    x: (pointerA.x + pointerB.x) / 2,
+    y: (pointerA.y + pointerB.y) / 2
   };
+}
 
-  function openLightbox(src, element) {
-    const galleryContainer = element.closest('.img-grid'); 
-    const allImages = Array.from(galleryContainer.querySelectorAll('.img-box img'));
-    currentAlbum = allImages.map(img => img.getAttribute('src'));
-    currentAlbum = [...new Set(currentAlbum)]; 
-    
-    currentIndex = currentAlbum.indexOf(src);
-    updateLightbox();
-    document.getElementById('lightbox').style.display = 'flex';
-    
-    document.body.style.overflow = 'hidden';
+lb.addEventListener('pointerdown', e => {
+  if (!lightboxOpen) return;
+
+  if (e.target.closest('.nav-arrow')) return;
+
+  if (e.target.id !== 'lightbox-img' &&
+      e.target !== lb) return;
+
+  e.preventDefault();
+
+  lb.setPointerCapture(e.pointerId);
+
+  activePointers.set(e.pointerId, {
+    x: e.clientX,
+    y: e.clientY
+  });
+
+  if (activePointers.size === 1) {
+    gesture = {
+      startX: e.clientX,
+      startY: e.clientY,
+      lastX: e.clientX,
+      lastY: e.clientY,
+      startImageX: imageX,
+      startImageY: imageY
+    };
+
+    gestureHadPinch = false;
   }
 
-  function updateLightbox() {
-    if(currentAlbum.length === 0) return;
-    document.getElementById('lightbox-img').src = currentAlbum[currentIndex];
-    document.getElementById('lightbox-counter').innerText = (currentIndex + 1) + ' / ' + currentAlbum.length;
+  if (activePointers.size === 2) {
+    const points = Array.from(activePointers.values());
+
+    gesture = {
+      startDistance: getPointerDistance(points[0], points[1]),
+      startScale: imageScale,
+      startCenter: getPointerCenter(points[0], points[1]),
+      startImageX: imageX,
+      startImageY: imageY
+    };
+
+    gestureHadPinch = true;
+  }
+});
+
+lb.addEventListener('pointermove', e => {
+  if (!activePointers.has(e.pointerId)) return;
+
+  e.preventDefault();
+
+  activePointers.set(e.pointerId, {
+    x: e.clientX,
+    y: e.clientY
+  });
+
+  if (activePointers.size === 2 && gesture) {
+    const points = Array.from(activePointers.values());
+
+    const distance = getPointerDistance(points[0], points[1]);
+    const center = getPointerCenter(points[0], points[1]);
+
+    const ratio = distance / gesture.startDistance;
+
+    imageScale = Math.max(
+      1,
+      Math.min(MAX_SCALE, gesture.startScale * ratio)
+    );
+
+    imageX = gesture.startImageX +
+      (center.x - gesture.startCenter.x);
+
+    imageY = gesture.startImageY +
+      (center.y - gesture.startCenter.y);
+
+    applyImageTransform();
+    return;
   }
 
-  function changeImage(direction) {
-    currentIndex += direction;
-    if (currentIndex < 0) currentIndex = 0;
-    if (currentIndex >= currentAlbum.length) currentIndex = currentAlbum.length - 1;
-    updateLightbox();
-  }
+  if (activePointers.size === 1 && gesture) {
+    const dx = e.clientX - gesture.startX;
+    const dy = e.clientY - gesture.startY;
 
-  document.addEventListener('keydown', e => {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox.style.display === 'flex') {
-      if (e.key === 'Escape') {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = ''; 
+    if (imageScale > 1) {
+      imageX = gesture.startImageX + dx;
+      imageY = gesture.startImageY + dy;
+
+      applyImageTransform();
+    }
+  }
+});
+
+function finishPointer(e) {
+  if (!activePointers.has(e.pointerId)) return;
+
+  const wasPinching = gestureHadPinch;
+
+  activePointers.delete(e.pointerId);
+
+  if (activePointers.size === 0) {
+    if (
+      !wasPinching &&
+      imageScale === 1 &&
+      gesture &&
+      gesture.startX !== undefined
+    ) {
+      const dx = e.clientX - gesture.startX;
+      const dy = e.clientY - gesture.startY;
+
+      if (Math.abs(dx) > 100 && Math.abs(dx) > Math.abs(dy)) {
+        changeImage(dx < 0 ? 1 : -1);
       }
-      if (e.key === 'ArrowLeft') changeImage(-1);
-      if (e.key === 'ArrowRight') changeImage(1);
     }
-  });
 
-  let touchStartX = 0;
-  let touchEndX = 0;
-  const lb = document.getElementById('lightbox');
-  
-  lb.addEventListener('click', e => {
-    if (e.target.id === 'lightbox') {
-      lb.style.display = 'none';
-      document.body.style.overflow = ''; 
-    }
-  });
-
-  lb.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: false });
-
-  lb.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, false);
-
-  function handleSwipe() {
-    if (touchEndX < touchStartX - 100) changeImage(1); 
-    if (touchEndX > touchStartX + 100) changeImage(-1); 
+    gesture = null;
+    gestureHadPinch = false;
+    return;
   }
+
+  if (activePointers.size === 1) {
+    const remaining = Array.from(activePointers.values())[0];
+
+    gesture = {
+      startX: remaining.x,
+      startY: remaining.y,
+      lastX: remaining.x,
+      lastY: remaining.y,
+      startImageX: imageX,
+      startImageY: imageY
+    };
+  }
+}
+
+lb.addEventListener('pointerup', finishPointer);
+lb.addEventListener('pointercancel', finishPointer);
+
+lb.addEventListener('lostpointercapture', e => {
+  if (activePointers.has(e.pointerId)) {
+    finishPointer(e);
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (lightboxOpen) {
+    applyImageTransform();
+  }
+});
+
 </script>
 </body>
 </html>
