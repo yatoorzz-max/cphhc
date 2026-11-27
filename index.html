@@ -142,32 +142,41 @@
   }
 }
 
-/* 首页左侧图片：强制变方块、全填充 */
+
+/* 首页左侧图片：真正铺满卡片 */
+
 .menu-card-img-box {
-  width: 90px !important; /* 宽度调大一点 */
-  height: 90px !important; /* 高度跟宽度一样，做成正方形 */
+  width: 90px !important;
+  height: 90px !important;
   padding: 0 !important;
-  overflow: hidden;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: #eee;
+  flex: 0 0 90px !important;
+  display: block !important;
+  overflow: hidden !important;
+  border-radius: 10px !important;
+  background: transparent !important;
 }
 
 .menu-card-img-box img {
-  display: block;
+  display: block !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important; /* 关键：填满整个方块，多余部分裁掉 */
-  object-position: top !important; /* 关键：图片顶部对齐，保证看得到脸 */
-  border-radius: 10px;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 10px !important;
+  transform: none !important;
 }
 
-/* 手机端保持原来的图片尺寸 */
+/* 手机端 */
 
 @media (max-width: 600px) {
   .menu-card-img-box {
-    width: 88px;
-    height: 88px;
+    width: 88px !important;
+    height: 88px !important;
+    flex-basis: 88px !important;
   }
 }
 
@@ -191,7 +200,9 @@
   
   <div class="menu-grid">
     <div class="menu-card" onclick="showPage('gallery-page')">
-      <div class="menu-card-img-box"><img src="images/ding_.png"></div>
+      <div style="width: 100px; height: 100px; flex-shrink: 0; overflow: hidden;">
+  <img src="images/ding_.png" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+</div>
       <div class="menu-card-text">
         <div class="menu-title">▼参考图册</div>
         <div class="menu-desc">供以参考的png与服设</div>
@@ -199,7 +210,7 @@
     </div>
 
     <div class="menu-card" onclick="showPage('text-page')">
-      <div class="menu-card-img-box"><img src="images/die_.jpg"></div>
+      <d<div class="menu-card-img-box"><img src="images/die_.jpg"></div>
       <div class="menu-card-text">
         <div class="menu-title">▼文字设定内容</div>
         <div class="menu-desc">供以参考的角色设定、角色故事、if线等</div>
