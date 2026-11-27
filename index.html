@@ -79,6 +79,37 @@
   cursor: grab;
 }
 
+
+.text-box {
+  background: transparent;
+  border: none;
+  border-left: 2px solid #eeeeee;
+  border-radius: 0;
+  padding: 4px 0 4px 20px;
+  margin-bottom: 28px;
+  font-size: 14px;
+  line-height: 2.15;
+  color: #5c5853;
+  letter-spacing: 0.025em;
+  overflow-wrap: anywhere;
+}
+
+/* 正文中的章节标题 */
+
+.text-box span[style*="font-weight: bold"] {
+  color: #333333 !important;
+}
+
+/* 手机端正文排版 */
+
+@media (max-width: 600px) {
+  .text-box {
+    padding: 4px 0 4px 14px;
+    font-size: 13px;
+    line-height: 2.1;
+  }
+}
+
 </style>
 </head>
 <body>
