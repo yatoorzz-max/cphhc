@@ -60,13 +60,24 @@
 
   /* 完美版灯箱样式 */
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; box-sizing: border-box; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; touch-action: none; overscroll-behavior: contain; overflow: hidden; }
-  #lightbox-track { display: flex; width: 100%; height: 100%; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform; }
-  .lightbox-slide { flex-shrink: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
-  .lightbox-slide img { max-width: calc(100vw - 40px); max-height: calc(100vh - 100px); width: auto; height: auto; object-fit: contain; border-radius: 8px; pointer-events: auto; user-select: none; -webkit-user-drag: none; transform-origin: center center; cursor: grab; }
+ .lightbox-slide { padding-bottom: 80px; display: flex; align-items: center; justify-content: center; } 
+.lightbox-slide img { 
+  max-width: calc(100vw - 40px); 
+  max-height: calc(100vh - 140px); /* 减去更多高度，防止被挡 */
+  width: auto; 
+  height: auto; 
+  object-fit: contain; 
+  border-radius: 8px; 
+  pointer-events: auto; 
+  user-select: none; 
+  -webkit-user-drag: none; 
+  transform-origin: center center; 
+  cursor: grab; 
+}
 </style>
 </head>
 <body>
-<!-- ================= 首页 ================= -->
+<!-- ===========产品啊产品个站首页=============== -->
 <div id="home-page">
   <div class="home-avatar">
     <img src="images/IMG_20261005_135043.png" alt="头像">
@@ -120,7 +131,7 @@
 </div>
 <!-- 相册 1 内部 -->
 <div id="album-1" class="detail-page">
-  <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
+  <div class="back-btn" onclick="showPage('gallery-page')">← 返回上一页</div>
   <div class="detail-title">立绘参考</div>
   <div class="img-grid">
     <div class="img-box" onclick="openLightbox('images/20261119_3.PNG', this)"><span class="img-num">1</span><img src="images/20261119_3.PNG"></div>
@@ -131,14 +142,14 @@
 
 <!-- 相册 2 内部 -->
 <div id="album-2" class="detail-page">
-  <div class="back-btn" onclick="showPage('gallery-page')">← 返回图册目录</div>
+  <div class="back-btn" onclick="showPage('gallery-page')">← 返回上一页</div>
   <div class="detail-title">服设参考</div>
   <div class="img-grid">
     <div class="img-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><span class="img-num">1</span><img src="images/IMG_2760.JPG"></div>
   </div>
 </div>
 
-<!-- ====== 文字页 ================= -->
+<!-- ====== 。这是文字页我好像有产品羞耻症写了不敢看有没有问题========= -->
 <div id="text-page" class="detail-page">
   <div class="back-btn" onclick="showPage('home-page')">← 返回主页</div>
   <div class="detail-title">角色文字设定</div>
@@ -259,6 +270,7 @@ function openLightbox(src, element) {
     slide.className = 'lightbox-slide';
     const img = document.createElement('img');
     img.src = imgSrc;
+    img.style.imageRendering = 'high-quality';
     img.dataset.index = idx;
     slide.appendChild(img);
     lbTrack.appendChild(slide);
@@ -353,6 +365,8 @@ lb.addEventListener('pointerdown', e => {
   if (activePointers.size === 2 && e.target.tagName === 'IMG') {
     const points = Array.from(activePointers.values());
     gesture = {
+    startCenterX: (points[0].x + points[1].x) / 2,
+startCenterY: (points[0].y + points[1].y) / 2,
       targetImg: e.target,
       startDistance: Math.sqrt(Math.pow(points[0].x - points[1].x, 2) + Math.pow(points[0].y - points[1].y, 2)),
       startScale: imageScale,
@@ -372,9 +386,19 @@ lb.addEventListener('pointermove', e => {
   if (activePointers.size === 2 && gesture) {
     const points = Array.from(activePointers.values());
     const distance = Math.sqrt(Math.pow(points[0].x - points[1].x, 2) + Math.pow(points[0].y - points[1].y, 2));
-    imageScale = Math.max(1, Math.min(MAX_SCALE, gesture.startScale * (distance / gesture.startDistance)));
-    imageX = gesture.startX + (points[0].x + points[1].x)/2 - (points[0].x + points[1].x)/2; 
-    imageY = gesture.startY + (points[0].y + points[1].y)/2 - (points[0].y + points[1].y)/2;
+imageScale = Math.max(1, Math.min(MAX_SCALE, gesture.startScale * (distance / gesture.startDistance)));
+
+
+const currentCenterX = (points[0].x + points[1].x) / 2;
+const currentCenterY = (points[0].y + points[1].y) / 2;
+
+
+imageX = gesture.startX + (currentCenterX - gesture.startCenterX);
+imageY = gesture.startY + (currentCenterY - gesture.startCenterY);
+const maxShiftX = (window.innerWidth * (imageScale - 1)) / 2;
+const maxShiftY = (window.innerHeight * (imageScale - 1)) / 2;
+imageX = Math.max(-maxShiftX, Math.min(maxShiftX, imageX));
+imageY = Math.max(-maxShiftY, Math.min(maxShiftY, imageY));
 
     gesture.targetImg.style.transition = 'none';
     gesture.targetImg.style.transform = `translate3d(${imageX}px, ${imageY}px, 0) scale(${imageScale})`;
