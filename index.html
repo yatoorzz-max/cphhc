@@ -112,66 +112,66 @@
 <!-- ============图册目录 ================= -->
 <div id="gallery-page" class="detail-page">
   <!-- 这里是让标题和文字一起当返回键 -->
- <div class="page-header" onclick="showPage('home-page')">
- <span class="back-icon">＜</span>
- <!-- ↑嗯对这里 -->
-
-  <div style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px;">
-    ←这是一个返回键。<br>罪过罪过衣服除了原设都不是我画的，一个并不敬职敬业的孝女（切腹自尽）<br>↑其实这一长串字点哪都能退出（何？）
+  <div class="page-header" onclick="showPage('home-page')">
+    <span class="back-icon">＜</span>
+     <!-- ↑嗯对这里 -->
+    <div style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px;">
+     <!-- ↑这里是 额 缩小返回键和颜色-->
+      ←这是一个返回键。<br>罪过罪过衣服除了原设都不是我画的，一个并不敬职敬业的孝女（切腹自尽）<br>↑其实这一长串字点哪都能退出（何？）
+    </div>
   </div>
-</div>
   
-    <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下查看详细内容：其实我没做。</p>
+  <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下查看详细内容：其实我没做。</p>
+  
   <div class="album-list">
   
-<!-- 相册 1：立绘参考 -->
-<div class="album-section">
-  <details class="album-details" id="details-1" open>
-    
-    <!-- 头部纯粹是展示，点它没有任何反应 -->
-    <div class="album-header">
-      <span>▼ 立绘参考
-        <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">产品好扫啊。（。你够了）</span>
-      </span>
+    <!-- 相册 1：立绘参考 -->
+    <div class="album-section">
+      <!-- 把 details 换成了 div，就不会再有“详细信息”了 -->
+      <div class="album-details">
+        <div class="album-header">
+          <span>▼ 立绘参考
+            <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">产品好扫啊。（。你够了）</span>
+          </span>
+        </div>
+
+        <!-- 图片区域 -->
+        <div class="album-preview" id="content-1" style="margin-top: 12px;">
+          <div class="preview-box" onclick="openLightbox('images/20261119_3.PNG', this)"><img src="images/20261119_3.PNG"></div>
+          <div class="preview-box" onclick="openLightbox('images/IMG_2792.PNG', this)"><img src="images/IMG_2792.PNG"></div>
+          <div class="preview-box" onclick="openLightbox('images/IMG_2797.PNG', this)"><img src="images/IMG_2797.PNG"></div>
+          <div class="preview-box" onclick="openLightbox('images/IMG_2653.PNG', this)"><img src="images/IMG_2653.PNG"></div>
+          <div class="preview-box" onclick="openLightbox('images/1794758357171.png', this)"><img src="images/1794758357171.png"></div>
+        </div>
+
+        <!-- 底部开关按钮 -->
+        <div id="btn-1" style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('content-1', 'btn-1')">
+          展开/收起
+        </div>
+      </div>
     </div>
 
-    <!-- 图片区域（给它加个 id，方便 JS 找到它） -->
-    <div class="album-preview" id="content-1" style="margin-top: 12px;">
-      <div class="preview-box" onclick="openLightbox('images/20261119_3.PNG', this)"><img src="images/20261119_3.PNG"></div>
-      <div class="preview-box" onclick="openLightbox('images/IMG_2792.PNG', this)"><img src="images/IMG_2792.PNG"></div>
-      <div class="preview-box" onclick="openLightbox('images/IMG_2797.PNG', this)"><img src="images/IMG_2797.PNG"></div>
-      <div class="preview-box" onclick="openLightbox('images/IMG_2653.PNG', this)"><img src="images/IMG_2653.PNG"></div>
-      <div class="preview-box" onclick="openLightbox('images/1794758357171.png', this)"><img src="images/1794758357171.png"></div>
+    <!-- 相册 2：服设参考 -->
+    <div class="album-section">
+      <div class="album-details">
+        <div class="album-header">
+          <span>▼ 服设参考
+            <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">这里怎么裂开了雾草算了不管了</span>
+          </span>
+        </div>
+
+        <div class="album-preview" id="content-2" style="margin-top: 12px;">
+          <div class="preview-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><img src="images/IMG_2760.JPG"></div>
+        </div>
+
+        <div id="btn-2" style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('content-2', 'btn-2')">
+          展开/收起
+        </div>
+      </div>
     </div>
 
-    <!-- 👇 这个才是真正的开关 👇 -->
-    <div style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('details-1', 'content-1')">
-      收起 / 展开图片
-    </div>
-
-  </details>
-</div>
-
-<!-- 相册 2：服设参考 -->
-<div class="album-section">
-  <details class="album-details" id="details-2" open>
-    
-    <div class="album-header">
-      <span>▼ 服设参考
-        <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">这里怎么裂开了雾草算了不管了</span>
-      </span>
-    </div>
-
-    <div class="album-preview" id="content-2" style="margin-top: 12px;">
-      <div class="preview-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><img src="images/IMG_2760.JPG"></div>
-    </div>
-
-    <div style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('details-2', 'content-2')">
-      收起 / 展开图片
-    </div>
-
-  </details>
-</div>
+  </div> 
+</div> 
 
 <!-- ====== 文字页 ========= -->
 <div id="text-page" class="detail-page">
@@ -554,16 +554,39 @@ lb.addEventListener('pointerup', finishPointer);
 lb.addEventListener('pointercancel', finishPointer);
 lb.addEventListener('lostpointercapture', e => { if (activePointers.has(e.pointerId)) finishPointer(e); });
 window.addEventListener('resize', () => { if (lightboxOpen) updateLightbox(false); });
-function toggleAlbum(detailsId, contentId) {
-  const details = document.getElementById(detailsId);
+/* ===== 折叠/展开相册（默认只显示3张） ===== */
+function toggleAlbum(contentId, btnId) {
   const content = document.getElementById(contentId);
-  // 如果图片目前是显示的，就隐藏它；如果是隐藏的，就显示它
-  if (content.style.display === 'none') {
-    content.style.display = 'grid';
+  const btn = document.getElementById(btnId);
+  const boxes = content.querySelectorAll('.preview-box');
+  
+  // 判断当前是否隐藏了后面的图
+  const isHidden = boxes.length > 3 && boxes[3].style.display === 'none';
+  
+  if (isHidden) {
+    // 展开：显示全部
+    boxes.forEach(box => box.style.display = 'block');
+    btn.innerText = '收起多余图片';
   } else {
-    content.style.display = 'none';
+    // 收起：只留前 3 张
+    boxes.forEach((box, index) => {
+      if (index >= 3) box.style.display = 'none';
+    });
+    btn.innerText = '展开全部图片';
   }
 }
+
+// 页面加载时，自动把超过 3 张的图隐藏起来
+window.addEventListener('load', () => {
+  document.querySelectorAll('.album-preview').forEach(content => {
+    const boxes = content.querySelectorAll('.preview-box');
+    if (boxes.length > 3) {
+      for (let i = 3; i < boxes.length; i++) {
+        boxes[i].style.display = 'none';
+      }
+    }
+  });
+});
 </script>
 </body>
 </html>
