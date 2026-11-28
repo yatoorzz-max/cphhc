@@ -123,47 +123,54 @@
   
     <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下查看详细内容：其实我没做。</p>
   <div class="album-list">
+  
 <!-- 相册 1：立绘参考 -->
 <div class="album-section">
-  <!-- 下面这行 details 就是折叠开关，open 表示默认展开，如果你想去掉默认展开，就把 open 删掉 -->
-  <details class="album-details" open>
+  <details class="album-details" id="details-1" open>
     
-    <!-- 这里是点击展开/收起的头部 -->
-    <summary class="album-header album-summary">
+    <!-- 头部纯粹是展示，点它没有任何反应 -->
+    <div class="album-header">
       <span>▼ 立绘参考
         <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">产品好扫啊。（。你够了）</span>
       </span>
-    </summary>
+    </div>
 
-    <!-- 这里是展开后的九宫格图片，你想排几行就放几张图，它会自动换行 -->
-    <div class="album-preview" style="margin-top: 12px;">
+    <!-- 图片区域（给它加个 id，方便 JS 找到它） -->
+    <div class="album-preview" id="content-1" style="margin-top: 12px;">
       <div class="preview-box" onclick="openLightbox('images/20261119_3.PNG', this)"><img src="images/20261119_3.PNG"></div>
       <div class="preview-box" onclick="openLightbox('images/IMG_2792.PNG', this)"><img src="images/IMG_2792.PNG"></div>
       <div class="preview-box" onclick="openLightbox('images/IMG_2797.PNG', this)"><img src="images/IMG_2797.PNG"></div>
-      
-      <!-- 第二行 -->
       <div class="preview-box" onclick="openLightbox('images/IMG_2653.PNG', this)"><img src="images/IMG_2653.PNG"></div>
       <div class="preview-box" onclick="openLightbox('images/1794758357171.png', this)"><img src="images/1794758357171.png"></div>
     </div>
-</details>
+
+    <!-- 👇 这个才是真正的开关 👇 -->
+    <div style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('details-1', 'content-1')">
+      收起 / 展开图片
+    </div>
+
+  </details>
 </div>
-    
-    
+
 <!-- 相册 2：服设参考 -->
 <div class="album-section">
-  <details class="album-details" open>
-    <summary class="album-header album-summary">
+  <details class="album-details" id="details-2" open>
+    
+    <div class="album-header">
       <span>▼ 服设参考
         <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">这里怎么裂开了雾草算了不管了</span>
       </span>
-    </summary>
+    </div>
 
-    <div class="album-preview" style="margin-top: 12px;">
+    <div class="album-preview" id="content-2" style="margin-top: 12px;">
       <div class="preview-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><img src="images/IMG_2760.JPG"></div>
     </div>
-    </details>
+
+    <div style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('details-2', 'content-2')">
+      收起 / 展开图片
     </div>
-</div>
+
+  </details>
 </div>
 
 <!-- ====== 文字页 ========= -->
@@ -547,6 +554,16 @@ lb.addEventListener('pointerup', finishPointer);
 lb.addEventListener('pointercancel', finishPointer);
 lb.addEventListener('lostpointercapture', e => { if (activePointers.has(e.pointerId)) finishPointer(e); });
 window.addEventListener('resize', () => { if (lightboxOpen) updateLightbox(false); });
+function toggleAlbum(detailsId, contentId) {
+  const details = document.getElementById(detailsId);
+  const content = document.getElementById(contentId);
+  // 如果图片目前是显示的，就隐藏它；如果是隐藏的，就显示它
+  if (content.style.display === 'none') {
+    content.style.display = 'grid';
+  } else {
+    content.style.display = 'none';
+  }
+}
 </script>
 </body>
 </html>
