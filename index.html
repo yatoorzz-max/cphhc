@@ -33,6 +33,9 @@
   @media (max-width: 600px) { .text-box { padding: 4px 0 4px 14px; font-size: 13px; line-height: 2.1; } }
 
   .album-list { display: flex; flex-direction: column; gap: 16px; }
+  .album-details { width: 100%; }
+  .album-summary { cursor: pointer; list-style: none; outline: none; }
+  .album-summary::-webkit-details-marker { display: none; }
   .album-section { background: #f8f8f8; border-radius: 12px; padding: 16px; border: 1px solid #eeeeee; }
   .album-header { font-size: 16px; font-weight: bold; color: #111111; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
   .album-count { font-size: 13px; color: #888888; font-weight: normal; }
@@ -78,7 +81,7 @@
 <!-- ===========首页=============== -->
 <div id="home-page">
   <div class="home-avatar">
-    <img src="images/IMG_20261005_135043.png" alt="头像">
+    <img src="images/IMG_20261128_012249.jpg" alt="头像">
   </div>
   <div class="home-subtitle">
     <span style="font-weight: bold; display: block; margin-bottom: 4px;">▇ 出身▇</span>
@@ -120,33 +123,47 @@
   
     <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下查看详细内容：其实我没做。</p>
   <div class="album-list">
-    <!-- 相册 1：立绘参考 -->
-    <div class="album-section">
-      <div class="album-header">
-<span>▼ 立绘参考
-  <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">产品好扫啊。（。你够了）</span>
-</span>
-      </div>
-      <div class="album-preview">
-        <div class="preview-box" onclick="openLightbox('images/20261119_3.PNG', this)"><img src="images/20261119_3.PNG"></div>
-        <div class="preview-box" onclick="openLightbox('images/IMG_2792.PNG', this)"><img src="images/IMG_2792.PNG"></div>
-        <div class="preview-box" onclick="openLightbox('images/IMG_2797.PNG', this)"><img src="images/IMG_2797.PNG"></div>
-      </div>
+<!-- 相册 1：立绘参考 -->
+<div class="album-section">
+  <!-- 下面这行 details 就是折叠开关，open 表示默认展开，如果你想去掉默认展开，就把 open 删掉 -->
+  <details class="album-details" open>
+    
+    <!-- 这里是点击展开/收起的头部 -->
+    <summary class="album-header album-summary">
+      <span>▼ 立绘参考
+        <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">产品好扫啊。（。你够了）</span>
+      </span>
+    </summary>
+
+    <!-- 这里是展开后的九宫格图片，你想排几行就放几张图，它会自动换行 -->
+    <div class="album-preview" style="margin-top: 12px;">
+      <div class="preview-box" onclick="openLightbox('images/20261119_3.PNG', this)"><img src="images/20261119_3.PNG"></div>
+      <div class="preview-box" onclick="openLightbox('images/IMG_2792.PNG', this)"><img src="images/IMG_2792.PNG"></div>
+      <div class="preview-box" onclick="openLightbox('images/IMG_2797.PNG', this)"><img src="images/IMG_2797.PNG"></div>
+      
+      <!-- 第二行 -->
+      <div class="preview-box" onclick="openLightbox('images/IMG_2653.PNG', this)"><img src="images/IMG_2653.PNG"></div>
+      <div class="preview-box" onclick="openLightbox('images/1794758357171.png', this)"><img src="images/1794758357171.png"></div>
     </div>
+</details>
+</div>
+    
     
 <!-- 相册 2：服设参考 -->
 <div class="album-section">
-  <div class="album-header">
-    <span>▼ 服设参考
-      <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">这里怎么裂开了雾草算了不管了</span>
-    </span>
-   
-      </div>
-      <div class="album-preview">
-        <div class="preview-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><img src="images/IMG_2760.JPG"></div>
-      </div>
+  <details class="album-details" open>
+    <summary class="album-header album-summary">
+      <span>▼ 服设参考
+        <span style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px; display: block; font-weight: normal;">这里怎么裂开了雾草算了不管了</span>
+      </span>
+    </summary>
+
+    <div class="album-preview" style="margin-top: 12px;">
+      <div class="preview-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><img src="images/IMG_2760.JPG"></div>
     </div>
-  </div>
+    </details>
+    </div>
+</div>
 </div>
 
 <!-- ====== 文字页 ========= -->
