@@ -18,8 +18,8 @@
   .menu-desc { font-size: 13px; color: #737373; line-height: 1.5; }
 
   .detail-page { display: none; max-width: 900px; margin: 0 auto; background: #ffffff; padding: 16px; border-radius: 16px; }
-  .page-header { display: flex; align-items: center; margin-bottom: 20px; }
-  .back-icon { font-size: 20px; color: #aaaaaa; cursor: pointer; padding: 5px 10px 5px 0; user-select: none; font-weight: normal; transition: 0.2s; }
+  .page-header { display: flex; align-items: flex-start; margin-bottom: 20px; cursor: pointer; }
+.back-icon { font-size: 20px; color: #aaaaaa; user-select: none; font-weight: normal; transition: 0.2s; margin-right: 8px; margin-top: -1px; }
   .back-icon:hover { color: #333; }
   .page-title { font-size: 18px; font-weight: bold; margin: 0; padding: 0; color: #111111; }
 
@@ -43,12 +43,11 @@
 
   #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; z-index: 9999; touch-action: none; overscroll-behavior: contain; overflow: hidden; }
   #lightbox-track { display: flex; width: 100vw; height: 100vh; will-change: transform; position: absolute; top: 0; left: 0; z-index: 1; }
-  .lightbox-slide { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; flex: 0 0 100vw; }
-  
-  /* 核心：强制高清渲染，去除多余的缩放限制 */
-  .lightbox-slide img { 
-    width: auto; height: auto; 
-    max-width: 100vw; max-height: 100vh; 
+  .lightbox-slide { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; flex: 0 0 100vw; padding: 60px 20px 80px 20px; }
+
+.lightbox-slide img { 
+  width: auto; height: auto; 
+  max-width: 100%; max-height: 100%; 
     object-fit: contain; border-radius: 0; 
     transform-origin: center center; cursor: grab; 
     user-select: none; -webkit-user-drag: none; 
@@ -110,10 +109,12 @@
 <!-- ============图册目录 ================= -->
 <div id="gallery-page" class="detail-page">
   <!-- 修改：返回键和标题合并 -->
-  <div class="page-header">
-    <span class="back-icon" onclick="showPage('home-page')">＜</span>
-<span style="font-size: 12px; color: #888888;">罪过罪过衣服除了原设都不是我画的<br>一个并不敬职敬业的孝女（切腹）</span>
+ <div class="page-header" onclick="showPage('home-page')">
+  <span class="back-icon">＜</span>
+  <div style="font-size: 12px; color: #888888; line-height: 1.6; padding-top: 2px;">
+    罪过罪过衣服除了原设都不是我画的<br>一个并不敬职敬业的孝女（切腹）
   </div>
+</div>
   
     <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
   <div class="album-list">
@@ -145,25 +146,29 @@
 
 <!-- ====== 文字页 ========= -->
 <div id="text-page" class="detail-page">
-  <!-- 修改：返回键和标题合并 -->
-  <div class="page-header">
-    <span class="back-icon" onclick="showPage('home-page')">＜</span>
-    <span class="page-title">角色文字设定</span>
-  </div>
   
-  <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
-  <div class="text-list-item" onclick="showPage('text-detail-1')"><div><div class="text-list-title">狭雾有江</div><div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
+<div class="page-header" onclick="showPage('home-page')">
+  <span class="back-icon">＜</span>
+  <span class="page-title">角色文字设定</span>
+</div>
+   <p style="font-size: 14px; color: #888888; margin-bottom: 16px;">点击下方小标题查看详细内容：</p>
+  
+  <div class="text-list-item" onclick="showPage('text-detail-1')"><div><div class="text-list-title">狭雾有江</div>
+  <div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
+  
   <div class="text-list-item" onclick="showPage('text-detail-2')"><div><div class="text-list-title">四月一日一期</div><div class="text-list-desc">角色设定</div></div><div class="text-list-arrow">›</div></div>
+  
   <div class="text-list-item" onclick="showPage('text-detail-3')"><div><div class="text-list-title">相处模式</div><div class="text-list-desc">看不看其实无所谓</div></div><div class="text-list-arrow">›</div></div>
+  
   <div class="text-list-item" onclick="showPage('text-detail-4')"><div><div class="text-list-title">主线故事</div><div class="text-list-desc">还会回到那里吗？你我的身边。</div></div><div class="text-list-arrow">›</div></div>
 </div> 
 
 <!-- 文字子详情页（同理合并返回键） -->
 <div id="text-detail-1" class="detail-page">
-  <div class="page-header">
-    <span class="back-icon" onclick="showPage('text-page')">＜</span>
-    <span class="page-title">狭雾有江</span>
-  </div>
+  <div class="page-header" onclick="showPage('text-page')">
+  <span class="back-icon">＜</span>
+  <span class="page-title">狭雾有江</span>
+</div>
   <div class="text-box">
 狭雾有江（鸟）24岁 178cm 德日混血<br><br>
 出生于复杂的贵族杀手家庭，具有家族遗传性精神障碍，喜欢打理外貌且有一定程度的强迫-洁癖。(伪)高功能反社会人格障碍。几乎没有同理心的概念，对世界上大多数事物的态度是无聊与不在乎。解离，阴晴不定，对不感兴趣的事基本没有耐心的及时行乐主义，恶趣味，好奇心。喜爱看到人真实、难堪的一面。<br><br>
@@ -173,10 +178,10 @@
 </div>
 
 <div id="text-detail-2" class="detail-page">
-  <div class="page-header">
-    <span class="back-icon" onclick="showPage('text-page')">＜</span>
-    <span class="page-title">四月一日一期</span>
-  </div>
+  <div class="page-header" onclick="showPage('text-page')">
+  <span class="back-icon">＜</span>
+  <span class="page-title">四月一日一期</span>
+</div>
   <div class="text-box">
   四月一日一期（鼠）24岁 174cm 日本人<br><br>
   欺诈师、诈骗犯，伪装得很好很常识人的反社会类型人。需要通过对另一个（在意的）人的痛苦、羞辱、恐惧、受控制或受折磨中映射出自己的存在来证明自己，反之被这样做也可以，爱也算。在对人不感兴趣后会抛弃得很彻底，甚至被缠上的话会无情地解决掉对方。<br><br>
@@ -187,15 +192,16 @@
 </div>
 
 <div id="text-detail-3" class="detail-page">
-  <div class="page-header">
-    <span class="back-icon" onclick="showPage('text-page')">＜</span>
-    <span class="page-title">相处模式</span>
-  </div>
+ <div class="page-header" onclick="showPage('text-page')">
+  <span class="back-icon">＜</span>
+  <span class="page-title">相处模式</span>
+</div>
   <div class="text-box">
     <span style="font-weight: bold; color: #333333;">▼相处关系——：</span><br>
     这俩位属于是不做什么只是待在对方身边的关系，仅此而已。没有过多存在的关系，没有过多询问的话语，仅仅是对方还没离开这里所以自己也还待着。<br><br>
     ——习惯。一个既不轻又不重的词。在无意间，在下意识中，因为某些东西而潜移默化改变自己维持已久的习性，就像人类学习自己的母语一般，有些字有些词不需要特地学习却懂得如何将其读出。<br><br>
     世界上的人太多了，多到就算你我分离开也显得不痛不痒甚至毫无察觉，但是、但是。我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br><br><br>
+    
     <span style="font-weight: bold; color: #333333;">▼相处方式——：</span><br>
     <span style="font-size: 13px; color: #999999; display: block; margin-bottom: 8px;">A是4 B是5</span>
    <span style="font-weight: bold;">【A】</span>：经常逗弄<span style="font-weight: bold;">【B】</span>，或是黏着<span style="font-weight: bold;">【B】</span>。对<span style="font-weight: bold;">【B】</span>可以毫不吝惜地低声说出那种沉重与轻浮并存的甜言蜜语。对于献出自己毫无犹豫，哪怕身心全都变成<span style="font-weight: bold;">【B】</span>的东西，被利用也好、被玩弄也好、被施加暴力也好，全都无所谓。甚至还期望着被那样对待。其目的只在引出<span style="font-weight: bold;">【B】</span>的反应，借此满足自身的需求。<br><br>
@@ -204,10 +210,10 @@
 </div>
 
 <div id="text-detail-4" class="detail-page">
-  <div class="page-header">
-    <span class="back-icon" onclick="showPage('text-page')">＜</span>
-    <span class="page-title">主线故事</span>
-  </div>
+  <div class="page-header" onclick="showPage('text-page')">
+  <span class="back-icon">＜</span>
+  <span class="page-title">主线故事</span>
+</div>
   <div class="text-box">
 <br>我知道你也是如此孤独所以，我知道你只会回到这里，欢迎回家。<br>
   </div>
