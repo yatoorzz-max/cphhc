@@ -145,9 +145,9 @@
         </div>
 
         <!-- 底部开关按钮 -->
-        <div id="btn-1" style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('content-1', 'btn-1')">
-          展开/收起
-        </div>
+        <div id="btn-1" style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer; -webkit-tap-highlight-color: transparent;" onclick="toggleAlbum('content-1', 'btn-1')">
+  ▼展开🐭
+</div>
       </div>
     </div>
 
@@ -164,9 +164,9 @@
           <div class="preview-box" onclick="openLightbox('images/IMG_2760.JPG', this)"><img src="images/IMG_2760.JPG"></div>
         </div>
 
-        <div id="btn-2" style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer;" onclick="toggleAlbum('content-2', 'btn-2')">
-          展开/收起
-        </div>
+        <div id="btn-2" style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #dddddd; cursor: pointer; -webkit-tap-highlight-color: transparent;" onclick="toggleAlbum('content-2', 'btn-2')">
+  ▼展开🐭
+</div>
       </div>
     </div>
 
@@ -554,25 +554,25 @@ lb.addEventListener('pointerup', finishPointer);
 lb.addEventListener('pointercancel', finishPointer);
 lb.addEventListener('lostpointercapture', e => { if (activePointers.has(e.pointerId)) finishPointer(e); });
 window.addEventListener('resize', () => { if (lightboxOpen) updateLightbox(false); });
-/* ===== 折叠/展开相册（默认只显示3张） ===== */
+
+/* ===== 折叠/展开相册 ===== */
 function toggleAlbum(contentId, btnId) {
   const content = document.getElementById(contentId);
   const btn = document.getElementById(btnId);
   const boxes = content.querySelectorAll('.preview-box');
   
-  // 判断当前是否隐藏了后面的图
   const isHidden = boxes.length > 3 && boxes[3].style.display === 'none';
   
   if (isHidden) {
     // 展开：显示全部
     boxes.forEach(box => box.style.display = 'block');
-    btn.innerText = '🐭收起';
+    btn.innerText = '▲收起🐭'; 
   } else {
     // 收起：只留前 3 张
     boxes.forEach((box, index) => {
       if (index >= 3) box.style.display = 'none';
     });
-    btn.innerText = '展开🐭';
+    btn.innerText = '▼展开🐭';
   }
 }
 
