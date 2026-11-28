@@ -19,14 +19,11 @@ body {
   padding: 30px 20px; 
   border-radius: 24px; 
   
+  /* 遮罩保持 0.92 让文字清晰 */
   background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('images/Image_1795800525154_258.png');
-  
-  /* 2. 用 cover 让图片铺满，但又不会拉伸变形 */
-  background-size: 100% 100%; 
-  
-  /* 3. 核心：调整位置！这里设为靠下，把上面的空间留给头像和文字 */
-  background-position: right 70%;  
-  
+
+  background-size: 140% auto; 
+  background-position: center top; 
   background-repeat: no-repeat;
 }
 
