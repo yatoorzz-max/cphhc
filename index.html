@@ -14,21 +14,25 @@ body {
   min-height: 100vh; 
 }
 #home-page {
-  /* 取消最大宽度限制，让它撑满屏幕 */
-  width: 100%; 
-  /* 取消四周的留白 */
+  /* 取消左右边距，让卡片更宽 */
+  max-width: 100%; 
   margin: 0 auto; 
-  /* 保留内边距，不然字贴着屏幕边缘不好看 */
   padding: 30px 12px; 
   
-  /* 背景图设置保持不变 */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('images/1795865210564.png');
-  background-size: 140% auto; 
-  background-position: center top; 
-  background-repeat: no-repeat;
+  /* 核心 1：让首页高度至少撑满整个手机屏幕，避免底部空出一截 */
+  min-height: 100vh; 
   
-  /* 如果不需要圆角了，可以删掉下面这行，或者保留 */
-  border-radius: 16px; 
+  /* 遮罩可以稍微透一点，0.9 */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('images/1795865210564.png');
+  
+  /* 核心 2：cover 会按比例无限放大图片，直到填满整个屏幕，绝对不会留白！ */
+  background-size: cover; 
+  
+  /* 核心 3：定位在正中间偏上一点点，保证脸露出来 */
+  background-position: center 20%; 
+  
+  background-repeat: no-repeat;
+  border-radius: 0; /* 铺满全屏就不需要圆角了 */
 }
 
   .home-avatar { text-align: center; margin-top: 30px; margin-bottom: 16px; }
