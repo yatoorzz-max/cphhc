@@ -19,14 +19,13 @@ body {
   padding: 30px 20px; 
   border-radius: 24px; 
   
-  background-color: #ffffff; /* 垫一层白底 */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('images/Image_1795800525154_258.png');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('images/Image_1795800525154_258.png');
   
-  /* 1. 改为 contain：让背景图完整显示，相当于“缩小”了 */
-  background-size: contain; 
+  /* 2. 用 cover 让图片铺满，但又不会拉伸变形 */
+  background-size: cover; 
   
-  /* 2. 居中偏下：如果你发现人物的脸还是被挡，可以改成 right center(靠右) 或 center bottom(靠下) */
-  background-position: center bottom; 
+  /* 3. 核心：调整位置！这里设为靠下，把上面的空间留给头像和文字 */
+  background-position: center 70%; 
   
   background-repeat: no-repeat;
 }
