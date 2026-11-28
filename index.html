@@ -14,17 +14,21 @@ body {
   min-height: 100vh; 
 }
 #home-page {
-  max-width: 800px; 
-  margin: 20px auto; 
-  padding: 30px 20px; 
-  border-radius: 24px; 
+  /* 取消最大宽度限制，让它撑满屏幕 */
+  width: 100%; 
+  /* 取消四周的留白 */
+  margin: 0 auto; 
+  /* 保留内边距，不然字贴着屏幕边缘不好看 */
+  padding: 30px 12px; 
   
-  /* 遮罩保持 0.92 让文字清晰 */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('images1795865210564.png');
-
+  /* 背景图设置保持不变 */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('images/1795865210564.png');
   background-size: 140% auto; 
   background-position: center top; 
   background-repeat: no-repeat;
+  
+  /* 如果不需要圆角了，可以删掉下面这行，或者保留 */
+  border-radius: 16px; 
 }
 
   .home-avatar { text-align: center; margin-top: 30px; margin-bottom: 16px; }
